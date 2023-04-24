@@ -34,7 +34,7 @@
          android:id="@+id/edittext_full_name"
          android:layout_below="@+id/Registration_form_text"
          android:layout_marginTop="14dp"
-         android:hinttext="Full Name"
+         android:hint="Full Name"
          android:textColorHint="#61000000"
          android:textColor="#61000000"
          android:text="Full Name"
@@ -52,7 +52,7 @@
          android:id="@+id/edittext_phone_number"
          android:layout_below="@+id/edittext_full_name"
          android:layout_marginTop="14dp"
-         android:hinttext="Phone Number"
+         android:hint="Phone Number"
          android:textColorHint="#61000000"
          android:textColor="#61000000"
          android:text="Phone Number"
@@ -70,7 +70,7 @@
          android:id="@+id/edittext_email_address"
          android:layout_below="@+id/edittext_phone_number"
          android:layout_marginTop="14dp"
-         android:hinttext="Email Address"
+         android:hint="Email Address"
          android:textColorHint="#61000000"
          android:textColor="#61000000"
          android:text="Address"
@@ -88,7 +88,7 @@
          android:id="@+id/edittext_pass_word"
          android:layout_below="@+id/edittext_email_address"
          android:layout_marginTop="14dp"
-         android:hinttext="Password"
+         android:hint="Password"
          android:textColorHint="#61000000"
          android:textColor="#61000000"
          android:text="Password"
@@ -97,7 +97,21 @@
          android:paddingTop="14dp"
          />
 
+
+     <com.qandeelabbassi.dropsy.DropDownView
+         android:layout_width="139dp"
+         android:layout_height="wrap_content"
+         android:layout_below="@+id/edittext_pass_word"
+         android:layout_marginStart="26dp"
+         android:layout_marginTop="14dp"
+         android:layout_marginEnd="195dp"
+         android:background="@drawable/custom_edit_text"
+         app:dropsyLabel="State"
+         app:dropsyLabelColor="#61000000"
+         app:dropsyItems="@array/dropdown_items"
+
          />
+
 
  </RelativeLayout>
 
