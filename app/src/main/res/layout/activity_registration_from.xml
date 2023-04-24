@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.RegistrationFrom"
+    android:background="@drawable/registrationform">
+
+ <RelativeLayout
+     android:layout_width="410dp"
+     android:layout_height="606dp"
+     android:layout_alignParentBottom="true"
+     android:background="@drawable/custom_shape_registrationform"
+     >
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="REGISTRATION FORM"
+         android:textColor="@color/black"
+         android:textSize="24dp"
+         android:fontFamily="@font/coda"
+         android:layout_marginTop="27dp"
+         android:layout_centerHorizontal="true"
+         android:id="@+id/Registration_form_text"
+         />
+
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="44dp"
+         android:layout_marginStart="26dp"
+         android:layout_marginEnd="26dp"
+         android:background="@drawable/custom_edit_text"
+         android:id="@+id/edittext_full_name"
+         android:layout_below="@+id/Registration_form_text"
+         android:layout_marginTop="14dp"
+         android:hinttext="Full Name"
+         android:textColorHint="#61000000"
+         android:textColor="#61000000"
+         android:text="Full Name"
+         android:textSize="14dp"
+         android:paddingStart="15dp"
+         android:paddingTop="14dp"
+         />
+
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="44dp"
+         android:layout_marginStart="26dp"
+         android:layout_marginEnd="26dp"
+         android:background="@drawable/custom_edit_text"
+         android:id="@+id/edittext_phone_number"
+         android:layout_below="@+id/edittext_full_name"
+         android:layout_marginTop="14dp"
+         android:hinttext="Phone Number"
+         android:textColorHint="#61000000"
+         android:textColor="#61000000"
+         android:text="Phone Number"
+         android:textSize="14dp"
+         android:paddingStart="15dp"
+         android:paddingTop="14dp"
+         />
+
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="44dp"
+         android:layout_marginStart="26dp"
+         android:layout_marginEnd="26dp"
+         android:background="@drawable/custom_edit_text"
+         android:id="@+id/edittext_email_address"
+         android:layout_below="@+id/edittext_phone_number"
+         android:layout_marginTop="14dp"
+         android:hinttext="Email Address"
+         android:textColorHint="#61000000"
+         android:textColor="#61000000"
+         android:text="Address"
+         android:textSize="14dp"
+         android:paddingStart="15dp"
+         android:paddingTop="14dp"
+         />
+
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="44dp"
+         android:layout_marginStart="26dp"
+         android:layout_marginEnd="26dp"
+         android:background="@drawable/custom_edit_text"
+         android:id="@+id/edittext_pass_word"
+         android:layout_below="@+id/edittext_email_address"
+         android:layout_marginTop="14dp"
+         android:hinttext="Password"
+         android:textColorHint="#61000000"
+         android:textColor="#61000000"
+         android:text="Password"
+         android:textSize="14dp"
+         android:paddingStart="15dp"
+         android:paddingTop="14dp"
+         />
+
+         />
+
+ </RelativeLayout>
+
+
+
+
+</RelativeLayout>
