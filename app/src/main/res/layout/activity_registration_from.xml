@@ -51,6 +51,7 @@
          android:layout_below="@+id/edittext_full_name"
          android:layout_marginTop="14dp"
          android:hint="Phone Number"
+         android:inputType="number"
          android:textColorHint="#61000000"
          android:textColor="#61000000"
          android:textSize="14dp"
@@ -185,7 +186,23 @@
          android:layout_centerHorizontal="true"
          android:layout_marginTop="14dp"
          android:textColor="@color/white"
+         android:id="@+id/checkbox"
          />
+
+     <androidx.appcompat.widget.AppCompatButton
+         android:layout_width="203dp"
+         android:layout_height="40dp"
+         android:background="@drawable/custom_shape_btn"
+         android:layout_below="@+id/checkbox"
+         android:layout_centerHorizontal="true"
+         android:text="Send OTP"
+         android:textColor="@color/black"
+         android:fontFamily="@font/ibarra_real_nova"
+         android:textAllCaps="false"
+         android:textSize="20dp"
+         />
+
+
 
 
  </RelativeLayout>
