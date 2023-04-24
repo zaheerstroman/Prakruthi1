@@ -50,6 +50,7 @@ dependencies {
 
 
     implementation 'com.github.qandeelabbassi:Dropsy:1.1'
+    implementation "com.github.skydoves:powerspinner:1.2.6"
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation 'androidx.activity:activity-compose:1.5.1'
