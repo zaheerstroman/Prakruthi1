@@ -27,8 +27,9 @@
         android:textColor="@color/black"
         android:id="@+id/logintext"
         />
-    
+
     <EditText
+        android:id="@+id/edittext_user_name"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:background="@drawable/custom_edit_text"
@@ -37,7 +38,87 @@
         android:layout_marginStart="19dp"
         android:layout_marginEnd="19dp"
         android:layout_marginTop="23dp"
+        android:text="Username"
+        android:textSize="15dp"
+        android:paddingStart="15dp"
+        android:textColor="@color/white"
+        android:drawableStart="@drawable/personicon"
+        android:drawablePadding="5dp"
         />
+
+
+    <EditText
+        android:id="@+id/edittext_login_password"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/custom_edit_text"
+        android:backgroundTint="@color/Primary"
+        android:layout_below="@+id/edittext_user_name"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginTop="23dp"
+        android:text="Password"
+        android:textSize="15dp"
+        android:paddingStart="15dp"
+        android:textColor="@color/white"
+        android:drawableStart="@drawable/vector"
+        android:drawablePadding="5dp" />
+
+    <TextView
+        android:id="@+id/forget_password_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Forget_password"
+        android:textColor="@color/Primary_less"
+        android:textSize="14dp"
+        android:layout_below="@+id/edittext_login_password"
+        android:layout_marginTop="28dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="14dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="191dp"
+        android:layout_height="40dp"
+        android:id="@+id/login_btn"
+        android:layout_below="@+id/forget_password_login"
+        android:background="@drawable/custom_shape_btn"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:fontFamily="@font/ibarra_real_nova"
+        android:textSize="20dp"
+        android:drawableEnd="@drawable/baseline_login_24"
+        android:paddingEnd="50dp"
+        android:gravity="end||center_vertical"
+        android:textStyle="bold"
+        android:drawablePadding="2dp"
+        />
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:text="Don't have an account?"
+        android:id="@+id/dont_have_account_login"
+        android:layout_below="@id/login_btn"
+        android:layout_marginTop="33dp"
+        android:layout_marginStart="90dp"/>
+
+    <TextView
+        android:id="@+id/register_an_account_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Register_an_account"
+        android:textColor="@color/Primary_less"
+        android:textSize="14dp"
+        android:layout_below="@+id/login_btn"
+        android:layout_marginTop="33dp"
+        android:layout_marginStart="215dp"
+
+        />
+
 
 
 </RelativeLayout>
