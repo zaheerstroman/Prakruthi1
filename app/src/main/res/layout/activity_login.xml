@@ -21,6 +21,23 @@
         android:layout_height="40dp"
         android:text="Login to your account"
         android:layout_below="@+id/Login_Logo"
-/>
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/ibarra_real_nova"
+        android:textSize="24dp"
+        android:textColor="@color/black"
+        android:id="@+id/logintext"
+        />
+    
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/custom_edit_text"
+        android:backgroundTint="@color/Primary"
+        android:layout_below="@+id/logintext"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginTop="23dp"
+        />
+
 
 </RelativeLayout>
