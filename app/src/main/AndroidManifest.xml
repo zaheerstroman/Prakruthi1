@@ -22,7 +22,8 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.Login"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".ui.SplashScreen"
             android:exported="true"

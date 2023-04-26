@@ -44,6 +44,7 @@
         android:paddingStart="15dp"
         android:textColor="@color/white"
         android:drawableStart="@drawable/personicon"
+        android:singleLine="true"
         android:drawablePadding="5dp"
         />
 
@@ -64,6 +65,7 @@
         android:paddingStart="15dp"
         android:textColor="@color/white"
         android:drawableStart="@drawable/vector"
+        android:singleLine="true"
         android:drawablePadding="5dp" />
 
     <TextView
@@ -79,7 +81,7 @@
         android:layout_marginEnd="14dp"
         />
 
-    <androidx.appcompat.widget.AppCompatButton
+    q<androidx.appcompat.widget.AppCompatButton
         android:layout_width="191dp"
         android:layout_height="40dp"
         android:id="@+id/login_btn"
