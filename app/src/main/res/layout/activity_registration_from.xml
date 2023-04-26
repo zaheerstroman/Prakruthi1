@@ -7,6 +7,16 @@
     tools:context=".ui.RegistrationFrom"
     android:background="@drawable/registrationform">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="36dp"
+        android:layout_height="24dp"
+        android:background="@drawable/baseline_arrow_back_24"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="12dp"
+        />
+
  <RelativeLayout
      android:layout_width="410dp"
      android:layout_height="606dp"
@@ -204,6 +214,8 @@
          android:textAllCaps="false"
          android:textSize="20dp"
          />
+     
+
 
 
 
