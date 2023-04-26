@@ -15,12 +15,14 @@
         <activity
             android:name=".ui.RegistrationFrom"
             android:theme="@style/Theme.MaterialComponents"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false" />
         <activity
             android:name=".ui.Login"
             android:exported="false" />
         <activity
             android:name=".ui.SplashScreen"
+            android:noHistory="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
