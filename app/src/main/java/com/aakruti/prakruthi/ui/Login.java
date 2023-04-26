@@ -11,7 +11,7 @@ import com.aakruti.prakruthi.R;
 
 public class Login extends AppCompatActivity {
 
-    TextView register;
+    TextView register,forget_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,8 +19,13 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
         register = findViewById(R.id.register_an_account_login);
+        forget_password = findViewById(R.id.forget_password_login);
         register.setOnClickListener(view -> {
             startActivity(new Intent(Login.this,RegistrationFrom.class));
+        });
+
+        forget_password.setOnClickListener(view -> {
+            startActivity(new Intent(Login.this,ForgetPassword.class));
         });
 
 
