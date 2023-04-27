@@ -13,6 +13,12 @@
         android:theme="@style/Theme.AppCompat.DayNight"
         tools:targetApi="31">
         <activity
+            android:name=".ui.NewCredentials"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Otp_Verification_Animation"
+            android:exported="false" />
+        <activity
             android:name=".ui.OTP_Verification"
             android:exported="false" />
         <activity
@@ -26,7 +32,7 @@
         <activity
             android:name=".ui.Login"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.SplashScreen"
             android:exported="true"
