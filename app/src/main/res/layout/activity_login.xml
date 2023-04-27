@@ -80,22 +80,23 @@
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/login_btn"
         android:layout_width="191dp"
         android:layout_height="40dp"
+        android:id="@+id/login_btn"
         android:layout_below="@+id/forget_password_login"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
         android:background="@drawable/custom_shape_btn"
-        android:drawableEnd="@drawable/baseline_login_24"
-        android:drawablePadding="2dp"
-        android:fontFamily="@font/ibarra_real_nova"
-        android:gravity="end|center_vertical"
-        android:paddingEnd="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
         android:text="Login"
         android:textAllCaps="false"
+        android:fontFamily="@font/ibarra_real_nova"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:drawableEnd="@drawable/baseline_login_24"
+        android:paddingEnd="50dp"
+        android:gravity="end|center_vertical"
+        android:textStyle="bold"
+        android:drawablePadding="2dp"
+        />
     
     <TextView
         android:layout_width="wrap_content"
