@@ -6,12 +6,12 @@ import android.os.Bundle;
 
 import com.aakruti.prakruthi.R;
 
-public class OTP_Verification extends AppCompatActivity {
+public class NewCredentials extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_otp_verification);
+        setContentView(R.layout.activity_new_credentials);
 
         getSupportActionBar().hide();
     }

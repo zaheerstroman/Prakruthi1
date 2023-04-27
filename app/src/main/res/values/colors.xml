@@ -11,4 +11,9 @@
     <color name="Primary_less">#00B5FF</color>
     <color name="Secondary">#E68CC8FF</color>
     <color name="Secondary_less">#C6E4FF</color>
+    <color name="Purple">#7745A9</color>
+    <color name="Green">#3DDC84</color>
+
+
+
 </resources>
