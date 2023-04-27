@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="@dimen/_350sdp"
         android:layout_height="@dimen/_360sdp"
-        android:src="@drawable/splashscreen"
+        android:src="@drawable/splashscreen_page_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
