@@ -7,13 +7,13 @@
     tools:context=".ui.SplashScreen">
 
     <ImageView
-        android:layout_width="350dp"
-        android:layout_height="360dp"
+        android:layout_width="@dimen/_350sdp"
+        android:layout_height="@dimen/_360sdp"
         android:src="@drawable/splashscreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="@dimen/_102sdp"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
