@@ -66,13 +66,13 @@
          android:textColorHint="#61000000"
          android:textColor="#61000000"
          android:textSize="@dimen/_14sdp"
-         android:paddingStart="@dimen/_15sdp"
+         android:paddingStart="@dimen/_14sdp"
          android:singleLine="true"
          />
 
      <EditText
          android:layout_width="match_parent"
-         android:layout_height="@dimen/_44sdp"
+         android:layout_height="44dp"
          android:layout_marginStart="@dimen/_26sdp"
          android:layout_marginEnd="@dimen/_26sdp"
          android:background="@drawable/custom_edit_text"
@@ -83,7 +83,7 @@
          android:textColorHint="#61000000"
          android:textColor="#61000000"
          android:textSize="@dimen/_14sdp"
-         android:paddingStart="@dimen/_15sdp"
+         android:paddingStart="@dimen/_14sdp"
          android:singleLine="true"
          />
 
@@ -112,7 +112,7 @@
          android:id="@+id/State_DropDown"
          android:layout_marginStart="@dimen/_26sdp"
          android:layout_marginTop="@dimen/_14sdp"
-         android:layout_marginEnd="@dimen/_195sdp"
+         android:layout_marginEnd="@dimen/_191sdp"
          android:background="@color/white"
          android:hint="State"
          android:textColorHint="#61000000"
@@ -123,7 +123,7 @@
          android:gravity="center_vertical"
          app:spinner_item_array="@array/dropdown_State"
          app:spinner_arrow_show="true"
-         app:spinner_popup_max_height="@dimen/_120sdp"
+         app:spinner_popup_max_height="120dp"
          app:spinner_divider_color="@color/black"
          app:spinner_arrow_tint="@color/black"
          />
@@ -180,7 +180,7 @@
          android:textColorHint="#61000000"
          android:textColor="#61000000"
          android:textSize="@dimen/_14sdp"
-         app:spinner_item_height="@dimen/_46sdp"
+         app:spinner_item_height="46dp"
          android:paddingStart="@dimen/_15sdp"
          android:gravity="center_vertical"
          app:spinner_item_array="@array/Type"
@@ -212,7 +212,7 @@
          android:id="@+id/send_OTP_btn"
          android:fontFamily="@font/ibarra_real_nova"
          android:textAllCaps="false"
-         android:textSize="@dimen/_20sdp"
+         android:textSize="20dp"
          />
      
 

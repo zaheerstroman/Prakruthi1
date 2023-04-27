@@ -8,8 +8,8 @@
     tools:context=".ui.Login">
     
     <ImageView
-        android:layout_width="@dimen/_186sdp"
-        android:layout_height="@dimen/_167sdp"
+        android:layout_width="186dp"
+        android:layout_height="167dp"
         android:src="@drawable/login_logo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="85dp"
@@ -18,12 +18,12 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="40dp"
         android:text="Login to your account"
         android:layout_below="@+id/Login_Logo"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/ibarra_real_nova"
-        android:textSize="@dimen/_24sdp"
+        android:textSize="24dp"
         android:textColor="@color/black"
         android:id="@+id/logintext"
         />
@@ -31,37 +31,37 @@
     <EditText
         android:id="@+id/edittext_user_name"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_height="45dp"
         android:background="@drawable/custom_edit_text"
         android:backgroundTint="@color/Primary"
         android:layout_below="@+id/logintext"
-        android:layout_marginStart="@dimen/_19sdp"
-        android:layout_marginEnd="@dimen/_19sdp"
-        android:layout_marginTop="@dimen/_23sdp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginTop="23dp"
         android:hint="Username"
         android:textColorHint="@color/white"
-        android:textSize="@dimen/_15sdp"
-        android:paddingStart="@dimen/_15sdp"
+        android:textSize="15dp"
+        android:paddingStart="15dp"
         android:textColor="@color/white"
         android:drawableStart="@drawable/personicon"
-        android:drawablePadding="@dimen/_5sdp"
+        android:drawablePadding="5dp"
         />
 
 
     <EditText
         android:id="@+id/edittext_login_password"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_height="45dp"
         android:background="@drawable/custom_edit_text"
         android:backgroundTint="@color/Primary"
         android:layout_below="@+id/edittext_user_name"
-        android:layout_marginStart="@dimen/_19sdp"
-        android:layout_marginEnd="@dimen/_19sdp"
-        android:layout_marginTop="@dimen/_23sdp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="19dp"
+        android:layout_marginTop="23dp"
         android:hint="Password"
         android:textColorHint="@color/white"
         android:textSize="15dp"
-        android:paddingStart="@dimen/_15sdp"
+        android:paddingStart="15dp"
         android:textColor="@color/white"
         android:drawableStart="@drawable/vector"
         android:drawablePadding="5dp" />
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:text="@string/Forget_password"
         android:textColor="@color/Primary_less"
-        android:textSize="@dimen/_14sdp"
+        android:textSize="14dp"
         android:layout_below="@+id/edittext_login_password"
         android:layout_marginTop="28dp"
         android:layout_alignParentEnd="true"
@@ -80,8 +80,8 @@
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_width="@dimen/_191sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_width="191dp"
+        android:layout_height="40dp"
         android:id="@+id/login_btn"
         android:layout_below="@+id/forget_password_login"
         android:background="@drawable/custom_shape_btn"
@@ -90,12 +90,12 @@
         android:text="Login"
         android:textAllCaps="false"
         android:fontFamily="@font/ibarra_real_nova"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="20dp"
         android:drawableEnd="@drawable/baseline_login_24"
-        android:paddingEnd="@dimen/_50sdp"
+        android:paddingEnd="50dp"
         android:gravity="end|center_vertical"
         android:textStyle="bold"
-        android:drawablePadding="@dimen/_2sdp"
+        android:drawablePadding="2dp"
         />
     
     <TextView
