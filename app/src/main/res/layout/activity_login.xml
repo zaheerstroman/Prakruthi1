@@ -6,19 +6,18 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_page_background"
     tools:context=".ui.Login">
-    
+
     <ImageView
-        android:layout_width="@dimen/_186sdp"
-        android:layout_height="@dimen/_167sdp"
-        android:src="@drawable/login_logo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/_85sdp"
         android:id="@+id/Login_Logo"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_55sdp"
+        android:src="@drawable/login_logo" />
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="wrap_content"
         android:text="Login to your account"
         android:layout_below="@+id/Login_Logo"
         android:layout_centerHorizontal="true"
@@ -31,7 +30,7 @@
     <EditText
         android:id="@+id/edittext_user_name"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_height="@dimen/_40sdp"
         android:background="@drawable/custom_edit_text"
         android:backgroundTint="@color/Primary"
         android:layout_below="@+id/logintext"
@@ -41,18 +40,18 @@
         android:hint="Username"
         android:textColorHint="@color/white"
         android:textSize="@dimen/_15sdp"
-        android:paddingStart="@dimen/_15sdp"
+        android:paddingStart="@dimen/_9sdp"
         android:textColor="@color/white"
         android:drawableStart="@drawable/personicon"
         android:singleLine="true"
-        android:drawablePadding="@dimen/_15sdp"
+        android:drawablePadding="@dimen/_3sdp"
         />
 
 
     <EditText
         android:id="@+id/edittext_login_password"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_45sdp"
+        android:layout_height="@dimen/_40sdp"
         android:background="@drawable/custom_edit_text"
         android:backgroundTint="@color/Primary"
         android:layout_below="@+id/edittext_user_name"
@@ -62,7 +61,7 @@
         android:hint="Password"
         android:textColorHint="@color/white"
         android:textSize="@dimen/_15sdp"
-        android:paddingStart="@dimen/_15sdp"
+        android:paddingStart="@dimen/_9sdp"
         android:textColor="@color/white"
         android:drawableStart="@drawable/vector"
         android:singleLine="true"
@@ -76,18 +75,18 @@
         android:textColor="@color/Primary_less"
         android:textSize="@dimen/_14sdp"
         android:layout_below="@+id/edittext_login_password"
-        android:layout_marginTop="@dimen/_28sdp"
+        android:layout_marginTop="@dimen/_24sdp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/_14sdp"
         />
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="@dimen/_191sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_height="@dimen/_35sdp"
         android:id="@+id/login_btn"
         android:layout_below="@+id/forget_password_login"
         android:background="@drawable/custom_shape_btn"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_27sdp"
         android:layout_centerHorizontal="true"
         android:text="Login"
         android:textAllCaps="false"
@@ -103,12 +102,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_12sdp"
+        android:textSize="@dimen/_10sdp"
         android:text="Don't have an account?"
         android:id="@+id/dont_have_account_login"
         android:layout_below="@id/login_btn"
-        android:layout_marginTop="@dimen/_33sdp"
-        android:layout_marginStart="@dimen/_90sdp"/>
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_60sdp"/>
 
     <TextView
         android:id="@+id/register_an_account_login"
@@ -116,12 +115,9 @@
         android:layout_height="wrap_content"
         android:text="@string/Register_an_account"
         android:textColor="@color/Primary_less"
-        android:textSize="@dimen/_14sdp"
+        android:textSize="@dimen/_11sdp"
         android:layout_below="@+id/login_btn"
         android:layout_marginTop="@dimen/_30sdp"
         android:layout_toEndOf="@id/dont_have_account_login"
         />
-
-
-
 </RelativeLayout>
