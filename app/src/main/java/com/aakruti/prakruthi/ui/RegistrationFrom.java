@@ -54,7 +54,7 @@ public class RegistrationFrom extends AppCompatActivity {
                 city.setError("City is required");
             }
             else {
-                // insert data into database
+
                 String fullnameStr = fullname.getText().toString().trim();
                 String phoneStr = phone_number.getText().toString().trim();
                 String emailStr = email.getText().toString().trim();

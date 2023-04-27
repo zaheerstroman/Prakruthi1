@@ -46,10 +46,10 @@ public class Login extends AppCompatActivity {
             if(!username.getText().toString().isEmpty() && !password.getText().toString().isEmpty())
             {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
+
             }
 
         });
-
 
     }
 

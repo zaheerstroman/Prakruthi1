@@ -103,7 +103,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_12sdp"
+        android:textSize="@dimen/_10sdp"
         android:text="Don't have an account?"
         android:id="@+id/dont_have_account_login"
         android:layout_below="@id/login_btn"
@@ -116,7 +116,7 @@
         android:layout_height="wrap_content"
         android:text="@string/Register_an_account"
         android:textColor="@color/Primary_less"
-        android:textSize="@dimen/_14sdp"
+        android:textSize="@dimen/_10sdp"
         android:layout_below="@+id/login_btn"
         android:layout_marginTop="@dimen/_30sdp"
         android:layout_toEndOf="@id/dont_have_account_login"
