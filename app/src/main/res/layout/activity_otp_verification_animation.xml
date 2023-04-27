@@ -20,13 +20,13 @@
         android:textSize="@dimen/_20sdp" />
 
     <ImageView
-        android:layout_width="360dp"
-        android:layout_height="389dp"
+        android:layout_width="@dimen/_360sdp"
+        android:layout_height="@dimen/_389sdp"
         android:src="@drawable/otp_verification_animation_640"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_below="@+id/txt_24_hour"
 />
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_below="@+id/txt_24_hour"
         />
