@@ -12,5 +12,7 @@ public class OTP_Verification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verification);
+
+        getSupportActionBar().hide();
     }
 }
