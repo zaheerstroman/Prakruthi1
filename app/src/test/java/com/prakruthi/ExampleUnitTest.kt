@@ -1,4 +1,4 @@
-package com.aakruti.prakruthi
+package com.prakruthi
 
 import org.junit.Test
 
