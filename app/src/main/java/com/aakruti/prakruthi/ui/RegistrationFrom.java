@@ -21,7 +21,9 @@ public class RegistrationFrom extends AppCompatActivity {
 
     CheckBox terms;
 
-    AppCompatButton sendotp;
+    AppCompatButton sendotp, backbtn;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +38,10 @@ public class RegistrationFrom extends AppCompatActivity {
         terms = findViewById(R.id.checkbox);
         state = findViewById(R.id.State_DropDown);
         district = findViewById(R.id.District_DropDown);
-
+        backbtn = findViewById(R.id.registration_back_btn);
+        backbtn.setOnClickListener(view -> {
+            super.onBackPressed();
+        });
         sendotp.setOnClickListener(view -> {
             if (fullname.getText().toString().trim().isEmpty()) {
                 fullname.setError("Full name is required");
@@ -63,6 +68,7 @@ public class RegistrationFrom extends AppCompatActivity {
 
             }
         });
+
     }
 
 }

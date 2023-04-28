@@ -20,8 +20,8 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 // Code to be executed after delay
-//                startActivity(new Intent(SplashScreen.this,Login.class));
-                startActivity(new Intent(SplashScreen.this,Pasword_Updated_Animation.class));
+//                startActivity(new Intent(SplashScreen.this,Otp_Verification_Animation.class));
+                startActivity(new Intent(SplashScreen.this,Login.class));
 
             }
         }, 2000); // 1000ms = 1 second delay
