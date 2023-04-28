@@ -16,9 +16,6 @@ public class OTP_Verification extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        startActivity(new Intent(OTP_Verification.this, Otp_Verification_Animation.class));
-
-        startActivity(new Intent(OTP_Verification.this, NewCredentials.class));
 
     }
 }

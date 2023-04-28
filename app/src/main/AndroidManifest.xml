@@ -19,9 +19,6 @@
             android:name=".ui.Pasword_Updated_Animation"
             android:exported="false" />
         <activity
-            android:name=".ui.NewCredentials"
-            android:exported="false" />
-        <activity
             android:name=".ui.Otp_Verification_Animation"
             android:exported="false" />
         <activity
