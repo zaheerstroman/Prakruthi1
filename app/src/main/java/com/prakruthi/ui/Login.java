@@ -1,7 +1,4 @@
-package com.aakruti.prakruthi.ui;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
+package com.prakruthi.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,9 +7,11 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.aakruti.prakruthi.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
+import com.prakruthi.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Login extends AppCompatActivity {
@@ -35,10 +34,10 @@ public class Login extends AppCompatActivity {
         login = findViewById(R.id.login_btn);
 
         register.setOnClickListener(view -> {
-            startActivity(new Intent(Login.this,RegistrationFrom.class));
+            startActivity(new Intent(Login.this, RegistrationFrom.class));
         });
         forget_password.setOnClickListener(view -> {
-            startActivity(new Intent(Login.this,ForgetPassword.class));
+            startActivity(new Intent(Login.this, ForgetPassword.class));
         });
 
         login.setOnClickListener(view -> {
@@ -54,11 +53,6 @@ public class Login extends AppCompatActivity {
             {
                 Api();
             }
-
-            startActivity(new Intent(Login.this,OTP_Verification.class));
-//            startActivity(new Intent(Login.this,NewCredentials.class));
-
-
         });
 
     }
@@ -70,16 +64,22 @@ public class Login extends AppCompatActivity {
         handler.post(new Runnable() {
             @Override
             public void run() {
+
                 //Starting Write and Read data with URL
+
                 //Creating array for parameters
                 String[] field = new String[2];
                 field[0] = "mobile";
                 field[1] = "password";
+
                 //Creating array for data
                 String[] data = new String[2];
                 data[0] = username.getText().toString();
                 data[1] = password.getText().toString();
+
                 PutData putData = new PutData(Variables.BaseUrl+"login", "POST", field, data);
+
+
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
@@ -89,28 +89,10 @@ public class Login extends AppCompatActivity {
                 }
                 //End Write and Read data with URL
             }
+
         });
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }

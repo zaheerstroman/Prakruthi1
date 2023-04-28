@@ -1,10 +1,10 @@
-package com.aakruti.prakruthi.ui;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.prakruthi.ui;
 
 import android.os.Bundle;
 
-import com.aakruti.prakruthi.R;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.prakruthi.R;
 
 public class Pasword_Updated_Animation extends AppCompatActivity {
 
