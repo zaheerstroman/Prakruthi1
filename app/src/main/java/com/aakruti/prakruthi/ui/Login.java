@@ -21,7 +21,9 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         getSupportActionBar().hide();
+
         register = findViewById(R.id.register_an_account_login);
         forget_password = findViewById(R.id.forget_password_login);
         username = findViewById(R.id.edittext_user_name);
@@ -34,6 +36,7 @@ public class Login extends AppCompatActivity {
         forget_password.setOnClickListener(view -> {
             startActivity(new Intent(Login.this,ForgetPassword.class));
         });
+
         login.setOnClickListener(view -> {
             if (username.getText().toString().isEmpty())
             {
@@ -48,6 +51,10 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
 
             }
+
+            startActivity(new Intent(Login.this,OTP_Verification.class));
+//            startActivity(new Intent(Login.this,NewCredentials.class));
+
 
         });
 

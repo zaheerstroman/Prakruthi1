@@ -14,5 +14,7 @@ public class OTP_Verification extends AppCompatActivity {
         setContentView(R.layout.activity_otp_verification);
 
         getSupportActionBar().hide();
+
+        //            startActivity(new Intent(Login.this,NewCredentials.class));
     }
 }

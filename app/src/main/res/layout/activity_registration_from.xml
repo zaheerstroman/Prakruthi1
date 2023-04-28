@@ -18,8 +18,8 @@
         />
 
  <RelativeLayout
-     android:layout_width="@dimen/_410sdp"
-     android:layout_height="@dimen/_600sdp"
+     android:layout_width="match_parent"
+     android:layout_height="@dimen/_530sdp"
      android:layout_alignParentBottom="true"
      android:background="@drawable/custom_shape_registrationform"
      >
