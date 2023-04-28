@@ -11,6 +11,10 @@
         android:id="@+id/relative_layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_100sdp"
         android:gravity="center_vertical">
 
         <ImageView
@@ -18,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_55sdp"
+            android:layout_marginTop="@dimen/_45sdp"
             android:src="@drawable/login_logo" />
 
         <TextView
@@ -38,7 +42,7 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_below="@+id/logintext"
             android:layout_marginStart="@dimen/_19sdp"
-            android:layout_marginTop="@dimen/_23sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_19sdp"
             android:background="@drawable/custom_edit_text"
             android:backgroundTint="@color/Primary"
@@ -58,7 +62,7 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_below="@+id/edittext_user_name"
             android:layout_marginStart="@dimen/_19sdp"
-            android:layout_marginTop="@dimen/_23sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginEnd="@dimen/_19sdp"
             android:background="@drawable/custom_edit_text"
             android:backgroundTint="@color/Primary"
@@ -89,7 +93,7 @@
             android:layout_height="@dimen/_35sdp"
             android:layout_below="@+id/forget_password_login"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_27sdp"
+            android:layout_marginTop="@dimen/_25sdp"
             android:background="@drawable/custom_shape_btn"
             android:drawableEnd="@drawable/baseline_login_24"
             android:drawablePadding="2dp"
@@ -101,40 +105,29 @@
             android:textSize="@dimen/_20sdp"
             android:textStyle="bold" />
 
-    </RelativeLayout>
-
-<!--    android:layout_marginTop="600dp"-->
-    <RelativeLayout
-        android:id="@+id/relative_layout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relative_layout1"
-
-        >
-<!--        android:layout_below="@id/login_btn"-->
-<!--        android:layout_marginStart="@dimen/_50sdp"-->
-
         <TextView
             android:id="@+id/dont_have_account_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/login_btn"
+            android:layout_marginStart="@dimen/_65sdp"
             android:layout_marginTop="@dimen/_30sdp"
             android:text="Don't have an account?"
+            android:layout_marginBottom="@dimen/_50sdp"
             android:textSize="@dimen/_10sdp" />
 
-<!--        android:layout_below="@+id/login_btn"-->
-<!--        android:layout_marginEnd="@dimen/_50sdp"-->
         <TextView
             android:id="@+id/register_an_account_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/login_btn"
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_toEndOf="@id/dont_have_account_login"
             android:text="@string/Register_an_account"
             android:textColor="@color/Primary_less"
+            android:layout_marginBottom="@dimen/_50sdp"
             android:textSize="@dimen/_11sdp" />
-
-        />
-
     </RelativeLayout>
+
+
 </RelativeLayout>
