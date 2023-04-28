@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -59,40 +60,32 @@ public class Login extends AppCompatActivity {
 
     public void Api()
     {
-        //Start ProgressBar first (Set visibility VISIBLE)
+        login.setVisibility(View.INVISIBLE);
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
             @Override
             public void run() {
-
-                //Starting Write and Read data with URL
-
                 //Creating array for parameters
                 String[] field = new String[2];
                 field[0] = "mobile";
                 field[1] = "password";
-
                 //Creating array for data
                 String[] data = new String[2];
                 data[0] = username.getText().toString();
                 data[1] = password.getText().toString();
-
                 PutData putData = new PutData(Variables.BaseUrl+"login", "POST", field, data);
-
-
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
                         //End ProgressBar (Set visibility to GONE)
                         Log.i("PutData", result);
+                        login.setVisibility(View.VISIBLE);
                     }
                 }
-                //End Write and Read data with URL
+                else {
+                    login.setVisibility(View.VISIBLE);
+                }
             }
-
         });
-
     }
-
-
 }
