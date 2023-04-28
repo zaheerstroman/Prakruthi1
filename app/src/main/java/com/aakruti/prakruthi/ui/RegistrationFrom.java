@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.CheckBox;
@@ -17,7 +18,7 @@ public class RegistrationFrom extends AppCompatActivity {
 
     EditText fullname,phone_number,email,password,city;
 
-    PowerSpinnerView state,district,type;
+    PowerSpinnerView state,district,type, Type_DropDown;
 
     CheckBox terms;
 
@@ -29,19 +30,25 @@ public class RegistrationFrom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_from);
         getSupportActionBar().hide();
+
         fullname = findViewById(R.id.edittext_full_name);
         phone_number = findViewById(R.id.edittext_phone_number);
         email = findViewById(R.id.edittext_email_address);
         password = findViewById(R.id.edittext_pass_word);
-        city = findViewById(R.id.Edittext_City);
-        sendotp = findViewById(R.id.send_OTP_btn);
-        terms = findViewById(R.id.checkbox);
+
         state = findViewById(R.id.State_DropDown);
         district = findViewById(R.id.District_DropDown);
+        city = findViewById(R.id.Edittext_City);
+        Type_DropDown = findViewById(R.id.Type_DropDown);
+
+        terms = findViewById(R.id.checkbox);
+        sendotp = findViewById(R.id.send_OTP_btn);
+
         backbtn = findViewById(R.id.registration_back_btn);
         backbtn.setOnClickListener(view -> {
             super.onBackPressed();
         });
+
         sendotp.setOnClickListener(view -> {
             if (fullname.getText().toString().trim().isEmpty()) {
                 fullname.setError("Full name is required");
@@ -67,6 +74,10 @@ public class RegistrationFrom extends AppCompatActivity {
                 String cityStr = city.getText().toString().trim();
 
             }
+
+            startActivity(new Intent(RegistrationFrom.this,OTP_Verification.class));
+
+
         });
 
     }
