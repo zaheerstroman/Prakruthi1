@@ -208,8 +208,6 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="20dp"/>
-
-
     </RelativeLayout>
 
 
