@@ -73,7 +73,8 @@
             android:singleLine="true"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
-            android:textSize="@dimen/_15sdp" />
+            android:textSize="@dimen/_15sdp"
+            android:inputType="textPassword"/>
 
         <TextView
             android:id="@+id/forget_password_login"

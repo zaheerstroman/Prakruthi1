@@ -54,11 +54,6 @@ public class Login extends AppCompatActivity {
             {
                 Api();
             }
-
-            startActivity(new Intent(Login.this,OTP_Verification.class));
-//            startActivity(new Intent(Login.this,NewCredentials.class));
-
-
         });
 
     }
@@ -85,32 +80,15 @@ public class Login extends AppCompatActivity {
                         String result = putData.getResult();
                         //End ProgressBar (Set visibility to GONE)
                         Log.i("PutData", result);
+
                     }
                 }
                 //End Write and Read data with URL
             }
+
         });
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }
