@@ -9,9 +9,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.prakruthi.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -87,5 +91,24 @@ public class Login extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void getFCMToken() {
+        FirebaseApp.initializeApp(Login.this);
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.d("firebase", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        Log.d("firebase", "token" + token);
+                        userLogin(token);
+                    }
+                });
     }
 }
