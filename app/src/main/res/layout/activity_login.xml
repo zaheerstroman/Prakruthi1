@@ -112,22 +112,23 @@
 
         >
 <!--        android:layout_below="@id/login_btn"-->
+<!--        android:layout_marginStart="@dimen/_50sdp"-->
+
         <TextView
             android:id="@+id/dont_have_account_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_50sdp"
             android:layout_marginTop="@dimen/_30sdp"
             android:text="Don't have an account?"
             android:textSize="@dimen/_10sdp" />
 
 <!--        android:layout_below="@+id/login_btn"-->
+<!--        android:layout_marginEnd="@dimen/_50sdp"-->
         <TextView
             android:id="@+id/register_an_account_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_30sdp"
-            android:layout_marginEnd="@dimen/_50sdp"
             android:layout_toEndOf="@id/dont_have_account_login"
             android:text="@string/Register_an_account"
             android:textColor="@color/Primary_less"
