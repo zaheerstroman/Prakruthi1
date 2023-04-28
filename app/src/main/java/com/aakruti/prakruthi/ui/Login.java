@@ -78,12 +78,10 @@ public class Login extends AppCompatActivity {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
-                        //End ProgressBar (Set visibility to GONE)
                         Log.i("PutData", result);
 
                     }
                 }
-                //End Write and Read data with URL
             }
 
         });
