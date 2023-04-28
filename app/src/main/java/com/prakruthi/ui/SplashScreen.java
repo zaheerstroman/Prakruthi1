@@ -1,12 +1,12 @@
-package com.aakruti.prakruthi.ui;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.prakruthi.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.aakruti.prakruthi.R;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.prakruthi.R;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -21,7 +21,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 // Code to be executed after delay
 //                startActivity(new Intent(SplashScreen.this,Otp_Verification_Animation.class));
-                startActivity(new Intent(SplashScreen.this,Login.class));
+                startActivity(new Intent(SplashScreen.this, Login.class));
 
             }
         }, 2000); // 1000ms = 1 second delay

@@ -1,11 +1,11 @@
-package com.aakruti.prakruthi.ui;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.prakruthi.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.aakruti.prakruthi.R;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.prakruthi.R;
 
 public class Otp_Verification_Animation extends AppCompatActivity {
 
@@ -16,7 +16,7 @@ public class Otp_Verification_Animation extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        startActivity(new Intent(Otp_Verification_Animation.this,MainActivity.class));
+        startActivity(new Intent(Otp_Verification_Animation.this, MainActivity.class));
 
 
     }

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.aakruti.prakruthi'
+    namespace 'com.prakruthi'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.aakruti.prakruthi"
+        applicationId "com.prakruthi"
         minSdk 24
         targetSdk 33
         versionCode 1

@@ -1,17 +1,14 @@
-package com.aakruti.prakruthi.ui;
+package com.prakruthi.ui;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.CheckBox;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
-import android.content.ContentValues;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Toast;
-
-import com.aakruti.prakruthi.R;
+import com.prakruthi.R;
 import com.skydoves.powerspinner.PowerSpinnerView;
 
 public class RegistrationFrom extends AppCompatActivity {
@@ -75,7 +72,7 @@ public class RegistrationFrom extends AppCompatActivity {
 
             }
 
-            startActivity(new Intent(RegistrationFrom.this,OTP_Verification.class));
+            startActivity(new Intent(RegistrationFrom.this, OTP_Verification.class));
 
 
         });

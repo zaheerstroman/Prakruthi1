@@ -1,11 +1,10 @@
-package com.aakruti.prakruthi.ui;
+package com.prakruthi.ui;
+
+import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-
-import com.aakruti.prakruthi.R;
+import com.prakruthi.R;
 
 public class OTP_Verification extends AppCompatActivity {
 
