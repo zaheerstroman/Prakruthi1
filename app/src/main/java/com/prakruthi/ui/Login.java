@@ -1,5 +1,8 @@
 package com.prakruthi.ui;
 
+//import com.google.firebase.messaging.FirebaseMessaging;
+
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +19,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.prakruthi.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -103,11 +107,9 @@ public class Login extends AppCompatActivity {
                             Log.d("firebase", "Fetching FCM registration token failed", task.getException());
                             return;
                         }
-
                         // Get new FCM registration token
                         String token = task.getResult();
                         Log.d("firebase", "token" + token);
-                        userLogin(token);
                     }
                 });
     }
