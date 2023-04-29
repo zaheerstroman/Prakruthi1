@@ -25,6 +25,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class RegistrationForm extends AppCompatActivity {
@@ -230,6 +234,31 @@ public class RegistrationForm extends AppCompatActivity {
                     if (fetchData.onComplete()) {
                         String result = fetchData.getResult();
                         Log.i("FetchData", result);
+                        try {
+                            // assume jsonStr contains the JSON object
+                            JSONObject jsonObj = new JSONObject(result);
+
+                            // convert the "departments" array to a List<String>
+                            JSONArray departmentsArr = jsonObj.getJSONArray("departments");
+                            List<String> departmentsList = Arrays.asList(departmentsArr.toString().split("\\s*,\\s*"));
+                            type.setItems(departmentsList);
+
+                            // convert the "state" array to a List<String>
+                            JSONArray stateArr = jsonObj.getJSONArray("state");
+                            List<String> stateList = Arrays.asList(stateArr.toString().split("\\s*,\\s*"));
+                            state.setItems(stateList);
+
+                            // convert the "district" array to a List<String>
+                            JSONArray districtArr = jsonObj.getJSONArray("district");
+                            List<String> districtList = Arrays.asList(districtArr.toString().split("\\s*,\\s*"));
+                            district.setItems(districtList);
+
+                        }
+                        catch (JSONException e)
+                        {
+                            Log.e(TAG, e.toString() );
+                            Toast.makeText(RegistrationForm.this, "Network Error", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                 }
