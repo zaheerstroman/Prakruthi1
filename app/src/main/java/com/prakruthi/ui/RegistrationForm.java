@@ -239,19 +239,31 @@ public class RegistrationForm extends AppCompatActivity {
                             JSONObject jsonObj = new JSONObject(result);
 
                             // convert the "departments" array to a List<String>
-                            JSONArray departmentsArr = jsonObj.getJSONArray("departments");
-                            List<String> departmentsList = Arrays.asList(departmentsArr.toString().split("\\s*,\\s*"));
-                            type.setItems(departmentsList);
+                            JSONArray departments = jsonObj.getJSONArray("departments");
+                            ArrayList<String> departmentNames = new ArrayList<>();
+                            for(int i = 0; i < departments.length(); i++) {
+                                JSONObject department = departments.getJSONObject(i);
+                                departmentNames.add(department.getString("name"));
+                            }
 
                             // convert the "state" array to a List<String>
-                            JSONArray stateArr = jsonObj.getJSONArray("state");
-                            List<String> stateList = Arrays.asList(stateArr.toString().split("\\s*,\\s*"));
-                            state.setItems(stateList);
+                            JSONArray states = jsonObj.getJSONArray("state");
+                            ArrayList<String> stateNames = new ArrayList<>();
+                            for(int i = 0; i < states.length(); i++) {
+                                JSONObject state = states.getJSONObject(i);
+                                stateNames.add(state.getString("name"));
+                            }
+                            state.setItems(stateNames);
+
 
                             // convert the "district" array to a List<String>
-                            JSONArray districtArr = jsonObj.getJSONArray("district");
-                            List<String> districtList = Arrays.asList(districtArr.toString().split("\\s*,\\s*"));
-                            district.setItems(districtList);
+                            JSONArray districts = jsonObj.getJSONArray("district");
+                            ArrayList<String> districtNames = new ArrayList<>();
+                            for(int i = 0; i < districts.length(); i++) {
+                                JSONObject district = districts.getJSONObject(i);
+                                districtNames.add(district.getString("name"));
+                            }
+                            district.setItems(districtNames);
 
                         }
                         catch (JSONException e)

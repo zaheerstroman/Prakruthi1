@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.prakruthi.R;
+
+import java.util.Objects;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -14,7 +17,8 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        getSupportActionBar().hide();
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        Objects.requireNonNull(getSupportActionBar()).hide();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
