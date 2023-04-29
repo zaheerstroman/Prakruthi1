@@ -26,7 +26,7 @@ public class ForgetPassword extends AppCompatActivity {
 
         new_password = findViewById(R.id.edittext_new_password);
         confirm_password = findViewById(R.id.edittext_confirm_password);
-        email_address = findViewById(R.id.edittext_fogetpassword_email_adrs);
+        email_address = findViewById(R.id.edittext_forgetpassword_email_adrs);
         update_btn = findViewById(R.id.btn_update_text);
         nextbtn = findViewById(R.id.next_forget_password_btn);
         via_sms_img = findViewById(R.id.via_msg_makeselection);

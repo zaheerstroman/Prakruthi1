@@ -53,14 +53,12 @@ public class Login extends AppCompatActivity {
             }
             if(!username.getText().toString().isEmpty() && !password.getText().toString().isEmpty())
             {
-                Api();
+                Api(username.getText().toString(),password.getText().toString());
             }
         });
 
-
-
     }
-    public void Api()
+    public void Api(String usernameString,String passwordString)
     {
         login.setVisibility(View.INVISIBLE);
         Handler handler = new Handler(Looper.getMainLooper());
@@ -73,8 +71,8 @@ public class Login extends AppCompatActivity {
                 field[1] = "password";
                 //Creating array for data
                 String[] data = new String[2];
-                data[0] = username.getText().toString();
-                data[1] = password.getText().toString();
+                data[0] = usernameString;
+                data[1] = passwordString;
                 PutData putData = new PutData(Variables.BaseUrl+"login", "POST", field, data);
                 if (putData.startPut()) {
                     if (putData.onComplete()) {

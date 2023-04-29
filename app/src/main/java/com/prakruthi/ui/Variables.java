@@ -35,4 +35,40 @@ public class Variables {
     public static String allowEmail;
     public static String allowSms;
     public static String allowPush;
+
+    public static void clear() {
+        token = "";
+        id = 0;
+        departmentId = 0;
+        userCode = "";
+        name = "";
+        lastName = "";
+        email = "";
+        password = "";
+        mobile = "";
+        gender = "";
+        dob = "";
+        attachment = "";
+        city = "";
+        postCode = "";
+        address = "";
+        state = "";
+        country = "";
+        district = "";
+        street = "";
+        about = "";
+        status = "";
+        mobileVerified = "";
+        isVerified = "";
+        logDateCreated = "";
+        createdBy = "";
+        logDateModified = "";
+        modifiedBy = "";
+        fcmToken = "";
+        deviceId = "";
+        allowEmail = "";
+        allowSms = "";
+        allowPush = "";
+    }
+
 }
