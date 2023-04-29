@@ -148,6 +148,7 @@ public class Login extends AppCompatActivity {
             String allowEmail = userDetails.optString("allow_email", "");
             String allowSms = userDetails.optString("allow_sms", "");
             String allowPush = userDetails.optString("allow_push", "");
+
             // Store values in static variables
             Variables.token = token;
             Variables.id = id;
@@ -181,6 +182,7 @@ public class Login extends AppCompatActivity {
             Variables.allowEmail = allowEmail;
             Variables.allowSms = allowSms;
             Variables.allowPush = allowPush;
+
             login.setVisibility(View.VISIBLE);
         }
         catch (JSONException e) {
