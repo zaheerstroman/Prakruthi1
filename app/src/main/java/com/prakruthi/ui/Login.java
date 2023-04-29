@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class Login extends AppCompatActivity {
 
+    ImageView iv_back, Login_Logo;
     TextView register,forget_password;
     EditText username,password;
     AppCompatButton login;
@@ -64,6 +66,8 @@ public class Login extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     public void Api()
@@ -88,6 +92,9 @@ public class Login extends AppCompatActivity {
                         //End ProgressBar (Set visibility to GONE)
                         Log.i("PutData", result);
                         login.setVisibility(View.VISIBLE);
+
+                        //Json Convertor tommorow
+                        getFCMToken();
                     }
                 }
                 else {
