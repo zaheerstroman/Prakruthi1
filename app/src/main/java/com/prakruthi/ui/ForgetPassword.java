@@ -1,6 +1,7 @@
 package com.prakruthi.ui;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
@@ -13,11 +14,11 @@ import java.util.Objects;
 
 
 public class ForgetPassword extends AppCompatActivity {
-    AppCompatButton update_btn,nextbtn , forget_password_backbtn;
+    AppCompatButton update_btn,nextbtn , forget_password_backbtn,otp_verfication_submit_btn;
     EditText new_password,confirm_password,email_address;
 
     RelativeLayout via_sms_img,via_mail_img;
-    RelativeLayout forget_password_relativelayout,make_selection_relativelayout,otp_verification_relativelayout,new_credential_relativelayout;
+    RelativeLayout forget_password_relativelayout,make_selection_relativelayout,otp_verification_relativelayout,new_credential_relativelayout,password_updated_animation_relativelayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,31 @@ public class ForgetPassword extends AppCompatActivity {
         via_sms_img = findViewById(R.id.via_msg_makeselection);
         via_mail_img = findViewById(R.id.email_msg_makeselection);
         forget_password_backbtn = findViewById(R.id.forgetpassword_btn);
+        otp_verfication_submit_btn = findViewById(R.id.btn_otp_submit);
+        password_updated_animation_relativelayout = findViewById(R.id.password_updated_animation);
 
         forget_password_backbtn.setOnClickListener(view -> {
             super.onBackPressed();
         });
 
+        nextbtn.setOnClickListener(view -> {
+            forget_password_relativelayout.setVisibility(View.GONE);
+            make_selection_relativelayout.setVisibility(View.VISIBLE);
+        });
+
+        via_sms_img.setOnClickListener(view -> {
+            make_selection_relativelayout.setVisibility(View.GONE);
+            otp_verification_relativelayout.setVisibility(View.VISIBLE);
+        });
+
+        otp_verfication_submit_btn.setOnClickListener(view -> {
+            otp_verification_relativelayout.setVisibility(View.GONE);
+            new_credential_relativelayout.setVisibility(View.VISIBLE);
+        });
+
+        update_btn.setOnClickListener(view -> {
+            new_credential_relativelayout.setVisibility(View.GONE);
+            password_updated_animation_relativelayout.setVisibility(View.VISIBLE);
+        });
     }
 }
