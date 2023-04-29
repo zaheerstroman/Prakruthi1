@@ -18,6 +18,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.prakruthi.R;
 import com.skydoves.powerspinner.PowerSpinnerView;
+import com.vishnusivadas.advanced_httpurlconnection.FetchData;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONArray;
@@ -55,6 +56,9 @@ public class RegistrationForm extends AppCompatActivity {
         sendotp = findViewById(R.id.send_OTP_btn);
         backbtn = findViewById(R.id.registration_back_btn);
 
+        // Getting DropDown Arrays
+        getDropDownData();
+
         // set an OnTouchListener to the root view
         View root = findViewById(android.R.id.content);
         root.setOnTouchListener(new View.OnTouchListener() {
@@ -79,11 +83,10 @@ public class RegistrationForm extends AppCompatActivity {
                 return false; // do not consume the event
             }
         });
+
         backbtn.setOnClickListener(view -> {
             super.onBackPressed();
         });
-
-
         sendotp.setOnClickListener(view -> {
             state.setError(null);
             district.setError(null);
@@ -105,21 +108,17 @@ public class RegistrationForm extends AppCompatActivity {
             }
             else if (state.getText().toString().isEmpty())
             {
-                Log.e(TAG, state.getText().toString()+district.getText().toString()+type.getText().toString() );
                 state.setError("City is required");
             }
             else if (district.getText().toString().isEmpty())
             {
-                Log.e(TAG, state.getText().toString()+district.getText().toString()+type.getText().toString() );
                 district.setError("City is required");
             }
             else if (type.getText().toString().isEmpty())
             {
-                Log.e(TAG, state.getText().toString()+district.getText().toString()+type.getText().toString() );
                 type.setError("City is required");
             }
             else {
-                Log.e(TAG, state.getText().toString()+district.getText().toString()+type.getText().toString() );
                 String fullnameStr = fullname.getText().toString().trim();
                 String phoneStr = phone_number.getText().toString().trim();
                 String emailStr = email.getText().toString().trim();
@@ -217,5 +216,24 @@ public class RegistrationForm extends AppCompatActivity {
             sendotp.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    public void getDropDownData()
+    {
+        //Start ProgressBar first (Set visibility VISIBLE)
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                FetchData fetchData = new FetchData("https://houseofspiritshyd.in/prakruthi/admin/api/getDropdownData");
+                if (fetchData.startFetch()) {
+                    if (fetchData.onComplete()) {
+                        String result = fetchData.getResult();
+                        Log.i("FetchData", result);
+
+                    }
+                }
+            }
+        });
     }
 }

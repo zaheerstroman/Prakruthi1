@@ -33,15 +33,12 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.edittext_login_password);
         login = findViewById(R.id.login_btn);
 
-
-
         register.setOnClickListener(view -> {
             startActivity(new Intent(Login.this, RegistrationForm.class));
         });
         forget_password.setOnClickListener(view -> {
             startActivity(new Intent(Login.this, ForgetPassword.class));
         });
-
         login.setOnClickListener(view -> {
             if (username.getText().toString().isEmpty())
             {
