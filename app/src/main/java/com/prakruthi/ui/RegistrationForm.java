@@ -17,7 +17,7 @@ public class RegistrationForm extends AppCompatActivity {
 
     EditText fullname,phone_number,email,password,city;
 
-    PowerSpinnerView state,district,type, Type_DropDown;
+    PowerSpinnerView state,district,Type_DropDown;
 
     CheckBox terms;
 
