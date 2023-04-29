@@ -2,6 +2,8 @@ package com.prakruthi.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
@@ -17,7 +19,7 @@ public class RegistrationForm extends AppCompatActivity {
 
     EditText fullname,phone_number,email,password,city;
 
-    PowerSpinnerView state,district,type, Type_DropDown;
+    PowerSpinnerView state,district,Type_DropDown;
 
     CheckBox terms;
 
@@ -42,6 +44,30 @@ public class RegistrationForm extends AppCompatActivity {
         sendotp = findViewById(R.id.send_OTP_btn);
         backbtn = findViewById(R.id.registration_back_btn);
 
+        // set an OnTouchListener to the root view
+        View root = findViewById(android.R.id.content);
+        root.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // check if the touch is outside of the state view
+                    int[] location = new int[2];
+                    state.getLocationOnScreen(location);
+                    int x = location[0];
+                    int y = location[1];
+                    int width = state.getWidth();
+                    int height = state.getHeight();
+                    if (!(event.getX() > x && event.getX() < x + width && event.getY() > y && event.getY() < y + height)) {
+                        // dismiss the state view
+                        state.dismiss();
+                        district.dismiss();
+                        Type_DropDown.dismiss();
+                        return true; // consume the event
+                    }
+                }
+                return false; // do not consume the event
+            }
+        });
         //
         backbtn.setOnClickListener(view -> {
             super.onBackPressed();
