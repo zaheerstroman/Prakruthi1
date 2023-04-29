@@ -40,17 +40,18 @@ public class OTP_Verification extends AppCompatActivity implements View.OnClickL
         txt_re_send = findViewById(R.id.txt_re_send);
         pinview_4_digits = findViewById(R.id.pinview_4_digits);
 
+        otp_btn_backpress.setOnClickListener(this);
+
+        txt_re_send.setOnClickListener(this);
+
+
 //        btn_otp_submit.setOnClickListener(this);
 
         btn_otp_submit.setOnClickListener(view -> {
-
                     Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
         });
 
-
                 startTimer(60000, 1000);
-
-
     }
 
     public void startTimer(final long finish, long tick) {
