@@ -86,7 +86,6 @@ public class RegistrationForm extends AppCompatActivity {
                 return false; // do not consume the event
             }
         });
-        //
         backbtn.setOnClickListener(view -> {
             super.onBackPressed();
         });
