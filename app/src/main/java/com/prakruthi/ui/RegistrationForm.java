@@ -128,6 +128,9 @@ public class RegistrationForm extends AppCompatActivity {
                 String emailStr = email.getText().toString().trim();
                 String passwordStr = password.getText().toString().trim();
                 String cityStr = city.getText().toString().trim();
+//                String stateStr = state.getText().toString().trim();
+//                String districtStr = district.getText().toString().trim();
+//                String typeStr = type.getText().toString().trim();
 //                Api();
 
             }

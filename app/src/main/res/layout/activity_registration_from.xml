@@ -157,7 +157,7 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_26sdp"
             android:background="@drawable/custom_edit_text"
-            android:hint="City"
+            android:hint="Area"
             android:paddingStart="@dimen/_15sdp"
             android:singleLine="true"
             android:textColor="#61000000"
