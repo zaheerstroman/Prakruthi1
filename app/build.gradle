@@ -50,16 +50,16 @@ android {
 
 dependencies {
 
-
+    implementation 'com.google.firebase:firebase-messaging-directboot:23.1.2'
+    debugImplementation 'androidx.compose.ui:ui-tooling'
+    debugImplementation 'androidx.compose.ui:ui-test-manifest'
+    implementation platform('com.google.firebase:firebase-bom:31.5.0')
+    implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.github.GoodieBag:Pinview:v1.5'
-
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
-
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.25'
     implementation 'com.github.bumptech.glide:glide:4.14.2'
-
     implementation 'com.github.VishnuSivadasVS:Advanced-HttpURLConnection:1.2'
-
     implementation 'com.github.qandeelabbassi:Dropsy:1.1'
     implementation "com.github.skydoves:powerspinner:1.2.6"
     implementation 'androidx.core:core-ktx:1.8.0'
@@ -78,14 +78,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     androidTestImplementation platform('androidx.compose:compose-bom:2022.10.00')
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
-    debugImplementation 'androidx.compose.ui:ui-tooling'
-    debugImplementation 'androidx.compose.ui:ui-test-manifest'
-
-    implementation platform('com.google.firebase:firebase-bom:31.5.0')
-
-    implementation 'com.google.firebase:firebase-analytics'
-
-    implementation 'com.google.firebase:firebase-messaging-directboot:23.1.1'
-
 
 }

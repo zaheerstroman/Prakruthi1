@@ -11,7 +11,9 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.prakruthi.R;
 import com.skydoves.powerspinner.PowerSpinnerView;
 
-public class RegistrationFrom extends AppCompatActivity {
+import java.util.Objects;
+
+public class RegistrationForm extends AppCompatActivity {
 
     EditText fullname,phone_number,email,password,city;
 
@@ -26,22 +28,21 @@ public class RegistrationFrom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_from);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         fullname = findViewById(R.id.edittext_full_name);
         phone_number = findViewById(R.id.edittext_phone_number);
         email = findViewById(R.id.edittext_email_address);
         password = findViewById(R.id.edittext_pass_word);
-
         state = findViewById(R.id.State_DropDown);
         district = findViewById(R.id.District_DropDown);
         city = findViewById(R.id.Edittext_City);
         Type_DropDown = findViewById(R.id.Type_DropDown);
-
         terms = findViewById(R.id.checkbox);
         sendotp = findViewById(R.id.send_OTP_btn);
-
         backbtn = findViewById(R.id.registration_back_btn);
+
+        //
         backbtn.setOnClickListener(view -> {
             super.onBackPressed();
         });
@@ -72,7 +73,7 @@ public class RegistrationFrom extends AppCompatActivity {
 
             }
 
-            startActivity(new Intent(RegistrationFrom.this, OTP_Verification.class));
+            startActivity(new Intent(RegistrationForm.this, OTP_Verification.class));
 
 
         });

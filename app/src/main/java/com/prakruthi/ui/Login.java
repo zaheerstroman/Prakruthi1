@@ -1,8 +1,5 @@
 package com.prakruthi.ui;
-
-//import com.google.firebase.messaging.FirebaseMessaging;
-
-
+import static android.content.ContentValues.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,42 +7,36 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.prakruthi.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
-
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.util.Objects;
 public class Login extends AppCompatActivity {
-
-    ImageView iv_back, Login_Logo;
     TextView register,forget_password;
     EditText username,password;
     AppCompatButton login;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        getSupportActionBar().hide();
-
+        Objects.requireNonNull(getSupportActionBar()).hide();
         register = findViewById(R.id.register_an_account_login);
         forget_password = findViewById(R.id.forget_password_login);
         username = findViewById(R.id.edittext_user_name);
         password = findViewById(R.id.edittext_login_password);
         login = findViewById(R.id.login_btn);
 
+
+
         register.setOnClickListener(view -> {
-            startActivity(new Intent(Login.this, RegistrationFrom.class));
+            startActivity(new Intent(Login.this, RegistrationForm.class));
         });
         forget_password.setOnClickListener(view -> {
             startActivity(new Intent(Login.this, ForgetPassword.class));
@@ -69,7 +60,6 @@ public class Login extends AppCompatActivity {
 
 
     }
-
     public void Api()
     {
         login.setVisibility(View.INVISIBLE);
@@ -88,13 +78,31 @@ public class Login extends AppCompatActivity {
                 PutData putData = new PutData(Variables.BaseUrl+"login", "POST", field, data);
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
+                        // result = Api Result
                         String result = putData.getResult();
-                        //End ProgressBar (Set visibility to GONE)
-                        Log.i("PutData", result);
-                        login.setVisibility(View.VISIBLE);
+                        try {
+                            JSONObject json = new JSONObject(result);
+                            boolean statusCode = json.getBoolean("status_code");
+                            int loggedIn = json.getInt("loggedIn");
+                            String message = json.getString("message");
+                            if (statusCode)
+                            {
+                                Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
+                                getUserData(json);
+                            }
+                            else
+                            {
+                                Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
+                                username.setError("Invalid");
+                                password.setError("Invalid");
+                                login.setVisibility(View.VISIBLE);
+                            }
 
-                        //Json Convertor tommorow
-                        getFCMToken();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            login.setVisibility(View.VISIBLE);
+                            Toast.makeText(Login.this, "Network Error", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
                 else {
@@ -103,21 +111,84 @@ public class Login extends AppCompatActivity {
             }
         });
     }
+    public void getUserData(JSONObject ResultJson)
+    {
+        try {
+            String token = ResultJson.getString("token");
+            JSONArray userDetailsArray = ResultJson.getJSONArray("user_details");
+            JSONObject userDetails = userDetailsArray.getJSONObject(0);
+            int id = userDetails.getInt("id");
+            int departmentId = userDetails.getInt("department_id");
+            String userCode = userDetails.optString("user_code", "");
+            String name = userDetails.optString("name", "");
+            String lastName = userDetails.optString("last_name", "");
+            String email = userDetails.optString("email", "");
+            String password = userDetails.optString("password", "");
+            String mobile = userDetails.optString("mobile", "");
+            String gender = userDetails.optString("gender", "");
+            String dob = userDetails.optString("dob", "");
+            String attachment = userDetails.optString("attachment", "");
+            String city = userDetails.optString("city", "");
+            String postCode = userDetails.optString("postCode", "");
+            String address = userDetails.optString("address", "");
+            String state = userDetails.optString("state", "");
+            String country = userDetails.optString("country", "");
+            String district = userDetails.optString("district", "");
+            String street = userDetails.optString("street", "");
+            String about = userDetails.optString("about", "");
+            String status = userDetails.optString("status", "");
+            String mobileVerified = userDetails.optString("mobile_verified", "");
+            String isVerified = userDetails.optString("is_verified", "");
+            String logDateCreated = userDetails.optString("log_date_created", "");
+            String createdBy = userDetails.optString("created_by", "");
+            String logDateModified = userDetails.optString("log_date_modified", "");
+            String modifiedBy = userDetails.optString("modified_by", "");
+            String fcmToken = userDetails.optString("fcm_token", "");
+            String deviceId = userDetails.optString("device_id", "");
+            String allowEmail = userDetails.optString("allow_email", "");
+            String allowSms = userDetails.optString("allow_sms", "");
+            String allowPush = userDetails.optString("allow_push", "");
+            // Store values in static variables
+            Variables.token = token;
+            Variables.id = id;
+            Variables.departmentId = departmentId;
+            Variables.userCode = userCode;
+            Variables.name = name;
+            Variables.lastName = lastName;
+            Variables.email = email;
+            Variables.password = password;
+            Variables.mobile = mobile;
+            Variables.gender = gender;
+            Variables.dob = dob;
+            Variables.attachment = attachment;
+            Variables.city = city;
+            Variables.postCode = postCode;
+            Variables.address = address;
+            Variables.state = state;
+            Variables.country = country;
+            Variables.district = district;
+            Variables.street = street;
+            Variables.about = about;
+            Variables.status = status;
+            Variables.mobileVerified = mobileVerified;
+            Variables.isVerified = isVerified;
+            Variables.logDateCreated = logDateCreated;
+            Variables.createdBy = createdBy;
+            Variables.logDateModified = logDateModified;
+            Variables.modifiedBy = modifiedBy;
+            Variables.fcmToken = fcmToken;
+            Variables.deviceId = deviceId;
+            Variables.allowEmail = allowEmail;
+            Variables.allowSms = allowSms;
+            Variables.allowPush = allowPush;
+            login.setVisibility(View.VISIBLE);
+        }
+        catch (JSONException e) {
+            Log.e(TAG, e.toString() );
+            Toast.makeText(this, "System Error", Toast.LENGTH_SHORT).show();
+            login.setVisibility(View.VISIBLE);
+        }
 
-    public void getFCMToken() {
-        FirebaseApp.initializeApp(Login.this);
-        FirebaseMessaging.getInstance().getToken()
-                .addOnCompleteListener(new OnCompleteListener<String>() {
-                    @Override
-                    public void onComplete(@NonNull Task<String> task) {
-                        if (!task.isSuccessful()) {
-                            Log.d("firebase", "Fetching FCM registration token failed", task.getException());
-                            return;
-                        }
-                        // Get new FCM registration token
-                        String token = task.getResult();
-                        Log.d("firebase", "token" + token);
-                    }
-                });
     }
+
 }
