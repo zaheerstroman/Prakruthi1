@@ -39,7 +39,7 @@
         android:singleLine="true"
         android:layout_marginTop="@dimen/_19sdp"
         android:fontFamily="@font/ibarra_real_nova"
-        android:text="Enter the OTP Send To +919032757020"
+        android:text="Enter the OTP Send To "
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="@dimen/_15sdp" />
@@ -93,7 +93,7 @@
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_otp_submit"
+        android:id="@+id/btn_otp_submit_Registration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/txt_re_send"

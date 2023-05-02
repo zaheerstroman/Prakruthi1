@@ -51,16 +51,12 @@ public class Variables {
 
     public static String apiToken;
 
+    public static String RegistrationOTP;
 
-    //VerifyOtp:---
-//    public static String isVerified;
-
-
-
+    public static String phoneNumber;
 
     public static void clear() {
 
-//        Login
         token = "";
         id = 0;
         departmentId = 0;
@@ -93,24 +89,18 @@ public class Variables {
         allowEmail = "";
         allowSms = "";
         allowPush = "";
-
         status_code = "";
         loggedIn = "";
         message = "";
-
 
 //        RegistrationForm:---
 //        userId,userMobile,apiToken
         userId = 0;
         userMobile = "";
         apiToken = "";
-
-//        VerifyOtp:----
-
         isVerified = "";
-
-
-
+        RegistrationOTP = "";
+        phoneNumber = "";
     }
 
 }

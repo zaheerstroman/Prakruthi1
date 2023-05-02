@@ -2,7 +2,9 @@ package com.prakruthi.ui;
 
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -13,9 +15,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.prakruthi.R;
 import com.skydoves.powerspinner.PowerSpinnerView;
 import com.vishnusivadas.advanced_httpurlconnection.FetchData;
@@ -47,7 +54,6 @@ public class RegistrationForm extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_from);
         Objects.requireNonNull(getSupportActionBar()).hide();
-
         fullname = findViewById(R.id.edittext_full_name);
         phone_number = findViewById(R.id.edittext_phone_number);
         email = findViewById(R.id.edittext_email_address);
@@ -62,6 +68,8 @@ public class RegistrationForm extends AppCompatActivity {
 
         // Getting DropDown Arrays
         getDropDownData();
+
+        getFCMToken();
 
         // set an OnTouchListener to the root view
         View root = findViewById(android.R.id.content);
@@ -97,113 +105,65 @@ public class RegistrationForm extends AppCompatActivity {
             type.setError(null);
             if (fullname.getText().toString().trim().isEmpty()) {
                 fullname.setError("Full name is required");
+                return;
             }
-            else if (phone_number.getText().toString().trim().isEmpty()) {
+            else if (phone_number.getText().toString().trim().isEmpty() || phone_number.getText().length() < 10) {
                 phone_number.setError("Phone number is required");
+                return;
             }
             else if (email.getText().toString().trim().isEmpty()) {
                 email.setError("Email is required");
+                return;
             }
             else if (password.getText().toString().trim().isEmpty()) {
                 password.setError("Password is required");
+                return;
             }
             else if (city.getText().toString().trim().isEmpty()) {
                 city.setError("City is required");
+                return;
             }
             else if (state.getText().toString().isEmpty())
             {
-                state.setError("City is required");
+                state.setError("state is required");
+                return;
             }
             else if (district.getText().toString().isEmpty())
             {
-                district.setError("City is required");
+                district.setError("district is required");
+                return;
             }
             else if (type.getText().toString().isEmpty())
             {
-                type.setError("City is required");
+                type.setError("type is required");
+                return;
+            }
+            else if(Variables.fcmToken == null || Variables.fcmToken.isEmpty())
+            {
+                Toast.makeText(this, "Internal Error", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            else if (!terms.isChecked())
+            {
+                Toast.makeText(this, "Please Accept Tge Terms And Conditions", Toast.LENGTH_SHORT).show();
+                return;
             }
             else {
                 String fullnameStr = fullname.getText().toString().trim();
                 String phoneStr = phone_number.getText().toString().trim();
                 String emailStr = email.getText().toString().trim();
                 String passwordStr = password.getText().toString().trim();
-                String cityStr = city.getText().toString().trim();
-//                String stateStr = state.getText().toString().trim();
-//                String districtStr = district.getText().toString().trim();
-//                String typeStr = type.getText().toString().trim();
-//                Api();
-
-            }
-
-
-        });
-
-    }
-
-    public void Api(String name , String mobile, String email , String password,String city,String type ,String state,String district,String fcm_token) {
-        sendotp.setVisibility(View.INVISIBLE);
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                //Creating array for parameters
-                String[] field = new String[9];
-                field[0] = "name";
-                field[1] = "mobile";
-                field[2] = "email";
-                field[3] = "password";
-                field[4] = "city";
-                field[5] = "type";
-                field[6] = "state";
-                field[7] = "district";
-                field[8] = "fcm_token";
-
-                //Creating array for data
-                String[] data = new String[9];
-                data[0] = name;
-                data[1] = mobile;
-                data[2] = email;
-                data[3] = password;
-                data[4] = city;
-                data[5] = type;
-                data[6] = state;
-                data[7] = district;
-                data[8] = fcm_token;
-
-                PutData putData = new PutData(Variables.BaseUrl + "registration", "POST", field, data);
-                if (putData.startPut()) {
-                    if (putData.onComplete()) {
-                        // result = Api Result
-                        String result = putData.getResult();
-
-                        try {
-                            JSONObject json = new JSONObject(result);
-                            boolean statusCode = json.getBoolean("status_code");
-                            String message = json.getString("message");
-                            if (statusCode) {
-                                Toast.makeText(RegistrationForm.this, message, Toast.LENGTH_SHORT).show();
-                                getUserData(json);
-                            } else {
-                                Toast.makeText(RegistrationForm.this, message, Toast.LENGTH_SHORT).show();
-                                sendotp.setVisibility(View.VISIBLE);
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            sendotp.setVisibility(View.VISIBLE);
-                            Toast.makeText(RegistrationForm.this, "Network Error", Toast.LENGTH_SHORT).show();
-                        }
-
-
-                    }
-                } else {
-                    sendotp.setVisibility(View.VISIBLE);
-                }
+//                String cityStr = city.getText().toString().trim();
+                String cityStr = String.valueOf(city.getText().toString().trim());
+                String stateStr = String.valueOf(state.getSelectedIndex()+1);
+                String districtStr = String.valueOf(district.getSelectedIndex()+1);
+                String typeStr = String.valueOf(type.getSelectedIndex()+1);
+               new ApiTask().execute(fullnameStr,phoneStr,emailStr,passwordStr,cityStr,typeStr,stateStr,districtStr,Variables.fcmToken);
             }
         });
     }
-
-    public void getUserData(JSONObject ResultJson) {
+    public void getUserData(JSONObject ResultJson)
+    {
         try {
             JSONArray resultArray = ResultJson.getJSONArray("result");
             for (int i = 0; i < resultArray.length(); i++) {
@@ -212,10 +172,9 @@ public class RegistrationForm extends AppCompatActivity {
                 String userMobile = resultObject.getString("user_mobile");
                 String apiToken = resultObject.getString("api_token");
             }
-
-
-
             sendotp.setVisibility(View.VISIBLE);
+            Variables.phoneNumber = phone_number.getText().toString();
+            startActivity(new Intent(RegistrationForm.this,OTP_Verification.class));
         }
         catch (JSONException e) {
             Log.e(TAG, e.toString() );
@@ -224,60 +183,152 @@ public class RegistrationForm extends AppCompatActivity {
         }
 
     }
-
-    public void getDropDownData()
-    {
-        //Start ProgressBar first (Set visibility VISIBLE)
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
+    @SuppressLint("StaticFieldLeak")
+    public void getDropDownData() {
+        new AsyncTask<Void, Void, JSONObject>() {
             @Override
-            public void run() {
+            protected JSONObject doInBackground(Void... voids) {
                 FetchData fetchData = new FetchData("https://houseofspiritshyd.in/prakruthi/admin/api/getDropdownData");
                 if (fetchData.startFetch()) {
                     if (fetchData.onComplete()) {
                         String result = fetchData.getResult();
                         Log.i("FetchData", result);
                         try {
-                            // assume jsonStr contains the JSON object
                             JSONObject jsonObj = new JSONObject(result);
-
-                            // convert the "departments" array to a List<String>
-                            JSONArray departments = jsonObj.getJSONArray("departments");
-                            ArrayList<String> departmentNames = new ArrayList<>();
-
-                            for(int i = 0; i < departments.length(); i++) {
-                                JSONObject department = departments.getJSONObject(i);
-                                departmentNames.add(department.getString("name"));
-                            }
-
-                            // convert the "state" array to a List<String>
-                            JSONArray states = jsonObj.getJSONArray("state");
-                            ArrayList<String> stateNames = new ArrayList<>();
-                            for(int i = 0; i < states.length(); i++) {
-                                JSONObject state = states.getJSONObject(i);
-                                stateNames.add(state.getString("name"));
-                            }
-                            state.setItems(stateNames);
-
-                            // convert the "district" array to a List<String>
-                            JSONArray districts = jsonObj.getJSONArray("district");
-                            ArrayList<String> districtNames = new ArrayList<>();
-                            for(int i = 0; i < districts.length(); i++) {
-                                JSONObject district = districts.getJSONObject(i);
-                                districtNames.add(district.getString("name"));
-                            }
-                            district.setItems(districtNames);
-
-                        }
-                        catch (JSONException e)
-                        {
+                            return jsonObj;
+                        } catch (JSONException e) {
                             Log.e(TAG, e.toString() );
-                            Toast.makeText(RegistrationForm.this, "Network Error", Toast.LENGTH_SHORT).show();
+                            return null;
                         }
-
                     }
                 }
+                return null;
             }
-        });
+
+            @Override
+            protected void onPostExecute(JSONObject jsonObj) {
+                if (jsonObj != null) {
+                    try {
+                        JSONArray departments = jsonObj.getJSONArray("departments");
+                        ArrayList<String> departmentNames = new ArrayList<>();
+                        for(int i = 0; i < departments.length(); i++) {
+                            JSONObject department = departments.getJSONObject(i);
+                            departmentNames.add(department.getString("name"));
+                        }
+
+                        JSONArray states = jsonObj.getJSONArray("state");
+                        ArrayList<String> stateNames = new ArrayList<>();
+                        for(int i = 0; i < states.length(); i++) {
+                            JSONObject state = states.getJSONObject(i);
+                            stateNames.add(state.getString("name"));
+                        }
+                        state.setItems(stateNames);
+
+                        JSONArray districts = jsonObj.getJSONArray("district");
+                        ArrayList<String> districtNames = new ArrayList<>();
+                        for(int i = 0; i < districts.length(); i++) {
+                            JSONObject district = districts.getJSONObject(i);
+                            districtNames.add(district.getString("name"));
+                        }
+                        district.setItems(districtNames);
+
+                    } catch (JSONException e) {
+                        Log.e(TAG, e.toString() );
+                        Toast.makeText(RegistrationForm.this, "Network Error", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(RegistrationForm.this, "Network Error", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }.execute();
     }
+
+    public void getFCMToken()
+    {
+        FirebaseApp.initializeApp(RegistrationForm.this);
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.d("firebase", "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        Log.d("firebase", "token" + token);
+                        Variables.fcmToken = token;
+                    }
+                });
+    }
+    private class ApiTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            //Creating array for parameters
+            String[] field = new String[9];
+            field[0] = "name";
+            field[1] = "mobile";
+            field[2] = "email";
+            field[3] = "password";
+            field[4] = "city";
+            field[5] = "type";
+            field[6] = "state";
+            field[7] = "district";
+            field[8] = "fcm_token";
+            //Creating array for data
+            String[] data = new String[9];
+            data[0] = params[0];
+            data[1] = params[1];
+            data[2] = params[2];
+            data[3] = params[3];
+            data[4] = params[4];
+            data[5] = params[5];
+            data[6] = params[6];
+            data[7] = params[7];
+            data[8] = params[8];
+
+            Log.e(TAG, Arrays.toString(data));
+            PutData putData = new PutData(Variables.BaseUrl + "registration", "POST", field, data);
+
+            if (putData.startPut()) {
+                if (putData.onComplete()) {
+                    // result = Api Result
+                    Log.e(TAG, putData.getResult() );
+                    return putData.getResult();
+                }
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            if (result != null) {
+                try {
+                    Log.e(TAG, result );
+                    JSONObject json = new JSONObject(result);
+                    boolean statusCode = json.getBoolean("status_code");
+                    String message = json.getString("message");
+
+                    if (statusCode) {
+                        Toast.makeText(RegistrationForm.this, message, Toast.LENGTH_SHORT).show();
+                        getUserData(json);
+                    } else {
+                        Toast.makeText(RegistrationForm.this, message, Toast.LENGTH_SHORT).show();
+                        sendotp.setVisibility(View.VISIBLE);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    sendotp.setVisibility(View.VISIBLE);
+                    Toast.makeText(RegistrationForm.this, "Network Error", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                sendotp.setVisibility(View.VISIBLE);
+                Toast.makeText(RegistrationForm.this, "Network Error", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 }

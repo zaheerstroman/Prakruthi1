@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_page_background"
     tools:context=".ui.CartActivity"
-
     >
 
     <androidx.appcompat.widget.AppCompatButton
@@ -58,14 +57,5 @@
             android:textSize="@dimen/_36sdp" />
 
     </RelativeLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_List"
-        android:layout_width="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/cart_RelativeLayout"
-        tools:listitem="@layout/cartlistlayout"
-        />
 
 </RelativeLayout>

@@ -18,9 +18,6 @@
             android:name=".ui.Profile"
             android:exported="false" />
         <activity
-            android:name=".ui.MyWishList"
-            android:exported="false" />
-        <activity
             android:name=".ui.CartActivity"
             android:exported="false" />
         <activity
