@@ -15,7 +15,6 @@
         android:layout_marginEnd="02dp"
         android:background="@drawable/button_bg_curve"
         android:backgroundTint="@color/Secondary_less"
-
         android:orientation="horizontal"
 
         >
@@ -27,26 +26,12 @@
             android:layout_weight="0.7"
             android:paddingLeft="05dp"
 
-
             >
-
-<!--            <com.google.android.material.imageview.ShapeableImageView-->
-<!--                android:id="@+id/iv_profile_img"-->
-<!--                android:src="@drawable/milkshake"-->
-<!--                android:layout_width="@dimen/_60sdp"-->
-<!--                android:layout_height="@dimen/_60sdp"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginLeft="02dp"-->
-<!--                android:paddingTop="30dp"-->
-<!--                android:paddingBottom="20dp"-->
-<!--                android:scaleType="fitXY"-->
-<!--                app:shapeAppearanceOverlay="@style/circleImageViewStyle" />-->
 
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_profile"
-                android:src="@drawable/milkshake"
+                android:src="@drawable/platic_glass"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_centerVertical="true"
