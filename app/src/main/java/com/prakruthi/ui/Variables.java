@@ -3,6 +3,8 @@ package com.prakruthi.ui;
 public class Variables {
     public static String BaseUrl = "https://houseofspiritshyd.in/prakruthi/admin/api/";
 
+
+    //Login
     public static String token;
     public static int id;
     public static int departmentId;
@@ -36,7 +38,29 @@ public class Variables {
     public static String allowSms;
     public static String allowPush;
 
+    public static String status_code;
+
+    public static String loggedIn;
+
+    public static String message;
+
+    //Registration:-----
+    public static Integer userId;
+
+    public static String userMobile;
+
+    public static String apiToken;
+
+
+    //VerifyOtp:---
+//    public static String isVerified;
+
+
+
+
     public static void clear() {
+
+//        Login
         token = "";
         id = 0;
         departmentId = 0;
@@ -69,6 +93,24 @@ public class Variables {
         allowEmail = "";
         allowSms = "";
         allowPush = "";
+
+        status_code = "";
+        loggedIn = "";
+        message = "";
+
+
+//        RegistrationForm:---
+//        userId,userMobile,apiToken
+        userId = 0;
+        userMobile = "";
+        apiToken = "";
+
+//        VerifyOtp:----
+
+        isVerified = "";
+
+
+
     }
 
 }

@@ -50,6 +50,9 @@ android {
 
 dependencies {
 
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+
     implementation 'com.google.firebase:firebase-messaging-directboot:23.1.2'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'

@@ -14,6 +14,9 @@
     <color name="Purple">#7745A9</color>
     <color name="Green">#3DDC84</color>
 
+    <color name="profile_bg_color">#eceded</color>
+
+
 
 
 </resources>

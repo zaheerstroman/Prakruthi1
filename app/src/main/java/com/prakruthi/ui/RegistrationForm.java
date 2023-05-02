@@ -244,6 +244,7 @@ public class RegistrationForm extends AppCompatActivity {
                             // convert the "departments" array to a List<String>
                             JSONArray departments = jsonObj.getJSONArray("departments");
                             ArrayList<String> departmentNames = new ArrayList<>();
+
                             for(int i = 0; i < departments.length(); i++) {
                                 JSONObject department = departments.getJSONObject(i);
                                 departmentNames.add(department.getString("name"));
@@ -257,7 +258,6 @@ public class RegistrationForm extends AppCompatActivity {
                                 stateNames.add(state.getString("name"));
                             }
                             state.setItems(stateNames);
-
 
                             // convert the "district" array to a List<String>
                             JSONArray districts = jsonObj.getJSONArray("district");
