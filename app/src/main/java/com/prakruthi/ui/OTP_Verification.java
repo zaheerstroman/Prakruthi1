@@ -1,5 +1,8 @@
 package com.prakruthi.ui;
 
+import static com.google.firebase.messaging.Constants.TAG;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -15,6 +18,10 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.goodiebag.pinview.Pinview;
 import com.prakruthi.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -40,7 +47,7 @@ public class OTP_Verification extends AppCompatActivity {
         pinview_4_digits = findViewById(R.id.pinview_4_digits);
         txt_enter_otp_sent_to.append(Variables.phoneNumber);
         btn_otp_submit.setOnClickListener(view -> {
-                    Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+                   verifyOtp();
         });
 
                 startTimer(60000, 1000);
@@ -85,7 +92,29 @@ public class OTP_Verification extends AppCompatActivity {
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
+                        Log.e(TAG, result );
                         //End ProgressBar (Set visibility to GONE)
+                        try {
+                            JSONObject jsonObject = new JSONObject(result);
+                            boolean statusCode = jsonObject.getBoolean("status_code");
+                            if (statusCode) {
+                                String message = jsonObject.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                JSONArray userDetailsArray = jsonObject.getJSONArray("user_details");
+                                JSONObject userDetails = userDetailsArray.getJSONObject(0);
+                                int departmentId = userDetails.getInt("department_id");
+                                // start the activity with departmentId as an extra
+                                Intent intent = new Intent(OTP_Verification.this, Otp_Verification_Animation.class);
+                                intent.putExtra("department_id", departmentId);
+                                startActivity(intent);
+                            } else {
+                                // handle the case where status code is false
+                                String message = jsonObject.getString("message");
+                                Toast.makeText(OTP_Verification.this, message , Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 }

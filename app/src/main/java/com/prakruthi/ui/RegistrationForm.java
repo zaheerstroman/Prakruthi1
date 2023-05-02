@@ -71,6 +71,8 @@ public class RegistrationForm extends AppCompatActivity {
 
         getFCMToken();
 
+
+
         // set an OnTouchListener to the root view
         View root = findViewById(android.R.id.content);
         root.setOnTouchListener(new View.OnTouchListener() {
@@ -157,7 +159,7 @@ public class RegistrationForm extends AppCompatActivity {
                 String cityStr = String.valueOf(city.getText().toString().trim());
                 String stateStr = String.valueOf(state.getSelectedIndex()+1);
                 String districtStr = String.valueOf(district.getSelectedIndex()+1);
-                String typeStr = String.valueOf(type.getSelectedIndex()+1);
+                String typeStr = String.valueOf(GetDepartmentId(type.getText().toString()));
                new ApiTask().execute(fullnameStr,phoneStr,emailStr,passwordStr,cityStr,typeStr,stateStr,districtStr,Variables.fcmToken);
             }
         });
@@ -243,6 +245,16 @@ public class RegistrationForm extends AppCompatActivity {
         }.execute();
     }
 
+    public int GetDepartmentId(String DepartmentName)
+    {
+        if (DepartmentName.equals("Customer"))
+            return 2;
+        if (DepartmentName.equals("Dealer"))
+            return 3;
+        if (DepartmentName.equals("Village-Mart"))
+            return 4;
+        return 0;
+    }
     public void getFCMToken()
     {
         FirebaseApp.initializeApp(RegistrationForm.this);

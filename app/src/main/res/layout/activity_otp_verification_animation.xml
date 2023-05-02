@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.Otp_Verification_Animation">
 
     <TextView
@@ -13,35 +14,24 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/_50sdp"
+        android:visibility="visible"
         android:fontFamily="@font/coda"
         android:text="You have to wait 24 Hours to Verify Your Account"
         android:textAlignment="center"
         android:textColor="@color/Green"
         android:textSize="@dimen/_20sdp" />
 
-    <ImageView
-        android:layout_width="@dimen/_360sdp"
-        android:layout_height="@dimen/_389sdp"
-        android:src="@drawable/otp_verification_animation_640"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginEnd="@dimen/_10sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_below="@+id/txt_24_hour"
-/>
 
     <pl.droidsonroids.gif.GifImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fff"
+        android:layout_width="@dimen/_300sdp"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_centerInParent="true"
         android:src="@drawable/otp_verification_animation_640"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginEnd="@dimen/_10sdp"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_below="@+id/txt_24_hour"
         />
 
 
