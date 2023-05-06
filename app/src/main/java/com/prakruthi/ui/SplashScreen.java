@@ -18,7 +18,6 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        Objects.requireNonNull(getSupportActionBar()).hide();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

@@ -48,7 +48,7 @@
             android:backgroundTint="@color/Primary"
             android:drawableStart="@drawable/personicon"
             android:drawablePadding="@dimen/_3sdp"
-            android:hint="Username"
+            android:hint="Mobile No. / Email"
             android:paddingStart="@dimen/_9sdp"
             android:singleLine="true"
             android:textColor="@color/white"
@@ -87,6 +87,16 @@
             android:textColor="@color/Primary_less"
             android:textSize="@dimen/_14sdp" />
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/RememberMe"
+            android:layout_below="@id/edittext_login_password"
+            android:layout_marginTop="@dimen/_21sdp"
+            android:text="Remember Me"
+            android:layout_marginStart="@dimen/_17sdp"
+            />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/login_btn"
             android:layout_width="@dimen/_191sdp"
@@ -119,7 +129,7 @@
         <TextView
             android:id="@+id/register_an_account_login"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_40sdp"
             android:layout_below="@id/login_btn"
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_toEndOf="@id/dont_have_account_login"
@@ -127,6 +137,7 @@
             android:textColor="@color/Primary_less"
             android:layout_marginBottom="@dimen/_50sdp"
             android:textSize="@dimen/_11sdp" />
+
     </RelativeLayout>
 
 

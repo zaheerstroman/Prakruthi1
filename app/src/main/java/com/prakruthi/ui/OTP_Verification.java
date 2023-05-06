@@ -3,6 +3,7 @@ package com.prakruthi.ui;
 import static com.google.firebase.messaging.Constants.TAG;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -49,6 +50,10 @@ public class OTP_Verification extends AppCompatActivity {
         btn_otp_submit.setOnClickListener(view -> {
                    verifyOtp();
         });
+        txt_re_send.setTextColor(Color.GRAY);
+        txt_re_send.setOnClickListener(v -> {
+            resendOtp();
+        });
 
                 startTimer(60000, 1000);
     }
@@ -66,12 +71,11 @@ public class OTP_Verification extends AppCompatActivity {
                 tv_resend_otp_timer.setText("00:00");
                 txt_re_send.setEnabled(true);
                 txt_re_send.setClickable(true);
+                txt_re_send.setTextColor(getResources().getColor(R.color.Primary));
                 cancel();
             }
         }.start();
     }
-
-
     private void verifyOtp() {
         //Start ProgressBar first (Set visibility VISIBLE)
         btn_otp_submit.setVisibility(View.GONE);
@@ -107,6 +111,7 @@ public class OTP_Verification extends AppCompatActivity {
                                 Intent intent = new Intent(OTP_Verification.this, Otp_Verification_Animation.class);
                                 intent.putExtra("department_id", departmentId);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 // handle the case where status code is false
                                 String message = jsonObject.getString("message");
@@ -124,9 +129,42 @@ public class OTP_Verification extends AppCompatActivity {
     }
 
     private void resendOtp() {
+        //Start ProgressBar first (Set visibility VISIBLE)
+        txt_re_send.setVisibility(View.GONE);
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                String[] field = new String[1];
+                field[0] = "mobile";
+                String[] data = new String[1];
+                data[0] = Variables.phoneNumber;
+                PutData putData = new PutData(Variables.BaseUrl+"resendOtp", "POST", field, data);
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        String result = putData.getResult();
+                        Log.e(TAG, result );
+                        //End ProgressBar (Set visibility to GONE)
+                        try {
+                            JSONObject jsonObject = new JSONObject(result);
+                            boolean statusCode = jsonObject.getBoolean("status_code");
+                            if (statusCode) {
+                                String message = jsonObject.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            } else {
+                                // handle the case where status code is false
+                                String message = jsonObject.getString("message");
+                                Toast.makeText(OTP_Verification.this, message , Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-
-
+                    }
+                }
+                //End Write and Read data with URL
+            }
+        });
     }
 
 }

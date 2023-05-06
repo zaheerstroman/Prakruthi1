@@ -12,17 +12,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight"
+        android:theme="@style/Theme.AppCompat.Light"
         tools:targetApi="31">
         <activity
-            android:name=".ui.Profile"
-            android:exported="false" />
-        <activity
-            android:name=".ui.CartActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.MainActivity"
-            android:exported="false" />
+            android:name=".ui.HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home" />
         <activity
             android:name=".ui.Pasword_Updated_Animation"
             android:exported="false" />
@@ -38,7 +33,6 @@
         <activity
             android:name=".ui.RegistrationForm"
             android:exported="false"
-            android:theme="@style/Theme.MaterialComponents"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.Login"

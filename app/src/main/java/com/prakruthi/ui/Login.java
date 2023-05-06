@@ -1,11 +1,15 @@
 package com.prakruthi.ui;
 import static android.content.ContentValues.TAG;
+
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,16 +32,24 @@ public class Login extends AppCompatActivity {
     TextView register,forget_password;
     EditText username,password;
     AppCompatButton login;
+
+    CheckBox RememberMe;
+
+    // Get SharedPreferences object
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Objects.requireNonNull(getSupportActionBar()).hide();
         register = findViewById(R.id.register_an_account_login);
         forget_password = findViewById(R.id.forget_password_login);
         username = findViewById(R.id.edittext_user_name);
         password = findViewById(R.id.edittext_login_password);
+        RememberMe = findViewById(R.id.RememberMe);
         login = findViewById(R.id.login_btn);
+        sharedPreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
+
 
         register.setOnClickListener(view -> {
             startActivity(new Intent(Login.this, RegistrationForm.class));
@@ -70,7 +82,7 @@ public class Login extends AppCompatActivity {
             public void run() {
                 //Creating array for parameters
                 String[] field = new String[2];
-                field[0] = "mobile";
+                field[0] = "user_name";
                 field[1] = "password";
                 //Creating array for data
                 String[] data = new String[2];
@@ -81,10 +93,10 @@ public class Login extends AppCompatActivity {
                     if (putData.onComplete()) {
                         // result = Api Result
                         String result = putData.getResult();
+                        Log.e(TAG, result );
                         try {
                             JSONObject json = new JSONObject(result);
                             boolean statusCode = json.getBoolean("status_code");
-                            int loggedIn = json.getInt("loggedIn");
                             String message = json.getString("message");
                             if (statusCode)
                             {
@@ -185,6 +197,8 @@ public class Login extends AppCompatActivity {
             Variables.allowPush = allowPush;
 
             login.setVisibility(View.VISIBLE);
+            startActivity(new Intent(Login.this, HomeActivity.class));
+            finish();
         }
         catch (JSONException e) {
             Log.e(TAG, e.toString() );
@@ -196,5 +210,19 @@ public class Login extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+    }
+
+    public void rememberMe()
+    {
+        // Get SharedPreferences.Editor object
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        // Set String value
+        editor.putString("username", username.getText().toString());
+        editor.putString("password", password.getText().toString());
+        editor.putBoolean("rememberMe",true);
+
+        // Apply changes
+        editor.apply();
     }
 }
