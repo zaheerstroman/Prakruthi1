@@ -50,6 +50,7 @@
             android:paddingStart="@dimen/_15sdp"
             android:singleLine="true"
             android:textColor="#61000000"
+            android:paddingEnd="@dimen/_5sdp"
             android:textColorHint="#61000000"
             android:textSize="@dimen/_14sdp" />
 
@@ -68,6 +69,7 @@
             android:paddingStart="@dimen/_14sdp"
             android:singleLine="true"
             android:textColor="#61000000"
+            android:paddingEnd="@dimen/_5sdp"
             android:textColorHint="#61000000"
             android:textSize="@dimen/_14sdp" />
 
@@ -84,6 +86,7 @@
             android:paddingStart="@dimen/_14sdp"
             android:singleLine="true"
             android:textColor="#61000000"
+            android:paddingEnd="@dimen/_5sdp"
             android:textColorHint="#61000000"
             android:textSize="@dimen/_14sdp" />
 
@@ -100,6 +103,7 @@
             android:paddingStart="@dimen/_15sdp"
             android:singleLine="true"
             android:textColor="#61000000"
+            android:paddingEnd="@dimen/_5sdp"
             android:textColorHint="#61000000"
             android:textSize="@dimen/_14sdp" />
 
@@ -162,6 +166,7 @@
             android:paddingStart="@dimen/_15sdp"
             android:singleLine="true"
             android:textColor="#61000000"
+            android:paddingEnd="@dimen/_5sdp"
             android:textColorHint="#61000000" />
 
         <com.skydoves.powerspinner.PowerSpinnerView

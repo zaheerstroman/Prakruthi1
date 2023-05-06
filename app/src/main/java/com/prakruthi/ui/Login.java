@@ -1,6 +1,7 @@
 package com.prakruthi.ui;
 import static android.content.ContentValues.TAG;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,26 +15,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.prakruthi.R;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.Objects;
 public class Login extends AppCompatActivity {
     TextView register,forget_password;
     EditText username,password;
     AppCompatButton login;
 
     CheckBox RememberMe;
+
+    ProgressDialog progress;
 
     // Get SharedPreferences object
     SharedPreferences sharedPreferences;
@@ -48,15 +45,30 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.edittext_login_password);
         RememberMe = findViewById(R.id.RememberMe);
         login = findViewById(R.id.login_btn);
+
+        // Progress
+        progress = new ProgressDialog(this);
+        progress.setTitle("Loading");
+        progress.setMessage("Please Wait...");
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER); // set the style to spinner
+        progress.setIndeterminate(true); // display a spinning progress circle animation
+        progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+
         sharedPreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
+        if (isRemembered())
+        {
+            String username = sharedPreferences.getString("username","");
+            String password = sharedPreferences.getString("password","");
+            Api(username,password);
+            return;
+        }
 
-        register.setOnClickListener(view -> {
-            startActivity(new Intent(Login.this, RegistrationForm.class));
-        });
+
         forget_password.setOnClickListener(view -> {
             startActivity(new Intent(Login.this, ForgetPassword.class));
         });
+
         login.setOnClickListener(view -> {
             if (username.getText().toString().isEmpty())
             {
@@ -72,9 +84,14 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        register.setOnClickListener(view -> {
+            startActivity(new Intent(Login.this, RegistrationForm.class));
+        });
+
     }
     public void Api(String usernameString,String passwordString)
     {
+        progress.show();
         login.setVisibility(View.INVISIBLE);
         Handler handler = new Handler(Looper.getMainLooper());
         handler.post(new Runnable() {
@@ -109,16 +126,19 @@ public class Login extends AppCompatActivity {
                                 username.setError("Invalid");
                                 password.setError("Invalid");
                                 login.setVisibility(View.VISIBLE);
+                                progress.dismiss();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            progress.dismiss();
                             login.setVisibility(View.VISIBLE);
                             Toast.makeText(Login.this, "Network Error", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
                 else {
+                    progress.dismiss();
                     login.setVisibility(View.VISIBLE);
                 }
             }
@@ -197,6 +217,9 @@ public class Login extends AppCompatActivity {
             Variables.allowPush = allowPush;
 
             login.setVisibility(View.VISIBLE);
+            progress.dismiss();
+            if (RememberMe.isChecked())
+                rememberMe();
             startActivity(new Intent(Login.this, HomeActivity.class));
             finish();
         }
@@ -225,4 +248,9 @@ public class Login extends AppCompatActivity {
         // Apply changes
         editor.apply();
     }
+    public boolean isRemembered()
+    {
+        return sharedPreferences.getBoolean("rememberMe",false);
+    }
+
 }

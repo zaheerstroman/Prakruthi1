@@ -2,6 +2,7 @@ package com.prakruthi.ui;
 
 import static android.content.ContentValues.TAG;
 
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -53,7 +54,6 @@ public class RegistrationForm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_from);
-        Objects.requireNonNull(getSupportActionBar()).hide();
         fullname = findViewById(R.id.edittext_full_name);
         phone_number = findViewById(R.id.edittext_phone_number);
         email = findViewById(R.id.edittext_email_address);
@@ -107,47 +107,49 @@ public class RegistrationForm extends AppCompatActivity {
             type.setError(null);
             if (fullname.getText().toString().trim().isEmpty()) {
                 fullname.setError("Full name is required");
+                ObjectAnimator.ofFloat(fullname, "translationX", 0, -10, 10, -10, 10, -10, 10, -10, 10, 0).start();
+                fullname.requestFocus();
                 return;
-            }
-            else if (phone_number.getText().toString().trim().isEmpty() || phone_number.getText().length() < 10) {
+            } else if (phone_number.getText().toString().trim().isEmpty() || phone_number.getText().length() < 10) {
                 phone_number.setError("Phone number is required");
+                ObjectAnimator.ofFloat(phone_number, "translationX", 0, -10, 10, -10, 10, -10, 10, -10, 10, 0).start();
+                phone_number.requestFocus();
                 return;
-            }
-            else if (email.getText().toString().trim().isEmpty()) {
+            } else if (email.getText().toString().trim().isEmpty()) {
                 email.setError("Email is required");
+                ObjectAnimator.ofFloat(email, "translationX", 0, -10, 10, -10, 10, -10, 10, -10, 10, 0).start();
+                email.requestFocus();
                 return;
-            }
-            else if (password.getText().toString().trim().isEmpty()) {
+            } else if (password.getText().toString().trim().isEmpty()) {
                 password.setError("Password is required");
+                ObjectAnimator.ofFloat(password, "translationX", 0, -10, 10, -10, 10, -10, 10, -10, 10, 0).start();
+                password.requestFocus();
                 return;
-            }
-            else if (city.getText().toString().trim().isEmpty()) {
+            } else if (city.getText().toString().trim().isEmpty()) {
                 city.setError("City is required");
+                ObjectAnimator.ofFloat(city, "translationX", 0, -10, 10, -10, 10, -10, 10, -10, 10, 0).start();
+                city.requestFocus();
                 return;
-            }
-            else if (state.getText().toString().isEmpty())
-            {
-                state.setError("state is required");
+            } else if (state.getText().toString().isEmpty()) {
+                state.setError("State is required");
+                ObjectAnimator.ofFloat(state, "translationX", 0, -10, 10, -10, 10, -10, 10, -10, 10, 0).start();
+                state.requestFocus();
                 return;
-            }
-            else if (district.getText().toString().isEmpty())
-            {
-                district.setError("district is required");
+            } else if (district.getText().toString().isEmpty()) {
+                district.setError("District is required");
+                ObjectAnimator.ofFloat(district, "translationX", 0, -10, 10, -10, 10, -10, 10, -10, 10, 0).start();
+                district.requestFocus();
                 return;
-            }
-            else if (type.getText().toString().isEmpty())
-            {
-                type.setError("type is required");
+            } else if (type.getText().toString().isEmpty()) {
+                type.setError("Type is required");
+                ObjectAnimator.ofFloat(type, "translationX", 0, -10, 10, -10, 10, -10, 10, -10, 10, 0).start();
+                type.requestFocus();
                 return;
-            }
-            else if(Variables.fcmToken == null || Variables.fcmToken.isEmpty())
-            {
-                Toast.makeText(this, "Internal Error", Toast.LENGTH_SHORT).show();
+            } else if (Variables.fcmToken == null || Variables.fcmToken.isEmpty()) {
+                Toast.makeText(this,"Internal Error", Toast.LENGTH_SHORT).show();
                 return;
-            }
-            else if (!terms.isChecked())
-            {
-                Toast.makeText(this, "Please Accept Tge Terms And Conditions", Toast.LENGTH_SHORT).show();
+            } else if (!terms.isChecked()) {
+                Toast.makeText(this, "Please Accept The Terms And Conditions", Toast.LENGTH_SHORT).show();
                 return;
             }
             else {

@@ -47,7 +47,6 @@ public class ForgetPassword extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
-        Objects.requireNonNull(getSupportActionBar()).hide();
 
         //ForgetPassword First Page
         forget_password_relativelayout = findViewById(R.id.forget_password_email_RelativeLayout);

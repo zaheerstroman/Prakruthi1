@@ -39,7 +39,6 @@ public class OTP_Verification extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verification);
-        Objects.requireNonNull(getSupportActionBar()).hide();
         otp_btn_backpress = findViewById(R.id.otp_btn_backpress);
         btn_otp_submit = findViewById(R.id.btn_otp_submit_Registration);
         txt_enter_otp_sent_to = findViewById(R.id.txt_enter_otp_sent_to);
