@@ -153,6 +153,7 @@
             app:spinner_item_height="@dimen/_46sdp"
             app:spinner_popup_max_height="@dimen/_120sdp" />
 
+        //
         <EditText
             android:id="@+id/Edittext_City"
             android:layout_width="match_parent"
