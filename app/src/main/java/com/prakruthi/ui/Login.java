@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -93,10 +94,11 @@ public class Login extends AppCompatActivity {
     {
         progress.show();
         login.setVisibility(View.INVISIBLE);
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.post(new Runnable() {
+
+        // Execute the AsyncTask
+        new AsyncTask<Void, Void, String>() {
             @Override
-            public void run() {
+            protected String doInBackground(Void... voids) {
                 //Creating array for parameters
                 String[] field = new String[2];
                 field[0] = "user_name";
@@ -110,40 +112,46 @@ public class Login extends AppCompatActivity {
                     if (putData.onComplete()) {
                         // result = Api Result
                         String result = putData.getResult();
-                        Log.e(TAG, result );
-                        try {
-                            JSONObject json = new JSONObject(result);
-                            boolean statusCode = json.getBoolean("status_code");
-                            String message = json.getString("message");
-                            if (statusCode)
-                            {
-                                Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
-                                getUserData(json);
-                            }
-                            else
-                            {
-                                Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
-                                username.setError("Invalid");
-                                password.setError("Invalid");
-                                login.setVisibility(View.VISIBLE);
-                                progress.dismiss();
-                            }
+                        return result;
+                    }
+                }
+                return null;
+            }
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                            progress.dismiss();
-                            login.setVisibility(View.VISIBLE);
-                            Toast.makeText(Login.this, "Network Error", Toast.LENGTH_SHORT).show();
+            @Override
+            protected void onPostExecute(String result) {
+                if (result != null) {
+                    Log.e(TAG, result );
+                    try {
+                        JSONObject json = new JSONObject(result);
+                        boolean statusCode = json.getBoolean("status_code");
+                        String message = json.getString("message");
+                        if (statusCode)
+                        {
+                            Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
+                            getUserData(json);
                         }
+                        else
+                        {
+                            Toast.makeText(Login.this, message, Toast.LENGTH_SHORT).show();
+                            username.setError("Invalid");
+                            password.setError("Invalid");
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(Login.this, "Network Error", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else {
-                    progress.dismiss();
-                    login.setVisibility(View.VISIBLE);
+                    Toast.makeText(Login.this, "Network Error", Toast.LENGTH_SHORT).show();
                 }
+                login.setVisibility(View.VISIBLE);
+                progress.dismiss();
             }
-        });
+        }.execute();
     }
+
     public void getUserData(JSONObject ResultJson)
     {
         try {
