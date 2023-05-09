@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,12 +28,8 @@ public class Otp_Verification_Animation extends AppCompatActivity {
             txt_24_hour.setVisibility(View.GONE);
         }
         Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent(Otp_Verification_Animation.this,Login.class));
-            }
-        },1000);
+        handler.postDelayed(() -> startActivity(new Intent(Otp_Verification_Animation.this,Login.class)),1000);
+        Toast.makeText(this, "Account Created Successful", Toast.LENGTH_SHORT).show();
         // You can now use the departmentId value as needed
     }
 }
