@@ -2,10 +2,17 @@ package com.prakruthi.ui.ui.home;
 
 import static com.google.firebase.messaging.Constants.TAG;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -21,9 +28,17 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.prakruthi.databinding.FragmentHomeBinding;
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.home.category.HomeCategoryRecyclerAdaptor;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -50,18 +65,42 @@ public class HomeFragment extends Fragment {
         super.onStart();
     }
 
-    public void SetScreenViews()
-    {
+    @SuppressLint("MissingPermission")
+    public void SetScreenViews() {
         if (Variables.address.isEmpty() || Variables.address.equals("null")) {
             binding.DeleverHomeLocation.setText("Choose Location");
             binding.DeleverHomeLocation.setOnClickListener(v -> {
-                GetPermission();
+                if (GetPermission()) {
+                    if (IsGpsEnabled()) {
+                        FusedLocationProviderClient fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext());
+                        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(location -> {
+                            if (location != null) {
+                                Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
+                                try {
+                                    List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+                                    if (addresses != null && addresses.size() > 0) {
+                                        Address address = addresses.get(0);
+                                        String area = address.getSubLocality();
+                                        String city = address.getLocality();
+                                        String pincode = address.getPostalCode();
+                                        String locationString = area + ", " + city + " " + pincode;
+                                        binding.DeleverHomeLocation.setText("Deliver to "+Variables.name+" - ");
+                                        binding.DeleverHomeLocation.append(locationString);
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                Log.d(TAG, "Location is null");
+                            }
+                        });
+                    }
+
+                }
             });
         }
         else
             binding.DeleverHomeLocation.setText(Variables.address);
-
-
         binding.HomeCategoryRecyclerview.showShimmerAdapter();
         Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(() -> {
@@ -69,22 +108,22 @@ public class HomeFragment extends Fragment {
         },2000);
     }
 
-    public void GetPermission()
+    public boolean GetPermission()
     {
         if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(requireActivity(),
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSIONS_REQUEST_LOCATION);
+            return false;
         }
+        else return true;
     }
     @Override
     public void onResume() {
         super.onResume();
 
     }
-
-
 
     @Override
     public void onDestroyView() {
@@ -97,7 +136,7 @@ public class HomeFragment extends Fragment {
         if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // permission granted, do something
-                enableGpsRequest();
+                IsGpsEnabled();
             } else {
                 Toast.makeText(requireContext(), "Location Permission Required", Toast.LENGTH_SHORT).show();
                 // permission denied, do something else
@@ -105,29 +144,30 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public void enableGpsRequest()
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-        builder.setTitle("Enable GPS");
-        builder.setMessage("Please enable GPS to use this feature.");
-        builder.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+    public boolean IsGpsEnabled() {
+        LocationManager locationManager = (LocationManager) requireContext().getSystemService(Context.LOCATION_SERVICE);
+        boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (!isGpsEnabled) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+            builder.setTitle("Enable GPS");
+            builder.setMessage("Please enable GPS to use this feature.");
+            builder.setPositiveButton("Settings", (dialog, which) -> {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
-            }
-        });
+            });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
+        return isGpsEnabled;
     }
+
 
 
 }

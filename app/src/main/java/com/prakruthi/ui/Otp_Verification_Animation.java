@@ -18,7 +18,6 @@ public class Otp_Verification_Animation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_otp_verification_animation);
 
-        getSupportActionBar().hide();
         // In your Otp_Verification_Animation activity's onCreate() method
         Intent intent = getIntent();
         int departmentId = intent.getIntExtra("department_id", 0); // Here, 0 is the default value if the extra is not found

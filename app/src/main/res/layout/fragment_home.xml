@@ -29,7 +29,7 @@
         android:layout_marginEnd="@dimen/_23sdp"
         android:layout_marginTop="@dimen/_10sdp"
         app:spinner_arrow_tint="@color/black"
-        android:hint="Deliver to Paradox - Hyderabad 500065"
+        android:hint="Deliver to Paradox - "
         android:gravity="center_vertical"
         android:textColor="@color/black"
         android:id="@+id/DeleverHomeLocation"
