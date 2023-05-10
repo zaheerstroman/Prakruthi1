@@ -214,6 +214,8 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
         getDeliveryAddressDetails.execute();
     }
 
+
+
     @Override
     public void onDeliveryAddressLoaded(ArrayList<Address_BottomSheet_Recycler_Adaptor_Model> address_bottomSheet_recycler_adaptor_models) {
         if (addressRecyclerView != null)
