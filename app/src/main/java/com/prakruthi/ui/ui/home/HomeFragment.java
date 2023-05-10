@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -35,17 +38,22 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.prakruthi.R;
 import com.prakruthi.databinding.FragmentHomeBinding;
+import com.prakruthi.ui.APIs.GetDeliveryAddressDetails;
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.misc.Loading;
+import com.prakruthi.ui.ui.home.address.Address_BottomSheet_Recycler_Adaptor;
+import com.prakruthi.ui.ui.home.address.Address_BottomSheet_Recycler_Adaptor_Model;
 import com.prakruthi.ui.ui.home.category.HomeCategoryRecyclerAdaptor;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.DeliveryAddressListener {
 
+    private RecyclerView addressRecyclerView;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
     private FragmentHomeBinding binding;
 
@@ -60,6 +68,7 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         SetScreenViews();
+        GetDeliveryAddressDetails();
         View root = binding.getRoot();
         return root;
     }
@@ -73,14 +82,9 @@ public class HomeFragment extends Fragment {
         if (Variables.address.isEmpty() || Variables.address.equals("null")) {
             binding.DeleverHomeLocation.setText("Choose Location");
             binding.DeleverHomeLocation.setOnClickListener(v -> {
-                showGpsDialog();
-                if (GetPermission()) {
-                    if (IsGpsEnabled()) {
-                        getCurrentLocation(locationString -> {
-                            binding.DeleverHomeLocation.setText(locationString);
-                        });
-                    }
-
+                if (GetPermission())
+                {
+                     chooseLocationDialog();
                 }
             });
         }
@@ -181,20 +185,42 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void showGpsDialog() {
+    private void chooseLocationDialog() {
+        // Create the bottom sheet dialog
+        BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
         // Inflate the layout for the dialog
         View dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.choose_location_bottom_dialog, null);
 
-        // Create the bottom sheet dialog
-        BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
-        dialog.setContentView(dialogView);
+        addressRecyclerView = dialogView.findViewById(R.id.choose_location_bottom_dialog_recycler);
+        GetDeliveryAddressDetails();
+        TextView CurrentLocation = dialogView.findViewById(R.id.choose_location_bottom_dialog_choose_current_location);
+        CurrentLocation.setOnClickListener(v -> {getCurrentLocation(locationString -> {
+            if (IsGpsEnabled())
+            {
+                binding.DeleverHomeLocation.setText(locationString);
+                dialog.dismiss();
+            }
 
+        });});
+
+        dialog.setContentView(dialogView);
         // Show the dialog
         dialog.show();
     }
 
+    public void GetDeliveryAddressDetails()
+    {
+        GetDeliveryAddressDetails getDeliveryAddressDetails = new GetDeliveryAddressDetails(requireContext(), this);
+        getDeliveryAddressDetails.execute();
+    }
 
-
-
-
+    @Override
+    public void onDeliveryAddressLoaded(ArrayList<Address_BottomSheet_Recycler_Adaptor_Model> address_bottomSheet_recycler_adaptor_models) {
+        if (addressRecyclerView != null)
+        {
+            addressRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+            addressRecyclerView.setAdapter(new Address_BottomSheet_Recycler_Adaptor(address_bottomSheet_recycler_adaptor_models,requireContext()));
+        }
+        binding.DeleverHomeLocation.setText(Variables.address);
+    }
 }

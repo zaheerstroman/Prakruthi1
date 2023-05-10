@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,19 +18,19 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/choose_location_bottom_dialog_recycler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_100sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:orientation="horizontal"
-        tools:listitem="@layout/choose_location_bottom_dialog_recycler"
-        tools:itemCount="10"/>
+        android:orientation="horizontal"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/baseline_location_on_24"
         android:textColor="@color/black"
         android:textSize="@dimen/_15sdp"
         android:text="User my current location"
         android:textStyle="bold"
-        android:id="@+id/choose_location_bottom_dialog_choose_current_location" />
+        android:id="@+id/choose_location_bottom_dialog_choose_current_location"
+        app:drawableStartCompat="@drawable/baseline_location_on_24" />
+
 </LinearLayout>
