@@ -46,10 +46,13 @@ public class GetDeliveryAddressDetails extends AsyncTask<Void, Void, ArrayList<A
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject obj = jsonArray.getJSONObject(i);
                         String name = obj.getString("name");
-                        String address = obj.getString("city") + ", " + obj.getString("postal_code");
-                        Variables.address = obj.getString("full_address");
+                        String address = obj.getString("full_address");
                         int Defualt = obj.getInt("is_default");
                         int id = obj.getInt("id");
+                        if (Defualt == 1)
+                        {
+                            Variables.address = obj.getString("full_address");
+                        }
                         addressList.add(new Address_BottomSheet_Recycler_Adaptor_Model(name, address,Defualt,id));
                     }
                 } catch (JSONException e) {

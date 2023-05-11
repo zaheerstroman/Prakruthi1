@@ -1,10 +1,14 @@
 package com.prakruthi.ui.ui.home.category;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.prakruthi.R;
+import com.prakruthi.ui.ui.home.address.Address_BottomSheet_Recycler_Adaptor;
 
 public class HomeCategoryRecyclerAdaptor extends RecyclerView.Adapter<HomeCategoryRecyclerAdaptor.ViewHolder> {
 
@@ -12,7 +16,8 @@ public class HomeCategoryRecyclerAdaptor extends RecyclerView.Adapter<HomeCatego
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.homepage_category_recycle_view, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override

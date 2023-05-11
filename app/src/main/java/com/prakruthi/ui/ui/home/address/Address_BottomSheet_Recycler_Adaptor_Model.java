@@ -5,6 +5,14 @@ public class Address_BottomSheet_Recycler_Adaptor_Model {
     private String address;
     private int Defualt;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private int id;
 
     public int getDefualt() {
