@@ -1,8 +1,12 @@
 package com.prakruthi.ui.APIs;
 
+import static com.google.firebase.messaging.Constants.TAG;
+
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
+import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.home.banners.HomeBannerModel;
 import com.prakruthi.ui.ui.home.category.HomeCategoryModal;
 import com.prakruthi.ui.ui.home.products.HomeProductModel;
@@ -37,13 +41,13 @@ public class GetHomeDetails {
         public void run() {
             //Creating array for parameters
             String[] field = new String[2];
-            field[0] = "param-1";
-            field[1] = "param-2";
+            field[0] = "user_id";
+            field[1] = "token";
             //Creating array for data
             String[] data = new String[2];
-            data[0] = "data-1";
-            data[1] = "data-2";
-            PutData putData = new PutData("https://projects.vishnusivadas.com/AdvancedHttpURLConnection/putDataTest.php", "POST", field, data);
+            data[0] = String.valueOf(Variables.id);
+            data[1] = Variables.token;
+            PutData putData = new PutData(Variables.BaseUrl+"getDashboardDetails", "POST", field, data);
             if (putData.startPut()) {
                 if (putData.onComplete()) {
                     String result = putData.getResult();
@@ -60,9 +64,9 @@ public class GetHomeDetails {
             if (result != null) {
                 try {
                     JSONObject jsonResponse = new JSONObject(result);
-                    JSONArray bannerList = jsonResponse.getJSONArray("banner_list");
-                    JSONArray categoryList = jsonResponse.getJSONArray("category_list");
-                    JSONArray productList = jsonResponse.getJSONArray("products_list");
+                    JSONArray bannerList = jsonResponse.getJSONObject("data").getJSONArray("banner_list");
+                    JSONArray categoryList = jsonResponse.getJSONObject("data").getJSONArray("category_list");
+                    JSONArray productList = jsonResponse.getJSONObject("data").getJSONArray("products_list");
 
                     // Create lists
                     List<HomeCategoryModal> homeCategoryModals = new ArrayList<>();
@@ -79,23 +83,23 @@ public class GetHomeDetails {
                     }
 
                     for (int i = 0; i < bannerList.length(); i++) {
-                        JSONObject banners = bannerList.getJSONObject(i);
-                        int id = banners.getInt("id");
-                        String attachement = banners.getString("attachment");
-                        homeBannerModels.add(new HomeBannerModel(id,attachement));
+                        JSONObject banner = bannerList.getJSONObject(i);
+                        int id = banner.getInt("id");
+                        String attachment = banner.getString("attachment");
+                        homeBannerModels.add(new HomeBannerModel(id, attachment));
                     }
 
                     for (int i = 0; i < productList.length(); i++) {
-                        JSONObject product = productList.getJSONObject(i);
-                        int id = product.getInt("id");
-                        String name = product.getString("name");
-                        String description = product.getString("description");
-                        String attachment = product.getString("attachment");
-                        homeProductModels.add(new HomeProductModel(id, name, description, attachment));
+                        JSONObject productlist = productList.getJSONObject(i);
+                        int id = productlist.getInt("id");
+                        String categoryId = productlist.getString("category_id");
+                        String name = productlist.getString("name");
+                        String attachment = productlist.getString("attachment");
+                        homeProductModels.add(new HomeProductModel(id, categoryId, name, attachment));
                     }
 
                     // Call listener with all three lists
-                    mListener.onDataFetched(homeCategoryModals);
+                    mListener.onCategoryFetched(homeCategoryModals);
                     mListener.onBannerListFetched(homeBannerModels);
                     mListener.onProductListFetched(homeProductModels);
                 } catch (JSONException e) {
@@ -114,7 +118,7 @@ public class GetHomeDetails {
     }
 
     public interface OnDataFetchedListener {
-        void onDataFetched(List<HomeCategoryModal> homeCategoryModals);
+        void onCategoryFetched(List<HomeCategoryModal> homeCategoryModals);
         void onBannerListFetched(List<HomeBannerModel> homeBannerModels);
         void onProductListFetched(List<HomeProductModel> homeProductModels);
         void onDataFetchError(String error);

@@ -94,12 +94,8 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
         else
             binding.DeleverHomeLocation.setText(Variables.address);
         binding.HomeCategoryRecyclerview.showShimmerAdapter();
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(() -> {
-            binding.HomeCategoryRecyclerview.hideShimmerAdapter();
-            binding.HomeCategoryRecyclerview.setLayoutManager(new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false));
-            binding.HomeCategoryRecyclerview.setAdapter(new HomeCategoryRecyclerAdaptor());
-        },2000);
+        GetHomeDetails getHomeDetails = new GetHomeDetails(requireContext(),this);
+        getHomeDetails.fetchData();
     }
 
     public boolean GetPermission() {
@@ -219,20 +215,21 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
     }
 
     @Override
-    public void onDataFetched(List<HomeCategoryModal> homeCategoryModals) {
-
+    public void onCategoryFetched(List<HomeCategoryModal> homeCategoryModals) {
+        requireActivity().runOnUiThread(() -> {
+            binding.HomeCategoryRecyclerview.hideShimmerAdapter();
+            binding.HomeCategoryRecyclerview.setLayoutManager(new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false));
+            binding.HomeCategoryRecyclerview.setAdapter(new HomeCategoryRecyclerAdaptor(homeCategoryModals));
+        });
     }
-
     @Override
     public void onBannerListFetched(List<HomeBannerModel> homeBannerModels) {
 
     }
-
     @Override
     public void onProductListFetched(List<HomeProductModel> homeProductModels) {
 
     }
-
     @Override
     public void onDataFetchError(String error) {
 
