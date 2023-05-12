@@ -29,8 +29,10 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -44,9 +46,11 @@ import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.misc.Loading;
 import com.prakruthi.ui.ui.home.address.Address_BottomSheet_Recycler_Adaptor;
 import com.prakruthi.ui.ui.home.address.Address_BottomSheet_Recycler_Adaptor_Model;
+import com.prakruthi.ui.ui.home.banners.BannerPagerAdapter;
 import com.prakruthi.ui.ui.home.banners.HomeBannerModel;
 import com.prakruthi.ui.ui.home.category.HomeCategoryModal;
 import com.prakruthi.ui.ui.home.category.HomeCategoryRecyclerAdaptor;
+import com.prakruthi.ui.ui.home.products.HomeProductAdaptor;
 import com.prakruthi.ui.ui.home.products.HomeProductModel;
 
 import java.io.IOException;
@@ -62,6 +66,15 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
 
     public static TextView HomeAddress;
     private FragmentHomeBinding binding;
+
+    boolean BannerFetched = false;
+    private List<HomeBannerModel> bannerList;
+    private ViewPager2 viewPager;
+
+    private int currentPage = 0;
+    private final long DELAY_TIME = 4000; // in milliseconds
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,6 +94,8 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
 
     public void SetScreenViews() {
         HomeAddress = binding.DeleverHomeLocation;
+        HomeAddress.setSelected(true);
+        viewPager = binding.HomeBannerPager;
         binding.DeleverHomeLocation.setOnClickListener(v -> {
             if (GetPermission())
             {
@@ -90,12 +105,8 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
         if (Variables.address.isEmpty() || Variables.address.equals("null")) {
             binding.DeleverHomeLocation.setText("Choose Location");
         }
-
-        else
-            binding.DeleverHomeLocation.setText(Variables.address);
-        binding.HomeCategoryRecyclerview.showShimmerAdapter();
-        GetHomeDetails getHomeDetails = new GetHomeDetails(requireContext(),this);
-        getHomeDetails.fetchData();
+        else binding.DeleverHomeLocation.setText(Variables.address);
+        getHomeDetails();
     }
 
     public boolean GetPermission() {
@@ -214,6 +225,12 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
         binding.DeleverHomeLocation.setText(Variables.address);
     }
 
+    public void getHomeDetails()
+    {
+        binding.HomeCategoryRecyclerview.showShimmerAdapter();
+        GetHomeDetails getHomeDetails = new GetHomeDetails(requireContext(),this);
+        getHomeDetails.fetchData();
+    }
     @Override
     public void onCategoryFetched(List<HomeCategoryModal> homeCategoryModals) {
         requireActivity().runOnUiThread(() -> {
@@ -222,16 +239,60 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
             binding.HomeCategoryRecyclerview.setAdapter(new HomeCategoryRecyclerAdaptor(homeCategoryModals));
         });
     }
+
+    private final Handler handler = new Handler();
+    private final Runnable runnable = new Runnable() {
+        public void run() {
+            if (BannerFetched)
+            {
+                if (currentPage == bannerList.size()) {
+                    currentPage = 0;
+                }
+                viewPager.setCurrentItem(currentPage++, true);
+                handler.postDelayed(runnable, DELAY_TIME);
+            }
+        }
+
+    };
     @Override
     public void onBannerListFetched(List<HomeBannerModel> homeBannerModels) {
+        requireActivity().runOnUiThread(() -> {
+            bannerList = homeBannerModels;
+            // Initialize the ViewPager2 with the BannerPagerAdapter
+            viewPager.setAdapter(new BannerPagerAdapter(homeBannerModels, getContext()));
+        });
 
     }
+
+
     @Override
     public void onProductListFetched(List<HomeProductModel> homeProductModels) {
+        requireActivity().runOnUiThread(() -> {
+            binding.HomeProductsRecycler.hideShimmerAdapter();
+            binding.HomeProductsRecycler.setLayoutManager(new GridLayoutManager(requireContext(),2));
+            binding.HomeProductsRecycler.setAdapter(new HomeProductAdaptor(homeProductModels));
+            binding.dotsIndicator.attachTo(viewPager);
+            BannerFetched = true;
+            runnable.run();
+        });
 
     }
     @Override
     public void onDataFetchError(String error) {
 
+    }
+
+    // Start the timer in onResume() method
+    @Override
+    public void onResume() {
+        super.onResume();
+        handler.postDelayed(runnable, DELAY_TIME);
+    }
+
+    // Stop the timer in onPause() method
+    @Override
+    public void onPause() {
+        super.onPause();
+        handler.removeCallbacks(runnable);
     }
 }

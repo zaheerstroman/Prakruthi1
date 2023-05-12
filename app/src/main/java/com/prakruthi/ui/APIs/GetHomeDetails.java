@@ -95,7 +95,8 @@ public class GetHomeDetails {
                         String categoryId = productlist.getString("category_id");
                         String name = productlist.getString("name");
                         String attachment = productlist.getString("attachment");
-                        homeProductModels.add(new HomeProductModel(id, categoryId, name, attachment));
+                        String description = productlist.getString("description");
+                        homeProductModels.add(new HomeProductModel(id, name, description, attachment));
                     }
 
                     // Call listener with all three lists
