@@ -1,32 +1,22 @@
 package com.prakruthi.ui.APIs;
 
-import static com.google.firebase.messaging.Constants.TAG;
-
-import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
-
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.home.banners.HomeBannerModel;
 import com.prakruthi.ui.ui.home.category.HomeCategoryModal;
 import com.prakruthi.ui.ui.home.products.HomeProductModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class GetHomeDetails {
-    private Context mContext;
-    private OnDataFetchedListener mListener;
+    private final OnDataFetchedListener mListener;
 
-    public GetHomeDetails(Context context, OnDataFetchedListener listener) {
-        mContext = context;
+    public GetHomeDetails(OnDataFetchedListener listener) {
         mListener = listener;
     }
 

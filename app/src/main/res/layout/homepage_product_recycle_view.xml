@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_160sdp"
-    android:layout_height="@dimen/_170sdp"
-    android:padding="@dimen/_5sdp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/_5sdp"
+    android:orientation="vertical">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/_105sdp"
@@ -22,4 +24,4 @@
         android:id="@+id/homepage_product_recycle_view_name_text"
         />
 
-</RelativeLayout>
+</LinearLayout>

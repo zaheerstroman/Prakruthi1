@@ -1,5 +1,6 @@
 package com.prakruthi.ui.ui.home.products;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.prakruthi.R;
+import com.prakruthi.ui.ui.productPage.ProductPage;
 
 import java.util.List;
 
@@ -39,6 +41,10 @@ public class HomeProductAdaptor extends RecyclerView.Adapter<HomeProductAdaptor.
                 .load(homeProductModel.getAttachment())
                 .placeholder(R.drawable.baseline_circle_24) // Optional placeholder image to show while loading the actual image.
                 .into(holder.productImageView);
+        holder.itemView.setOnClickListener(v->{
+            holder.itemView.getContext().startActivity(new Intent(holder.itemView.getContext(),ProductPage.class)
+                    .putExtra("productId",String.valueOf(homeProductModel.getId())));
+        });
     }
 
     @Override
