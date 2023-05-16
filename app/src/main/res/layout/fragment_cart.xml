@@ -24,9 +24,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-
-            android:src="@drawable/cart_background_logo_vector_12"
-            android:background="@drawable/cart_background_logo_vector_12"
             >
 
             <ImageView

@@ -1,223 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="@dimen/_20sdp">
+    android:layout_height="@dimen/_100sdp"
+    android:background="@drawable/custom_edit_text"
+    android:backgroundTint="#C6E4FF"
+    android:layout_margin="@dimen/_5sdp"
+    >
 
-    <LinearLayout
-        android:id="@+id/Plastic_Glass"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_100sdp"
-        android:layout_below="@+id/cart_RelativeLayout"
-        android:layout_marginStart="02dp"
-        android:layout_marginEnd="02dp"
-        android:background="@drawable/button_bg_curve"
-        android:backgroundTint="@color/Secondary_less"
-        android:orientation="horizontal"
+    <ImageButton
+        android:layout_width="@dimen/_17sdp"
+        android:layout_height="@dimen/_19sdp"
+        android:src="@drawable/bin"
+        android:background="@android:color/transparent"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:id="@+id/CartProductDelete"/>
 
-        >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_65sdp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:id="@+id/CartProductImage"
+        />
+    <TextView
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="wrap_content"
+        android:text="Plastic Glass"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:layout_toEndOf="@id/CartProductImage"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13sdp"
+        android:id="@+id/CartProductName"
+        android:translationY="-8dp"
+        />
+    <TextView
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="wrap_content"
+        android:text="Sub information"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:layout_below="@id/CartProductName"
+        android:layout_toEndOf="@id/CartProductImage"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:id="@+id/CartProductSubInformation"
+        android:translationY="-8dp"/>
 
-        <RelativeLayout
-            android:id="@+id/card_image"
-            android:layout_width="10sp"
-            android:layout_height="120dp"
-            android:layout_weight="0.7"
-            android:paddingLeft="05dp"
-            android:paddingTop="05dp"
-
-            >
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/cart_product_image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:src="@drawable/platic_glass" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_2"
-            android:layout_width="01dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="2"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingTop="@dimen/_5sdp"
-
-            >
-
-            <LinearLayout
-                android:id="@+id/ll_site_visit_req_LastUpdated"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-
-                <TextView
-                    android:id="@+id/tv_product_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Plastic Glass"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15sdp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/txt_sub_info_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-
-                <TextView
-                    android:id="@+id/tv_sub_product_information"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="Sub information"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_10sdp" />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/layout_3"
-            android:layout_width="02dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/_5sdp"
-
-            >
-
-            <LinearLayout
-                android:id="@+id/ll_site_visit_req_LastUpdated2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/add_plus_btn"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/maines_group_187"
-                    android:src="@drawable/maines_group_187" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/ll_site_visit_req_LastUpdated3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-
-                <TextView
-                    android:id="@+id/tv_add_to_cart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_5sdp"
-                    android:text="1"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_20sdp"
-
-                    />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/ll_site_visit_req_LastUpdated32"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/add_plus_btn2"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="@dimen/_3sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:background="@drawable/plus_group_187"
-                    android:src="@drawable/plus_group_187"
-                    />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/maines_plus_button"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:gravity="center_vertical"
-
-            >
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/price_Rate"
-                android:layout_width="@dimen/_46sdp"
-                android:layout_height="@dimen/_26sdp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="@dimen/_3sdp"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:paddingLeft="05dp"
-                android:text="$ 3,237"
-                android:textStyle="bold"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textColor="@color/black"
-                />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/delete_layout"
-            android:layout_width="01dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/Plastic_Glass"
-            android:layout_weight="0.4">
-
-            <ImageView
-                android:id="@+id/iv_edit"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_gravity="top"
-                android:src="@drawable/delete_icon_combined_shape"/>
-
-        </LinearLayout>
-
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="@dimen/_19sdp"
+        android:layout_height="@dimen/_19sdp"
+        android:layout_toEndOf="@id/CartProductSubInformation"
+        android:background="@drawable/baseline_circle_24"
+        android:backgroundTint="#6144AE53"
+        android:text="-"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:id="@+id/CartProductMinus"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/CartProductMinus"
+        android:text="1"
+        android:textAlignment="center"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:id="@+id/CartProductQuantity"
+        />
 
-    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="@dimen/_19sdp"
+        android:layout_height="@dimen/_19sdp"
+        android:layout_toEndOf="@id/CartProductQuantity"
+        android:background="@drawable/baseline_circle_24"
+        android:backgroundTint="#6144AE53"
+        android:text="+"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:id="@+id/CartProductPlus"
+        />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/CartProductPlus"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_15sdp"
+        android:text="₹1000"
+        android:id="@+id/CartProductPrice"
+        />
 
-</LinearLayout>
+</RelativeLayout>
