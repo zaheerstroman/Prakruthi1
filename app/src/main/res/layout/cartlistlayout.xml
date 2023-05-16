@@ -25,6 +25,7 @@
         android:layout_marginStart="@dimen/_5sdp"
         android:id="@+id/CartProductImage"
         />
+
     <TextView
         android:layout_width="@dimen/_80sdp"
         android:layout_height="wrap_content"
@@ -40,6 +41,7 @@
         android:id="@+id/CartProductName"
         android:translationY="-8dp"
         />
+
     <TextView
         android:layout_width="@dimen/_80sdp"
         android:layout_height="wrap_content"
