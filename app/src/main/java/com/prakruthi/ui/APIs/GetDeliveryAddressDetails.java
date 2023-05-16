@@ -18,11 +18,9 @@ public class GetDeliveryAddressDetails extends AsyncTask<Void, Void, ArrayList<A
     private static final String[] FIELD = {"user_id", "token"};
     private static final String[] DATA = {String.valueOf(Variables.id), Variables.token};
 
-    private Context mContext;
     private DeliveryAddressListener mListener;
 
-    public GetDeliveryAddressDetails(Context context, DeliveryAddressListener listener) {
-        mContext = context;
+    public GetDeliveryAddressDetails(DeliveryAddressListener listener) {
         mListener = listener;
     }
 

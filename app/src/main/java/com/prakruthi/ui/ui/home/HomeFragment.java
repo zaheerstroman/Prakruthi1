@@ -212,7 +212,7 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
 
     public void GetDeliveryAddressDetails()
     {
-        GetDeliveryAddressDetails getDeliveryAddressDetails = new GetDeliveryAddressDetails(requireContext(), this);
+        GetDeliveryAddressDetails getDeliveryAddressDetails = new GetDeliveryAddressDetails(this);
         getDeliveryAddressDetails.execute();
     }
     @Override
@@ -228,7 +228,7 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
     public void getHomeDetails()
     {
         binding.HomeCategoryRecyclerview.showShimmerAdapter();
-        GetHomeDetails getHomeDetails = new GetHomeDetails(requireContext(),this);
+        GetHomeDetails getHomeDetails = new GetHomeDetails(this);
         getHomeDetails.fetchData();
     }
     @Override

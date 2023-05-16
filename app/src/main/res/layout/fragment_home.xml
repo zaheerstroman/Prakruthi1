@@ -99,6 +99,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/dots_indicator"
                 android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:shimmer_demo_child_count="10"
                 app:shimmer_demo_layout="@layout/homepage_product_recycle_view_loading"
