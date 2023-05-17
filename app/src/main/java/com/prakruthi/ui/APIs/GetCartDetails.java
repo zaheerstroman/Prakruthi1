@@ -58,9 +58,7 @@ public class GetCartDetails {
 
                     JSONArray cartList = jsonResponse.getJSONArray("cart_data");
 
-
                     ArrayList<CartModal> cartModal = new ArrayList<>();
-
 
                     // Populate lists
                     for (int i = 0; i < cartList.length(); i++) {
@@ -74,8 +72,6 @@ public class GetCartDetails {
                         String description = cartList1.getString("description");
                         cartModal.add(new CartModal(id,product_id,quantity,name,description,customer_price,attachment));
                     }
-
-
                     // Call listener with all three lists
                     mListener.onCartListFetched(cartModal);
                 } catch (JSONException e) {

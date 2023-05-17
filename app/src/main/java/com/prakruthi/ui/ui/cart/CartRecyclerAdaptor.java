@@ -1,25 +1,37 @@
 package com.prakruthi.ui.ui.cart;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.prakruthi.R;
+import com.prakruthi.ui.APIs.AddToCart;
+import com.prakruthi.ui.misc.Loading;
+
 import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdaptor.ViewHolder> {
+public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdaptor.ViewHolder>{
 
     ArrayList<CartModal> cartCategoryModalList = new ArrayList<>();
     Context context;
+    AddToCart.OnDataFetchedListner listner;
 
-    public CartRecyclerAdaptor(Context context ,  ArrayList<CartModal> cartCategoryModalList) {
+    public CartRecyclerAdaptor(Context context , ArrayList<CartModal> cartCategoryModalList , AddToCart.OnDataFetchedListner listner) {
         this.cartCategoryModalList = cartCategoryModalList;
         this.context = context;
+        this.listner = listner;
     }
 
     @NonNull
@@ -40,19 +52,37 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
         try {
 
             CartModal cartData = cartCategoryModalList.get(position);
-
             holder.CartProductName.setText(cartData.getName());
-
             holder.CartProductSubInformation.setText(cartData.getDescription());
             holder.CartProductPrice.setText(cartData.getCustomerPrice());
             holder.CartProductQuantity.setText(String.valueOf(cartData.getQuantity()));
-
             Glide.with(context)
                     .load(cartCategoryModalList.get(position).getAttachment())
                     .placeholder(R.drawable.baseline_circle_24)
                     .into(holder.CartProductImage);
 
-        } catch (Exception e) {
+            holder.minus.setOnClickListener(v -> {
+                Loading.show(holder.itemView.getContext());
+                AddToCart addToCart = new AddToCart(String.valueOf(cartData.getProductId()),String.valueOf(cartData.getQuantity()),String.valueOf(cartData.getQuantity()-1),String.valueOf(cartData.getId()) ,true,listner);
+                addToCart.fetchData();
+            });
+            holder.plus.setOnClickListener(v -> {
+                Loading.show(holder.itemView.getContext());
+                AddToCart addToCart = new AddToCart(String.valueOf(cartData.getProductId()),String.valueOf(cartData.getQuantity()) , String.valueOf(cartData.getQuantity()+1) , String.valueOf(cartData.getId()) , true , listner);
+                addToCart.fetchData();
+            });
+            if (cartData.getQuantity() <= 1)
+            {
+                holder.minus.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#020202")));
+                holder.minus.setClickable(false);
+            }
+            else if (cartData.getQuantity() >= 2)
+            {
+                holder.minus.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#6144AE53")));
+                holder.minus.setClickable(true);
+            }
+        }
+        catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -62,11 +92,12 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
         return cartCategoryModalList.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        AppCompatButton plus,minus;
         public CircleImageView CartProductImage;
         public TextView CartProductName, CartProductSubInformation, CartProductPrice, CartProductQuantity;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,6 +106,8 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
             CartProductSubInformation = itemView.findViewById(R.id.CartProductSubInformation);
             CartProductPrice = itemView.findViewById(R.id.CartProductPrice);
             CartProductImage = itemView.findViewById(R.id.CartProductImage);
+            plus = itemView.findViewById(R.id.CartProductPlus);
+            minus = itemView.findViewById(R.id.CartProductMinus);
 
             CartProductQuantity = itemView.findViewById(R.id.CartProductQuantity);
 

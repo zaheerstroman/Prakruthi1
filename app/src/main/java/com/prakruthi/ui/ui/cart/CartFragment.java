@@ -16,11 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.prakruthi.databinding.FragmentCartBinding;
+import com.prakruthi.ui.APIs.AddToCart;
 import com.prakruthi.ui.APIs.GetCartDetails;
+import com.prakruthi.ui.misc.Loading;
 
 import java.util.ArrayList;
 
-public class CartFragment extends Fragment implements GetCartDetails.OnDataFetchedListener{
+public class CartFragment extends Fragment implements GetCartDetails.OnDataFetchedListener , AddToCart.OnDataFetchedListner {
 
     private FragmentCartBinding binding;
 
@@ -41,6 +43,7 @@ public class CartFragment extends Fragment implements GetCartDetails.OnDataFetch
         final RecyclerView recyclerviewList = binding.cartRecyclerviewList;
 
         getCartDetails();
+
 
         return root;
     }
@@ -74,7 +77,7 @@ public class CartFragment extends Fragment implements GetCartDetails.OnDataFetch
             requireActivity().runOnUiThread(() -> {
                 binding.cartRecyclerviewList.hideShimmerAdapter();
                 binding.cartRecyclerviewList.setLayoutManager(new LinearLayoutManager(requireContext()));
-                binding.cartRecyclerviewList.setAdapter(new CartRecyclerAdaptor(requireContext(),cartModals));
+                binding.cartRecyclerviewList.setAdapter(new CartRecyclerAdaptor(requireContext(),cartModals,this));
             });
         }
         catch (Exception e)
@@ -89,6 +92,32 @@ public class CartFragment extends Fragment implements GetCartDetails.OnDataFetch
         requireActivity().runOnUiThread(()->{
             binding.cartRecyclerviewList.hideShimmerAdapter();
             Toast.makeText(requireContext(), "No Data Found", Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    @Override
+    public void OnCarteditDataFetched(String Message) {
+        requireActivity().runOnUiThread(() -> {
+            Loading.hide();
+            Toast.makeText(requireContext(), Message, Toast.LENGTH_SHORT).show();
+            getCartDetails();
+        });
+
+    }
+
+    @Override
+    public void OnAddtoCartDataFetched(String Message) {
+        requireActivity().runOnUiThread(() -> {
+            Loading.hide();
+            Toast.makeText(requireContext(), Message, Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    @Override
+    public void OnErrorFetched(String Error) {
+        requireActivity().runOnUiThread(() -> {
+            Loading.hide();
+            Toast.makeText(requireContext(), Error, Toast.LENGTH_SHORT).show();
         });
     }
 }
