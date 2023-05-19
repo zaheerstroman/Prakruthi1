@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.prakruthi.R;
 import com.prakruthi.databinding.FragmentProfileBinding;
+import com.prakruthi.ui.Variables;
 
 public class ProfileFragment extends Fragment {
 
@@ -27,6 +28,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater,container,false);
+        binding.txtId.setText("ID : #");
+        binding.txtId.append(String.valueOf(Variables.id));
        return binding.getRoot();
     }
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.ui.cart.CartFragment"
     android:background="@drawable/cartbackground">
-
 
     <RelativeLayout
         android:id="@+id/cart_RelativeLayout"
@@ -49,11 +49,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/cart_RelativeLayout"
         android:layout_marginBottom="@dimen/_70sdp"
+        android:id="@+id/NesterScrollViewCart"
         >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             >
+
             <com.cooltechworks.views.shimmer.ShimmerRecyclerView
                 android:id="@+id/cart_recyclerview_List"
                 android:layout_width="match_parent"
@@ -181,5 +183,7 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:text="Proceed To Checkout"
         android:layout_marginStart="@dimen/_5sdp"
+        android:id="@+id/CheckoutButton"
         android:layout_marginEnd="@dimen/_5sdp"/>
+
 </RelativeLayout>

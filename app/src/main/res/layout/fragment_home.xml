@@ -17,6 +17,7 @@
         android:drawableEnd="@drawable/round_search_24"
         android:paddingEnd="@dimen/_5sdp"
         android:id="@+id/Search"
+        android:editable="false"
         android:hint="Search"
         android:paddingStart="@dimen/_15sdp"/>
 

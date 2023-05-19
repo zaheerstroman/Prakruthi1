@@ -88,6 +88,7 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         SetScreenViews();
         GetDeliveryAddressDetails();
+        binding.Search.setClickable(false);
         View root = binding.getRoot();
         return root;
     }

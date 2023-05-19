@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.animation.ObjectAnimator;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,6 +49,14 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
         GetApiData();
 
         AddtoCart.setOnClickListener(v -> {
+            Qty.setError(null);
+            if (Qty.getText().toString().isEmpty())
+            {
+                Qty.setError("Select Quantity");
+                ObjectAnimator.ofFloat(Qty, "translationX", 0, -10, 10, -10, 10, -10, 10, -10, 10, 0).start();
+                Qty.requestFocus();
+                return;
+            }
             Loading.show(this);
             AddToCart addToCart = new AddToCart(productId,String.valueOf(Qty.getSelectedIndex()+1),String.valueOf(Qty.getSelectedIndex()+1),"" ,false,this);
             addToCart.fetchData();
