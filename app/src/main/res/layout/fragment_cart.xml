@@ -1,61 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.ui.cart.CartFragment"
+    android:background="@drawable/cartbackground">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.ui.cart.CartFragment"
-        android:background="@drawable/cartbackground"
+
+    <RelativeLayout
+        android:id="@+id/cart_RelativeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
         >
 
+        <ImageView
+            android:id="@+id/image_view_carticon"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="@dimen/_200sdp"
+            android:layout_marginLeft="@dimen/_162sdp"
+            android:layout_marginTop="@dimen/_36sdp"
+            android:layout_marginEnd="@dimen/_145sdp"
+            android:layout_marginRight="@dimen/_162sdp"
+            android:src="@drawable/cart_icon"
+            />
 
-        <RelativeLayout
-            android:id="@+id/cart_RelativeLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            >
-
-            <ImageView
-                android:id="@+id/image_view_carticon"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="@dimen/_200sdp"
-                android:layout_marginLeft="@dimen/_162sdp"
-                android:layout_marginTop="@dimen/_36sdp"
-                android:layout_marginEnd="@dimen/_145sdp"
-                android:layout_marginRight="@dimen/_162sdp"
-                android:src="@drawable/cart_icon"
-
-                />
-
-            <TextView
-                android:id="@+id/CART_TEXT"
-                android:layout_width="@dimen/_66sdp"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_below="@id/image_view_carticon"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:fontFamily="@font/coda"
-                android:text="Cart"
-                android:textAlignment="center"
-                android:textColor="#00B5FF"
-                android:textSize="@dimen/_36sdp" />
-
-        </RelativeLayout>
-
-        <com.cooltechworks.views.shimmer.ShimmerRecyclerView
-            android:id="@+id/cart_recyclerview_List"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cart_RelativeLayout"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/cartlistlayout" />
-
+        <TextView
+            android:id="@+id/CART_TEXT"
+            android:layout_width="@dimen/_76sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_below="@id/image_view_carticon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/coda"
+            android:text="Cart"
+            android:textAlignment="center"
+            android:textColor="#00B5FF"
+            android:textSize="@dimen/_36sdp" />
 
     </RelativeLayout>
-</layout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cart_RelativeLayout"
+        android:layout_marginBottom="@dimen/_70sdp"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+                android:id="@+id/cart_recyclerview_List"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/cartlistlayout" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_100sdp"
+                android:background="@drawable/custom_edit_text"
+                android:backgroundTint="@color/Secondary"
+                android:id="@+id/totalLayout"
+                android:layout_below="@id/cart_recyclerview_List"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Subtotal"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_9sdp"
+                        android:id="@+id/Subtotal"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Shipping fees"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:id="@+id/ShippingFee" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Taxes"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:id="@+id/Taxes"
+                        android:layout_below="@id/ShippingFee"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total (including Tax)"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:id="@+id/Total" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_alignParentEnd="true"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_9sdp"
+                        android:id="@+id/Subtotal_Price"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:id="@+id/ShippingFee_Price"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:id="@+id/Taxes_Price"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:textSize="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:id="@+id/Total_Price"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@drawable/custom_edit_text"
+        android:backgroundTint="@color/Secondary"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:text="Proceed To Checkout"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"/>
+</RelativeLayout>

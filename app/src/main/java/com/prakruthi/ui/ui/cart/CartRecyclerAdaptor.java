@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.prakruthi.R;
 import com.prakruthi.ui.APIs.AddToCart;
+import com.prakruthi.ui.APIs.DeleteCartDetails;
 import com.prakruthi.ui.misc.Loading;
 
 import java.util.ArrayList;
@@ -27,11 +29,13 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
     ArrayList<CartModal> cartCategoryModalList = new ArrayList<>();
     Context context;
     AddToCart.OnDataFetchedListner listner;
+    DeleteCartDetails.OnCartItemDeleteAPiHit Deletelistner;
 
-    public CartRecyclerAdaptor(Context context , ArrayList<CartModal> cartCategoryModalList , AddToCart.OnDataFetchedListner listner) {
+    public CartRecyclerAdaptor(Context context , ArrayList<CartModal> cartCategoryModalList , AddToCart.OnDataFetchedListner listner , DeleteCartDetails.OnCartItemDeleteAPiHit Deletelistner) {
         this.cartCategoryModalList = cartCategoryModalList;
         this.context = context;
         this.listner = listner;
+        this.Deletelistner = Deletelistner;
     }
 
     @NonNull
@@ -60,6 +64,12 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
                     .load(cartCategoryModalList.get(position).getAttachment())
                     .placeholder(R.drawable.baseline_circle_24)
                     .into(holder.CartProductImage);
+
+            holder.CartProductDelete.setOnClickListener(v->{
+                Loading.show(holder.itemView.getContext());
+                DeleteCartDetails deleteCartDetails = new DeleteCartDetails(Deletelistner,cartData.getId());
+                deleteCartDetails.HitApi();
+            });
 
             holder.minus.setOnClickListener(v -> {
                 Loading.show(holder.itemView.getContext());
@@ -96,6 +106,7 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         AppCompatButton plus,minus;
+        ImageButton CartProductDelete;
         public CircleImageView CartProductImage;
         public TextView CartProductName, CartProductSubInformation, CartProductPrice, CartProductQuantity;
 
@@ -110,6 +121,7 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
             minus = itemView.findViewById(R.id.CartProductMinus);
 
             CartProductQuantity = itemView.findViewById(R.id.CartProductQuantity);
+            CartProductDelete = itemView.findViewById(R.id.CartProductDelete);
 
             CartProductName.setSelected(true);
             CartProductSubInformation.setSelected(true);
