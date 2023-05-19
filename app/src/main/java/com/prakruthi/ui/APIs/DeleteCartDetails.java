@@ -40,7 +40,7 @@ public class DeleteCartDetails {
             data[0] = String.valueOf(Variables.id);
             data[1] = Variables.token;
             data[2] = id;
-            PutData putData = new PutData(Variables.BaseUrl+"getProductDetails", "POST", field, data);
+            PutData putData = new PutData(Variables.BaseUrl+"deleteCartDetails", "POST", field, data);
             if (putData.startPut()) {
                 if (putData.onComplete()) {
                     String result = putData.getResult();

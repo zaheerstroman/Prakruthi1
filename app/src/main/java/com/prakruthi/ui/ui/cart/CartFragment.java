@@ -92,6 +92,8 @@ public class CartFragment extends Fragment implements GetCartDetails.OnDataFetch
     public void onDataFetchError(String error) {
         requireActivity().runOnUiThread(()->{
             binding.cartRecyclerviewList.hideShimmerAdapter();
+            binding.NesterScrollViewCart.setVisibility(View.GONE);
+            binding.CheckoutButton.setVisibility(View.GONE);
             Toast.makeText(requireContext(), "No Data Found", Toast.LENGTH_SHORT).show();
         });
     }

@@ -1,6 +1,7 @@
 package com.prakruthi.ui;
 import static android.content.ContentValues.TAG;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -110,6 +111,7 @@ public class Login extends AppCompatActivity {
                 return null;
             }
 
+            @SuppressLint("StaticFieldLeak")
             @Override
             protected void onPostExecute(String result) {
                 if (result != null) {

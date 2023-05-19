@@ -32,6 +32,7 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
     DeleteCartDetails.OnCartItemDeleteAPiHit Deletelistner;
 
     public CartRecyclerAdaptor(Context context , ArrayList<CartModal> cartCategoryModalList , AddToCart.OnDataFetchedListner listner , DeleteCartDetails.OnCartItemDeleteAPiHit Deletelistner) {
+        this.cartCategoryModalList.clear();
         this.cartCategoryModalList = cartCategoryModalList;
         this.context = context;
         this.listner = listner;
