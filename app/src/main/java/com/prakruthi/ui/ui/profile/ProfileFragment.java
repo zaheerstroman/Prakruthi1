@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.prakruthi.R;
 import com.prakruthi.databinding.FragmentProfileBinding;
 import com.prakruthi.ui.Variables;
 
