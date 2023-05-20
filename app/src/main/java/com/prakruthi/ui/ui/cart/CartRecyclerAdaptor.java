@@ -106,7 +106,8 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageButton plus,minus,CartProductDelete;
+        AppCompatButton plus,minus;
+        ImageButton CartProductDelete;
         public CircleImageView CartProductImage;
         public TextView CartProductName, CartProductSubInformation, CartProductPrice, CartProductQuantity;
 

@@ -74,15 +74,14 @@ public class GetProductDetails {
                 product.setSubcategoryId(productDetails.getInt("subcategory_id"));
                 product.setName(productDetails.getString("name"));
                 product.setDescription(productDetails.getString("description"));
-
                 List<String> attachments = new ArrayList<>();
-                attachments.add(productDetails.getString("attachment"));
-                attachments.add(productDetails.getString("attachment1"));
-                attachments.add(productDetails.getString("attachment2"));
-                attachments.add(productDetails.getString("attachment3"));
-                attachments.add(productDetails.getString("attachment4"));
+                for (int i = 1; i <= 10; i++) {
+                        String attachment = productDetails.getString("attachment" + i);
+                        if (!attachment.equals("null")) {
+                            attachments.add(attachment);
+                        }
+                }
                 product.setAttachments(attachments);
-
                 product.setActualPrice(productDetails.getString("actual_price"));
                 product.setCustomerPrice(productDetails.getString("customer_price"));
                 product.setDealerPrice(productDetails.getString("delar_price"));

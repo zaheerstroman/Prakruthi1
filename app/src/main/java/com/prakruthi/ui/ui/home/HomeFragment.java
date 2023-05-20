@@ -52,6 +52,7 @@ import com.prakruthi.ui.ui.home.category.HomeCategoryModal;
 import com.prakruthi.ui.ui.home.category.HomeCategoryRecyclerAdaptor;
 import com.prakruthi.ui.ui.home.products.HomeProductAdaptor;
 import com.prakruthi.ui.ui.home.products.HomeProductModel;
+import com.prakruthi.ui.ui.search.SearchPage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -88,12 +89,14 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         SetScreenViews();
         GetDeliveryAddressDetails();
-        binding.Search.setClickable(false);
         View root = binding.getRoot();
         return root;
     }
 
     public void SetScreenViews() {
+        binding.Search.setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(),SearchPage.class));
+        });
         HomeAddress = binding.DeleverHomeLocation;
         HomeAddress.setSelected(true);
         viewPager = binding.HomeBannerPager;

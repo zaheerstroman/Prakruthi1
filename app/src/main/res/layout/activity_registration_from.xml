@@ -124,7 +124,6 @@
             android:textColor="#61000000"
             android:textColorHint="#61000000"
             android:textSize="@dimen/_14sdp"
-            app:spinner_arrow_show="true"
             app:spinner_arrow_tint="@color/black"
             app:spinner_divider_color="@color/black"
             app:spinner_item_array="@array/dropdown_State"
