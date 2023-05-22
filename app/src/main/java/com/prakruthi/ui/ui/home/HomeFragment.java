@@ -267,6 +267,7 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
         }
 
     };
+
     @Override
     public void onBannerListFetched(List<HomeBannerModel> homeBannerModels) {
         requireActivity().runOnUiThread(() -> {
