@@ -6,6 +6,7 @@
     android:background="@drawable/custom_edit_text"
     android:backgroundTint="#C6E4FF"
     android:layout_margin="@dimen/_5sdp"
+    android:id="@+id/cartlistlayoutbackground"
     >
 
     <ImageButton

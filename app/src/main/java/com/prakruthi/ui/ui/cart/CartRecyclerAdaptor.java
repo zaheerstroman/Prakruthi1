@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,8 +90,13 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
             }
             else if (cartData.getQuantity() >= 2)
             {
-                holder.minus.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#6144AE53")));
+                holder.minus.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#C6E4FF")));
                 holder.minus.setClickable(true);
+            }
+            if (position % 2 == 0) {
+                holder.cartlistlayoutbackground.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#92C8F9"))); // Set elevation for even positions.
+            } else {
+                holder.cartlistlayoutbackground.setElevation(0f); // Remove elevation for odd positions.
             }
         }
         catch (Exception e) {
@@ -107,9 +113,13 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         AppCompatButton plus,minus;
+
+        RelativeLayout cartlistlayoutbackground;
+
         ImageButton CartProductDelete;
         public CircleImageView CartProductImage;
         public TextView CartProductName, CartProductSubInformation, CartProductPrice, CartProductQuantity;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -127,6 +137,7 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
             CartProductName.setSelected(true);
             CartProductSubInformation.setSelected(true);
 
+            cartlistlayoutbackground = itemView.findViewById(R.id.cartlistlayoutbackground);
         }
 
 

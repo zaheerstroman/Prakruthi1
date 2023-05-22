@@ -34,6 +34,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -42,6 +43,7 @@ import com.prakruthi.R;
 import com.prakruthi.databinding.FragmentHomeBinding;
 import com.prakruthi.ui.APIs.GetDeliveryAddressDetails;
 import com.prakruthi.ui.APIs.GetHomeDetails;
+import com.prakruthi.ui.APIs.GetProductsList;
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.misc.Loading;
 import com.prakruthi.ui.ui.home.address.Address_BottomSheet_Recycler_Adaptor;
@@ -60,12 +62,13 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.DeliveryAddressListener , GetHomeDetails.OnDataFetchedListener {
+public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.DeliveryAddressListener , GetHomeDetails.OnDataFetchedListener , GetProductsList.OnCategoryProductsFetchedListner {
 
     public static RecyclerView addressRecyclerView;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1;
 
     public static TextView HomeAddress;
+    public static ShimmerRecyclerView HomeShimmerProductRecyclerView;
     private FragmentHomeBinding binding;
 
     boolean BannerFetched = false;
@@ -98,6 +101,7 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
             startActivity(new Intent(requireContext(),SearchPage.class));
         });
         HomeAddress = binding.DeleverHomeLocation;
+        HomeShimmerProductRecyclerView = binding.HomeProductsRecycler;
         HomeAddress.setSelected(true);
         viewPager = binding.HomeBannerPager;
         binding.DeleverHomeLocation.setOnClickListener(v -> {
@@ -245,7 +249,7 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
         requireActivity().runOnUiThread(() -> {
             binding.HomeCategoryRecyclerview.hideShimmerAdapter();
             binding.HomeCategoryRecyclerview.setLayoutManager(new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false));
-            binding.HomeCategoryRecyclerview.setAdapter(new HomeCategoryRecyclerAdaptor(homeCategoryModals));
+            binding.HomeCategoryRecyclerview.setAdapter(new HomeCategoryRecyclerAdaptor(homeCategoryModals,this));
         });
     }
 
@@ -303,5 +307,21 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
     public void onPause() {
         super.onPause();
         handler.removeCallbacks(runnable);
+    }
+
+    @Override
+    public void OnCategoryProductsFetched(List<HomeProductModel> homeProductModel) {
+        requireActivity().runOnUiThread(()->{
+            binding.HomeProductsRecycler.hideShimmerAdapter();
+            binding.HomeProductsRecycler.setLayoutManager(new GridLayoutManager(requireContext(),2));
+            binding.HomeProductsRecycler.setAdapter(new HomeProductAdaptor(homeProductModel));
+        });
+    }
+
+    @Override
+    public void OnGetProductsListApiGivesError(String error) { requireActivity().runOnUiThread(()->{
+        Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show();
+        binding.HomeProductsRecycler.hideShimmerAdapter();
+    });
     }
 }
