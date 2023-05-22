@@ -106,10 +106,16 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
                 chooseLocationDialog();
             }
         });
-        if (Variables.address.isEmpty() || Variables.address.equals("null")) {
+        Log.e(TAG, Variables.address );
+        if (Variables.address.equals("null")) {
             binding.DeleverHomeLocation.setText("Choose Location");
+            Log.e(TAG, Variables.address );
         }
-        else binding.DeleverHomeLocation.setText(Variables.address);
+        else {
+            binding.DeleverHomeLocation.setText(Variables.address);
+            Log.e(TAG, Variables.address );
+            Log.e(TAG,"''''''" );
+        }
         getHomeDetails();
     }
 
@@ -226,7 +232,6 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
             addressRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
             addressRecyclerView.setAdapter(new Address_BottomSheet_Recycler_Adaptor(address_bottomSheet_recycler_adaptor_models,requireContext()));
         }
-        binding.DeleverHomeLocation.setText(Variables.address);
     }
 
     public void getHomeDetails()
