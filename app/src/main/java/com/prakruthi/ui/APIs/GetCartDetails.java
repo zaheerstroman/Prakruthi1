@@ -98,6 +98,4 @@ public class GetCartDetails {
         void onDataFetchError(String error);
     }
 
-
-
 }
