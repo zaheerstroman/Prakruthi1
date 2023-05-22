@@ -79,6 +79,7 @@ public class CartFragment extends Fragment implements GetCartDetails.OnDataFetch
                 binding.cartRecyclerviewList.hideShimmerAdapter();
                 binding.cartRecyclerviewList.setLayoutManager(new LinearLayoutManager(requireContext()));
                 binding.cartRecyclerviewList.setAdapter(new CartRecyclerAdaptor(requireContext(),cartModals,this, this));
+                binding.SubtotalPrice.setText(String.valueOf(CartModal.cartAmount));
             });
         }
         catch (Exception e)

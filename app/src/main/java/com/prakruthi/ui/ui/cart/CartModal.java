@@ -4,6 +4,8 @@ package com.prakruthi.ui.ui.cart;
 import java.util.ArrayList;
 
 public class CartModal {
+
+    public static int cartAmount;
     private int id;
     private int productId;
     private int quantity;
