@@ -106,8 +106,6 @@ public class AddToCart {
             data[2] = Productid;
             data[3] = quantityafter;
             data[4] = id;
-            Log.e(TAG, Arrays.toString(field));
-            Log.e(TAG, Arrays.toString(data));
 
             PutData putData = new PutData(Variables.BaseUrl+"addToCart", "POST", field, data);
 

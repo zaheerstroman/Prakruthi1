@@ -4,6 +4,7 @@ import static com.google.firebase.messaging.Constants.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.animation.ObjectAnimator;
@@ -16,19 +17,24 @@ import android.widget.Toast;
 import com.prakruthi.R;
 import com.prakruthi.ui.APIs.AddToCart;
 import com.prakruthi.ui.APIs.GetProductDetails;
+import com.prakruthi.ui.APIs.SaveWishList;
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.misc.Loading;
 import com.skydoves.powerspinner.PowerSpinnerView;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
-public class ProductPage extends AppCompatActivity implements GetProductDetails.OnProductDataFetched , AddToCart.OnDataFetchedListner{
+public class ProductPage extends AppCompatActivity implements GetProductDetails.OnProductDataFetched , AddToCart.OnDataFetchedListner, SaveWishList.OnSaveWishListDataFetchedListener {
 
     String productId;
     TextView ProductName,ProductDescription,CurrentPrice,MRPPrice,ProductDeleveryAddress,Avalable;
     PowerSpinnerView Qty;
     AppCompatButton AddtoCart,BuyNow;
     DotsIndicator dotsIndicator;
+
+    AppCompatButton Wishlist;
     ViewPager2 ProductImagePager;
+
+    boolean in_wishlist;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +52,22 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
         Qty = findViewById(R.id.Qty);
         AddtoCart = findViewById(R.id.AddtoCart);
         BuyNow = findViewById(R.id.BuyNow);
+        Wishlist = findViewById(R.id.Product_Save_Wishlist);
         GetApiData();
 
+        Wishlist.setOnClickListener(v->{
+            if (in_wishlist)
+            {
+                SaveWishList saveWishList = new SaveWishList(this,productId);
+                saveWishList.HitSaveWishListApi("No");
+                Wishlist.setBackgroundDrawable(ContextCompat.getDrawable(this,R.drawable.like_outline));
+            } else if (!in_wishlist) {
+                SaveWishList saveWishList = new SaveWishList(this,productId);
+                saveWishList.HitSaveWishListApi("Yes");
+                Wishlist.setBackgroundDrawable(ContextCompat.getDrawable(this,R.drawable.like_filled));
+            }
+
+        });
         AddtoCart.setOnClickListener(v -> {
             Qty.setError(null);
             if (Qty.getText().toString().isEmpty())
@@ -71,7 +91,6 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
     @Override
     public void OnDataFetched(ProductModel productModel) {
         this.runOnUiThread(()->{
-            Toast.makeText(this, productModel.getName(), Toast.LENGTH_SHORT).show();
             ProductImagePager.setAdapter(new ProductPagerAdaptor(this, productModel.getAttachments()));
             dotsIndicator.attachTo(ProductImagePager);
             ProductName.setText(productModel.getName());
@@ -80,6 +99,9 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
             MRPPrice.setText(productModel.getActualPrice());
             MRPPrice.setPaintFlags(MRPPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             ProductDeleveryAddress.setText(Variables.address);
+            in_wishlist = productModel.isIn_wishlist();
+            if (in_wishlist)
+                Wishlist.setBackgroundDrawable(ContextCompat.getDrawable(this,R.drawable.like_filled));
         });
 
     }
@@ -114,5 +136,22 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
             Loading.hide();
             Toast.makeText(this, Error, Toast.LENGTH_SHORT).show();
         });
+    }
+
+    @Override
+    public void OnItemSavedToWishlist(String message) {
+        runOnUiThread( () -> {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            GetApiData();
+        } );
+
+    }
+
+    @Override
+    public void OnSaveWishlistApiGivesError(String error) {
+        runOnUiThread( () -> {
+            Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+        } );
+
     }
 }

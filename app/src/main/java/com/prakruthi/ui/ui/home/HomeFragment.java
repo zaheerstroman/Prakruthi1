@@ -56,6 +56,9 @@ import com.prakruthi.ui.ui.home.products.HomeProductAdaptor;
 import com.prakruthi.ui.ui.home.products.HomeProductModel;
 import com.prakruthi.ui.ui.search.SearchPage;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -97,6 +100,9 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
     }
 
     public void SetScreenViews() {
+
+
+
         binding.Search.setOnClickListener(v -> {
             startActivity(new Intent(requireContext(),SearchPage.class));
         });
@@ -265,7 +271,6 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
                 handler.postDelayed(runnable, DELAY_TIME);
             }
         }
-
     };
 
     @Override

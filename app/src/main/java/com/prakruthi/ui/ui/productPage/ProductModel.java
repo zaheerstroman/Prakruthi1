@@ -19,6 +19,16 @@ public class ProductModel {
     private String size;
     private String type;
 
+    public boolean isIn_wishlist() {
+        return in_wishlist;
+    }
+
+    public void setIn_wishlist(boolean in_wishlist) {
+        this.in_wishlist = in_wishlist;
+    }
+
+    public boolean in_wishlist;
+
     // Getter and Setter for id
     public int getId() {
         return id;

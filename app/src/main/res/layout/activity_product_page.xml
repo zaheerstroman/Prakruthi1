@@ -29,6 +29,18 @@
         android:layout_below="@+id/productPage_back_btn"
         />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_above="@+id/ProductImagePager"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginBottom="-60dp"
+        android:background="@drawable/like_outline"
+        android:id="@+id/Product_Save_Wishlist"/>
+
+
+
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
         android:id="@+id/dots_indicator"
         android:layout_width="wrap_content"

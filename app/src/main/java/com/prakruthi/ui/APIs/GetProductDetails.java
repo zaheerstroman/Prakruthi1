@@ -95,6 +95,7 @@ public class GetProductDetails {
                 product.setColor(productDetails.getString("color"));
                 product.setSize(productDetails.getString("size"));
                 product.setType(productDetails.getString("type"));
+                product.setIn_wishlist(productDetails.getBoolean("in_wishlist"));
 
                 // Use the product and status code as needed
                 mListener.OnDataFetched(product);

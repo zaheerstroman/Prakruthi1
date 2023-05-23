@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -116,7 +117,7 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
 
         RelativeLayout cartlistlayoutbackground;
 
-        ImageButton CartProductDelete;
+        AppCompatImageButton CartProductDelete;
         public CircleImageView CartProductImage;
         public TextView CartProductName, CartProductSubInformation, CartProductPrice, CartProductQuantity;
 
