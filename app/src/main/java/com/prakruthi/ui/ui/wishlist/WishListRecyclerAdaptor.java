@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.prakruthi.R;
 import com.prakruthi.ui.APIs.AddToCart;
 import com.prakruthi.ui.APIs.GetWishlistDetails;
+import com.prakruthi.ui.APIs.SaveWishList;
 import com.prakruthi.ui.misc.Loading;
 import com.prakruthi.ui.ui.search.SearchAdaptor;
 
@@ -28,9 +29,11 @@ public class WishListRecyclerAdaptor extends RecyclerView.Adapter<WishListRecycl
     List<WishListModal> wishListModals;
 
     AddToCart.OnDataFetchedListner listner;
-    public WishListRecyclerAdaptor(List<WishListModal> wishListModals ,  AddToCart.OnDataFetchedListner listner) {
+    SaveWishList.OnSaveWishListDataFetchedListener listner_wishlist;
+    public WishListRecyclerAdaptor(List<WishListModal> wishListModals ,  AddToCart.OnDataFetchedListner listner , SaveWishList.OnSaveWishListDataFetchedListener listner_wishlist) {
         this.wishListModals = wishListModals;
         this.listner = listner;
+        this.listner_wishlist = listner_wishlist;
     }
 
     @NonNull
@@ -44,14 +47,21 @@ public class WishListRecyclerAdaptor extends RecyclerView.Adapter<WishListRecycl
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         WishListModal wishListModal = wishListModals.get(position);
+        Glide.with(holder.itemView.getContext()).load(wishListModal.getAttachment()).into(holder.wishlist_product_image);
         holder.wishlist_product_name.setText(wishListModal.getName());
+        holder.wishlist_product_name.setSelected(true);
         holder.wishlist_product_price.setText(wishListModal.getCustomerPrice());
-        holder.wishlist_product_added_date.setText(wishListModal.getDate());
-
+        holder.wishlist_product_added_date.append(wishListModal.getDate());
+        holder.wishlist_product_added_date.setSelected(true);
         holder.wishlist_product_add_to_cart.setOnClickListener(v -> {
             Loading.show(holder.itemView.getContext());
-            AddToCart addToCart = new AddToCart("2","1" , "" , "" , false , listner);
+            AddToCart addToCart = new AddToCart(wishListModal.getProduct_id(), "1" , "" , "" , false , listner);
             addToCart.fetchData();
+        });
+        holder.wishlist_product_delete.setOnClickListener(v -> {
+            Loading.show(holder.itemView.getContext());
+            SaveWishList saveWishList = new SaveWishList(listner_wishlist,wishListModal.getProduct_id());
+            saveWishList.HitSaveWishListApi("No");
         });
 
     }

@@ -59,7 +59,6 @@ public class GetCartDetails {
             if (result != null) {
                 try {
                     JSONObject jsonResponse = new JSONObject(result);
-
                     JSONArray cartList = jsonResponse.getJSONArray("cart_data");
                     CartModal.cartAmount = jsonResponse.getInt("cart_amount");
                     ArrayList<CartModal> cartModal = new ArrayList<>();

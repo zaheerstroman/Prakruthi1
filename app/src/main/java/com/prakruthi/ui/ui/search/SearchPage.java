@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -37,12 +39,28 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
         searchRecyclerView = findViewById(R.id.SearchRecyclerView);
         editText = findViewById(R.id.Search);
         editText.requestFocus();
-        if(editText.requestFocus()) {
+        if (editText.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
         editText.setOnEditorActionListener((textView, actionId, keyEvent) -> {
             performSearch();
             return false;
+        });
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                performSearch();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
     }
     private void performSearch() {
@@ -63,7 +81,6 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
     @Override
     public void OnSearchResult(List<SearchModle> product) {
         runOnUiThread(() -> {
-            Toast.makeText(this, product.get(0).getName(), Toast.LENGTH_SHORT).show();
             searchRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             searchRecyclerView.hideShimmerAdapter();
             searchRecyclerView.setAdapter(new SearchAdaptor(product));

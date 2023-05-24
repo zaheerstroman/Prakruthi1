@@ -22,14 +22,16 @@
 
     <TextView
         android:id="@+id/wishlist_product_name"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_80sdp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
         android:text="Plastic Glass"
+        android:singleLine="true"
         android:textColor="@color/black"
         android:textSize="@dimen/_10sdp"
         android:layout_below="@+id/wishlist_product_image"
-        />
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever" />
 
     <TextView
         android:id="@+id/wishlist_product_price"
@@ -85,22 +87,18 @@
 
         />
 
-
-
     <TextView
         android:id="@+id/wishlist_product_added_date"
-        android:layout_width="@dimen/_118sdp"
+        android:layout_width="@dimen/_100sdp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:text="Added on April 1 2023"
+        android:textAlignment="viewEnd"
+        android:text="Added on "
+        android:singleLine="true"
         android:textColor="@color/black"
         android:textSize="@dimen/_12sdp"
-        />
-
-
-
-
-
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever" />
 
 </RelativeLayout>

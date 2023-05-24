@@ -1,7 +1,6 @@
 package com.prakruthi.ui.APIs;
 
 import com.prakruthi.ui.Variables;
-import com.prakruthi.ui.ui.cart.CartModal;
 import com.prakruthi.ui.ui.wishlist.WishListModal;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
@@ -75,9 +74,11 @@ public class GetWishlistDetails {
                         String color = wishList1.getString("color");
                         String size = wishList1.getString("size");
                         String type = wishList1.getString("type");
+                        String attachment = wishList1.getString("attachment");
+                        String product_id = wishList1.getString("product_id");
                         String date = wishList1.getString("date");
 
-                        wishlistModal.add(new WishListModal(wishlist_id,name,description,customer_price,color,size,type,date));
+                        wishlistModal.add(new WishListModal(wishlist_id,name,description,customer_price,color,size,type, attachment , product_id, date));
                     }
                     // Call listener with all three lists
                     mListener.onWishListFetched(wishlistModal);

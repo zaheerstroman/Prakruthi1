@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.prakruthi.databinding.FragmentWishlistBinding;
 import com.prakruthi.ui.APIs.AddToCart;
 import com.prakruthi.ui.APIs.GetWishlistDetails;
+import com.prakruthi.ui.APIs.SaveWishList;
 import com.prakruthi.ui.misc.Loading;
 
 import java.util.ArrayList;
 
-public class WishlistFragment extends Fragment implements GetWishlistDetails.OnWishlistDataFetchedListener , AddToCart.OnDataFetchedListner {
+public class WishlistFragment extends Fragment implements GetWishlistDetails.OnWishlistDataFetchedListener , AddToCart.OnDataFetchedListner , SaveWishList.OnSaveWishListDataFetchedListener {
 
     private FragmentWishlistBinding binding;
 
@@ -30,6 +31,7 @@ public class WishlistFragment extends Fragment implements GetWishlistDetails.OnW
     }
 
     public void getWishlistDetails() {
+        Loading.hide();
         binding.wishlistRecyclerviewList.showShimmerAdapter();
         GetWishlistDetails getWishlistDetails = new GetWishlistDetails(this);
         getWishlistDetails.HitWishlistApi();
@@ -43,11 +45,17 @@ public class WishlistFragment extends Fragment implements GetWishlistDetails.OnW
 
     @Override
     public void onWishListFetched(ArrayList<WishListModal> wishListModals) {
+        try {
             requireActivity().runOnUiThread(() -> {
                 binding.wishlistRecyclerviewList.hideShimmerAdapter();
                 binding.wishlistRecyclerviewList.setLayoutManager(new LinearLayoutManager(requireContext()));
-                binding.wishlistRecyclerviewList.setAdapter(new WishListRecyclerAdaptor(wishListModals , this));
+                binding.wishlistRecyclerviewList.setAdapter(new WishListRecyclerAdaptor(wishListModals , this,this));
             });
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -65,10 +73,7 @@ public class WishlistFragment extends Fragment implements GetWishlistDetails.OnW
 
     @Override
     public void OnAddtoCartDataFetched(String Message) {
-        requireActivity().runOnUiThread( () -> {
-            Loading.hide();
-            Toast.makeText(requireContext(), Message, Toast.LENGTH_SHORT).show();
-        });
+        requireActivity().runOnUiThread(Loading::hide);
     }
 
     @Override
@@ -77,5 +82,17 @@ public class WishlistFragment extends Fragment implements GetWishlistDetails.OnW
             Loading.hide();
             Toast.makeText(requireContext(), Error, Toast.LENGTH_SHORT).show();
         });
+    }
+
+    @Override
+    public void OnItemSavedToWishlist(String message) {
+        requireActivity().runOnUiThread(this::getWishlistDetails);
+    }
+
+    @Override
+    public void OnSaveWishlistApiGivesError(String error) {
+        requireActivity().runOnUiThread( () -> {
+            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show();
+        } );
     }
 }

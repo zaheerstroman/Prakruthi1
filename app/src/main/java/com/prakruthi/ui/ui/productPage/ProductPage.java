@@ -117,7 +117,6 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
     public void OnCarteditDataFetched(String Message) {
         this.runOnUiThread(() -> {
             Loading.hide();
-            Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
         });
 
     }
@@ -126,7 +125,6 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
     public void OnAddtoCartDataFetched(String Message) {
         this.runOnUiThread(() -> {
             Loading.hide();
-            Toast.makeText(this, Message, Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -141,7 +139,6 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
     @Override
     public void OnItemSavedToWishlist(String message) {
         runOnUiThread( () -> {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
             GetApiData();
         } );
 

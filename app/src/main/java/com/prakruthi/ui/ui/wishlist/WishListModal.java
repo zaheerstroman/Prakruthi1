@@ -16,9 +16,30 @@ public class WishListModal {
 
     private String type;
 
+    private String attachment;
+
+    public String getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
+    }
+
+    private String product_id;
+
+    public String getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
+    }
+
     private String date;
 
-    public WishListModal(int wishlistId, String name, String description, String customerPrice, String color, String size, String type, String date) {
+
+    public WishListModal(int wishlistId, String name, String description, String customerPrice, String color, String size, String type, String attachment , String product_id, String date) {
         this.wishlistId = wishlistId;
         this.name = name;
         this.description = description;
@@ -26,6 +47,8 @@ public class WishListModal {
         this.color = color;
         this.size = size;
         this.type = type;
+        this.attachment = attachment;
+        this.product_id = product_id;
         this.date = date;
     }
 

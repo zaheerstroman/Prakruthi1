@@ -78,6 +78,7 @@ public class AddToCart {
                         handleResponseAdd(message);
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        handleError("Internal Error");
                     }
                 } else {
                     handleError("Failed to fetch data");

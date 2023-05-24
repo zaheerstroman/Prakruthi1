@@ -114,7 +114,7 @@ public class SearchProductApi {
     }
 
     private void handleError(String failed_to_fetch_data) {
-
+        mListner.OnSearchResultApiGivesError(failed_to_fetch_data);
     }
 
     public interface OnSearchResultApiHit

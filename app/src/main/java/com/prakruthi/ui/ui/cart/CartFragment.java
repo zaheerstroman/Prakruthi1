@@ -104,7 +104,6 @@ public class CartFragment extends Fragment implements GetCartDetails.OnDataFetch
     public void OnCarteditDataFetched(String Message) {
         requireActivity().runOnUiThread(() -> {
             Loading.hide();
-            Toast.makeText(requireContext(), Message, Toast.LENGTH_SHORT).show();
             getCartDetails();
         });
 
@@ -112,10 +111,7 @@ public class CartFragment extends Fragment implements GetCartDetails.OnDataFetch
 
     @Override
     public void OnAddtoCartDataFetched(String Message) {
-        requireActivity().runOnUiThread(() -> {
-            Loading.hide();
-            Toast.makeText(requireContext(), Message, Toast.LENGTH_SHORT).show();
-        });
+        requireActivity().runOnUiThread(Loading::hide);
     }
 
     @Override
@@ -130,7 +126,6 @@ public class CartFragment extends Fragment implements GetCartDetails.OnDataFetch
     public void OnCartItemDeleted(String message) {
         requireActivity().runOnUiThread(() -> {
             Loading.hide();
-            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
             getCartDetails();
         });
     }

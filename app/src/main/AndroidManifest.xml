@@ -18,6 +18,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".ui.ui.myaddress.MyAddresses"
+            android:exported="false" />
+        <activity
             android:name=".ui.ui.search.SearchPage"
             android:exported="false" />
         <activity
