@@ -56,7 +56,6 @@ public class CartFragment extends Fragment implements GetCartDetails.OnDataFetch
         getCartDetails.fetchData();
     }
 
-
     public void onStart() {
         super.onStart();
     }

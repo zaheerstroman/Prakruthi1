@@ -58,19 +58,16 @@
                 android:id="@+id/tv_my_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/iv_my_orders_Image"
-                android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/my_address_vector"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"
                 android:text="My Address"
                 android:textAlignment="center"
                 android:textSize="@dimen/_10sdp"
-
-                android:translationY="-4dp" />
+                android:translationY="-4dp"
+                app:drawableTopCompat="@drawable/my_address_vector" />
 
             <TextView
                 android:id="@+id/tv_my_wishlist"
@@ -155,19 +152,16 @@
                 android:id="@+id/tv_support"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_feedback"
-                android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/my_address_vector"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"
                 android:text="Support"
                 android:textAlignment="center"
                 android:textSize="@dimen/_10sdp"
-
-                android:translationY="-4dp" />
+                android:translationY="-4dp"
+                app:drawableTopCompat="@drawable/my_address_vector" />
 
             <TextView
                 android:id="@+id/tv_privacy_policy"

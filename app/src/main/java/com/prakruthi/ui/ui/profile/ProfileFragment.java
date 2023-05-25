@@ -1,5 +1,6 @@
 package com.prakruthi.ui.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.prakruthi.databinding.FragmentProfileBinding;
 import com.prakruthi.ui.Variables;
+import com.prakruthi.ui.ui.myaddress.MyAddresses;
 
 public class ProfileFragment extends Fragment {
 
@@ -29,6 +31,9 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater,container,false);
         binding.txtId.setText("ID : #");
         binding.txtId.append(String.valueOf(Variables.id));
+        binding.tvMyAddress.setOnClickListener(v -> {
+            startActivity(new Intent(requireContext(), MyAddresses.class));
+        });
        return binding.getRoot();
     }
 }
