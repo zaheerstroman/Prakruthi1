@@ -33,14 +33,13 @@ public class AddToCart {
 
     public void fetchData()
     {
+        Executor executor = Executors.newSingleThreadExecutor();
         if (edit)
         {
-            Executor executor = Executors.newSingleThreadExecutor();
             executor.execute(new editCartItem());
         }
         else
         {
-            Executor executor = Executors.newSingleThreadExecutor();
             executor.execute(new AddtoCartItem());
         }
     }
@@ -68,6 +67,7 @@ public class AddToCart {
             if (putData.startPut()) {
                 if (putData.onComplete()) {
                     String result = putData.getResult();
+                    Log.e(TAG, result );
                     try {
                         JSONObject response = new JSONObject(result);
 
@@ -113,6 +113,7 @@ public class AddToCart {
             if (putData.startPut()) {
                 if (putData.onComplete()) {
                     String result = putData.getResult();
+                    Log.e(TAG, result );
                     try {
                         JSONObject response = new JSONObject(result);
 

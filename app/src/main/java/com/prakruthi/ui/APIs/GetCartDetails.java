@@ -40,12 +40,14 @@ public class GetCartDetails {
             String[] data = new String[2];
             data[0] = String.valueOf(Variables.id);
             data[1] = Variables.token;
-//            PutData putData = new PutData(Variables.BaseUrl+"getDashboardDetails", "POST", field, data);
             PutData putData = new PutData(Variables.BaseUrl+"getCartDetails", "POST", field, data);
 
             if (putData.startPut()) {
+                String result = putData.getResult();
+                Log.e(TAG, result );
                 if (putData.onComplete()) {
-                    String result = putData.getResult();
+                    result = putData.getResult();
+                    Log.e(TAG, result );
                     handleResponse(result);
                 } else {
                     handleError("Failed to fetch data");

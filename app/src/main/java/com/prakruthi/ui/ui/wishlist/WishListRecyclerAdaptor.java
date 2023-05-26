@@ -51,6 +51,7 @@ public class WishListRecyclerAdaptor extends RecyclerView.Adapter<WishListRecycl
         holder.wishlist_product_name.setText(wishListModal.getName());
         holder.wishlist_product_name.setSelected(true);
         holder.wishlist_product_price.setText(wishListModal.getCustomerPrice());
+        holder.wishlist_product_added_date.setText("Added on ");
         holder.wishlist_product_added_date.append(wishListModal.getDate());
         holder.wishlist_product_added_date.setSelected(true);
         holder.wishlist_product_add_to_cart.setOnClickListener(v -> {
