@@ -139,7 +139,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/myorder_vector"
+                android:drawableTop="@drawable/feedback_vector"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"
@@ -161,7 +161,7 @@
                 android:textAlignment="center"
                 android:textSize="@dimen/_10sdp"
                 android:translationY="-4dp"
-                app:drawableTopCompat="@drawable/my_address_vector" />
+                app:drawableTopCompat="@drawable/support_vector" />
 
             <TextView
                 android:id="@+id/tv_privacy_policy"
@@ -171,7 +171,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/mywishlist_vector"
+                android:drawableTop="@drawable/privacy_policy_vector"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"
@@ -188,7 +188,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/mypayment_vector"
+                android:drawableTop="@drawable/aboutus_vector"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
                 android:singleLine="true"

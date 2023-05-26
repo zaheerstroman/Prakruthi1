@@ -6,8 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
+import com.prakruthi.R;
 import com.prakruthi.databinding.FragmentWishlistBinding;
 import com.prakruthi.ui.APIs.AddToCart;
 import com.prakruthi.ui.APIs.GetWishlistDetails;
@@ -20,11 +23,14 @@ public class WishlistFragment extends Fragment implements GetWishlistDetails.OnW
 
     private FragmentWishlistBinding binding;
 
+    public static int id;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentWishlistBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        id = root.getId();
         getWishlistDetails();
 
         return root;
@@ -47,23 +53,34 @@ public class WishlistFragment extends Fragment implements GetWishlistDetails.OnW
     public void onWishListFetched(ArrayList<WishListModal> wishListModals) {
         try {
             requireActivity().runOnUiThread(() -> {
-                binding.wishlistRecyclerviewList.hideShimmerAdapter();
-                binding.wishlistRecyclerviewList.setLayoutManager(new LinearLayoutManager(requireContext()));
-                binding.wishlistRecyclerviewList.setAdapter(new WishListRecyclerAdaptor(wishListModals , this,this));
+                try {
+                    binding.wishlistRecyclerviewList.hideShimmerAdapter();
+                    binding.wishlistRecyclerviewList.setLayoutManager(new LinearLayoutManager(requireContext()));
+                    binding.wishlistRecyclerviewList.setAdapter(new WishListRecyclerAdaptor(wishListModals , this,this));
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
             });
-        }catch (Exception e)
-        {
-            e.printStackTrace();
+        }catch (Exception exception) {
+            exception.printStackTrace();
         }
 
     }
 
     @Override
     public void onDataFetchError(String error) {
-        requireActivity().runOnUiThread(() -> {
-            binding.wishlistRecyclerviewList.hideShimmerAdapter();
-            Toast.makeText(requireContext(), "No Data Found", Toast.LENGTH_SHORT).show();
-        });
+        try {
+            requireActivity().runOnUiThread(() -> {
+                binding.wishlistRecyclerviewList.hideShimmerAdapter();
+                Toast.makeText(requireContext(), "No Data Found", Toast.LENGTH_SHORT).show();
+            });
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
     @Override

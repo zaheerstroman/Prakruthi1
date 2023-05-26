@@ -1,7 +1,5 @@
 package com.prakruthi.ui.ui.cart;
 
-import static androidx.fragment.app.FragmentManager.TAG;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +19,6 @@ import com.prakruthi.ui.APIs.DeleteCartDetails;
 import com.prakruthi.ui.APIs.GetCartDetails;
 import com.prakruthi.ui.APIs.RemoveAllCartDetails;
 import com.prakruthi.ui.misc.Loading;
-
 import java.util.ArrayList;
 
 public class CartFragment extends Fragment implements GetCartDetails.OnDataFetchedListener , AddToCart.OnDataFetchedListner , DeleteCartDetails.OnCartItemDeleteAPiHit , RemoveAllCartDetails.OnCartItemRemoveAllAPiHit {
@@ -94,12 +91,24 @@ public class CartFragment extends Fragment implements GetCartDetails.OnDataFetch
     }
     @Override
     public void onDataFetchError(String error) {
-        requireActivity().runOnUiThread(()->{
-            binding.cartRecyclerviewList.hideShimmerAdapter();
-            binding.NesterScrollViewCart.setVisibility(View.GONE);
-            binding.CheckoutButton.setVisibility(View.GONE);
-            Toast.makeText(requireContext(), "No Data Found", Toast.LENGTH_SHORT).show();
-        });
+        try {
+            requireActivity().runOnUiThread(()->{
+                try {
+                    binding.cartRecyclerviewList.hideShimmerAdapter();
+                    binding.NesterScrollViewCart.setVisibility(View.GONE);
+                    binding.CheckoutButton.setVisibility(View.GONE);
+                    Toast.makeText(requireContext(), "No Data Found", Toast.LENGTH_SHORT).show();
+                }catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+            });
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
     }
     @Override
     public void OnCarteditDataFetched(String Message) {

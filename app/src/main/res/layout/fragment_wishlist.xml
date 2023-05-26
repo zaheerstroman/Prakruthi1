@@ -7,8 +7,8 @@
         android:layout_height="match_parent"
         tools:context=".ui.ui.wishlist.WishListFragment"
         android:src="@drawable/wishlist_background"
+        android:id="@+id/wishlist"
         android:background="@drawable/wishlist_background"
-
         >
 
         <androidx.appcompat.widget.AppCompatButton
