@@ -116,15 +116,11 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
                 chooseLocationDialog();
             }
         });
-        Log.e(TAG, Variables.address );
         if (Variables.address.equals("null")) {
             binding.DeleverHomeLocation.setText("Choose Location");
-            Log.e(TAG, Variables.address );
         }
         else {
             binding.DeleverHomeLocation.setText(Variables.address);
-            Log.e(TAG, Variables.address );
-            Log.e(TAG,"''''''" );
         }
         getHomeDetails();
     }

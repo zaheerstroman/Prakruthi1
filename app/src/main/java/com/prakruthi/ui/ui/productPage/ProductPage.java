@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.animation.ObjectAnimator;
+import android.app.Dialog;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,9 @@ import com.prakruthi.ui.APIs.GetProductDetails;
 import com.prakruthi.ui.APIs.SaveWishList;
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.misc.Loading;
+import com.saadahmedsoft.popupdialog.PopupDialog;
+import com.saadahmedsoft.popupdialog.Styles;
+import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
@@ -110,6 +114,18 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
     public void OnDataFetchError(String message) {
         this.runOnUiThread(() ->{
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            PopupDialog.getInstance(this)
+                    .setStyle(Styles.FAILED)
+                    .setHeading("Uh-Oh")
+                    .setDescription("Unexpected error occurred."+
+                            " Try again later.")
+                    .setCancelable(false)
+                    .showDialog(new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
         });
     }
 
@@ -125,6 +141,18 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
     public void OnAddtoCartDataFetched(String Message) {
         this.runOnUiThread(() -> {
             Loading.hide();
+            PopupDialog.getInstance(this)
+                    .setStyle(Styles.SUCCESS)
+                    .setHeading("Well Done")
+                    .setDescription("Successfully"+
+                            " Added Into The Cart")
+                    .setCancelable(false)
+                    .showDialog(new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
         });
     }
 
@@ -133,6 +161,18 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
         this.runOnUiThread(() -> {
             Loading.hide();
             Toast.makeText(this, Error, Toast.LENGTH_SHORT).show();
+            PopupDialog.getInstance(this)
+                    .setStyle(Styles.FAILED)
+                    .setHeading("Uh-Oh")
+                    .setDescription("Unexpected error occurred."+
+                            " Try again later.")
+                    .setCancelable(false)
+                    .showDialog(new OnDialogButtonClickListener() {
+                        @Override
+                        public void onDismissClicked(Dialog dialog) {
+                            super.onDismissClicked(dialog);
+                        }
+                    });
         });
     }
 

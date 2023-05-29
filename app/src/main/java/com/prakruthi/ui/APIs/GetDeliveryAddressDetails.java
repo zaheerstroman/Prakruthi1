@@ -1,7 +1,11 @@
 package com.prakruthi.ui.APIs;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+
+import android.content.ContentValues;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.home.address.Address_BottomSheet_Recycler_Adaptor_Model;
@@ -12,11 +16,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class GetDeliveryAddressDetails extends AsyncTask<Void, Void, ArrayList<Address_BottomSheet_Recycler_Adaptor_Model>> {
     private static final String URL = Variables.BaseUrl+"getDeliveryAddressDetails";
     private static final String[] FIELD = {"user_id", "token"};
-    private static final String[] DATA = {String.valueOf(Variables.id), Variables.token};
+    private final String[] DATA = {String.valueOf(Variables.id), Variables.token};
 
     private DeliveryAddressListener mListener;
 
@@ -31,6 +36,8 @@ public class GetDeliveryAddressDetails extends AsyncTask<Void, Void, ArrayList<A
         // Create PutData object to make API call
         PutData putData = new PutData(URL, "POST", FIELD, DATA);
 
+        Log.e(TAG, Arrays.toString(FIELD)+Arrays.toString(DATA) );
+        Log.e(ContentValues.TAG, Variables.id+Variables.token );
         // Start API call
         if (putData.startPut()) {
             if (putData.onComplete()) {

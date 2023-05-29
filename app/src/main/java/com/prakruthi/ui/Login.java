@@ -189,6 +189,7 @@ public class Login extends AppCompatActivity {
             String allowPush = userDetails.optString("allow_push", "");
 
             // Store values in static variables
+            Variables.clear();
             Variables.token = token;
             Variables.id = id;
             Variables.departmentId = departmentId;
@@ -222,6 +223,7 @@ public class Login extends AppCompatActivity {
             Variables.allowSms = allowSms;
             Variables.allowPush = allowPush;
 
+            Log.e(TAG, Variables.id+Variables.token );
             login.setVisibility(View.VISIBLE);
             Loading.hide();
             if (RememberMe.isChecked())

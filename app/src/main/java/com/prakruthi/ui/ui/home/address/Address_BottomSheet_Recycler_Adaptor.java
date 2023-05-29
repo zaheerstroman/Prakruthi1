@@ -69,15 +69,17 @@ public class Address_BottomSheet_Recycler_Adaptor extends RecyclerView.Adapter<A
             defaultDeliveryAddressDetails(String.valueOf(model.getId()), context, success -> {
                 if (success) {
                     // Do something on success
-                        for (int i = 0; i < mList.size(); i++) {
-                            ViewHolder tempHolder = (ViewHolder) HomeFragment.addressRecyclerView.findViewHolderForAdapterPosition(i);
-                            tempHolder.DefualtAddress.setVisibility(View.GONE);
-                            tempHolder.itemView.setBackgroundColor(context.getResources().getColor(R.color.Grey));
-                        }
-                        holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.Secondary_less));
-                        holder.DefualtAddress.setVisibility(View.VISIBLE);
-                        HomeFragment.HomeAddress.setText(holder.addressTextView.getText());
-                        Variables.address = holder.DefualtAddress.getText().toString();
+                    for (int i = 0; i < HomeFragment.addressRecyclerView.getChildCount(); i++) {
+                        View itemView = HomeFragment.addressRecyclerView.getChildAt(i);
+                        ViewHolder tempHolder = (ViewHolder) HomeFragment.addressRecyclerView.getChildViewHolder(itemView);
+                        tempHolder.DefualtAddress.setVisibility(View.GONE);
+                        tempHolder.itemView.setBackgroundColor(context.getResources().getColor(R.color.Grey));
+                    }
+
+                    holder.itemView.setBackgroundColor(context.getResources().getColor(R.color.Secondary_less));
+                    holder.DefualtAddress.setVisibility(View.VISIBLE);
+                    HomeFragment.HomeAddress.setText(holder.addressTextView.getText());
+                    Variables.address = holder.addressTextView.getText().toString();
                 } else {
                     // Do something on failure
                 }
@@ -129,6 +131,7 @@ public class Address_BottomSheet_Recycler_Adaptor extends RecyclerView.Adapter<A
                 if (putData.startPut()) {
                     if (putData.onComplete()) {
                         String result = putData.getResult();
+                        Log.e(TAG, result );
                         if (result != null) {
                             try {
                                 JSONObject jsonObject = new JSONObject(result);

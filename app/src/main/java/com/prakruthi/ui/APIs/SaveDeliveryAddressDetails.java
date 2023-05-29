@@ -1,16 +1,24 @@
 package com.prakruthi.ui.APIs;
 
+import static com.google.firebase.messaging.Constants.MessageNotificationKeys.TAG;
+
+import android.util.Log;
+
 import com.prakruthi.ui.Variables;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 public class SaveDeliveryAddressDetails {
 
     private final OnSaveDeliveryAddressApiHits mListener;
 
-    public String id;
     public String name;
     public String city;
     public String state;
@@ -19,9 +27,8 @@ public class SaveDeliveryAddressDetails {
     public String postal_code;
     public int is_default;
 
-    public SaveDeliveryAddressDetails(OnSaveDeliveryAddressApiHits mListener, String id, String name, String city, String state, String country, String address, String postal_code, int is_default) {
+    public SaveDeliveryAddressDetails(OnSaveDeliveryAddressApiHits mListener, String name, String city, String state, String country, String address, String postal_code, int is_default) {
         this.mListener = mListener;
-        this.id = id;
         this.name = name;
         this.city = city;
         this.state = state;
@@ -31,38 +38,48 @@ public class SaveDeliveryAddressDetails {
         this.is_default = is_default;
     }
 
+    public void HitApi()
+    {
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(new HitSaveDeliveryAddressDetailsApi());
+    }
+
     private class HitSaveDeliveryAddressDetailsApi implements Runnable {
 
         @Override
         public void run() {
             // Creating array for parameters
             String[] field = new String[9];
-            field[0] = "id";
-            field[1] = "user_id";
-            field[2] = "token";
-            field[3] = "name";
-            field[4] = "city";
-            field[5] = "state";
-            field[6] = "country";
-            field[7] = "address";
-            field[8] = "postal_code";
+            field[0] = "user_id";
+            field[1] = "token";
+            field[2] = "name";
+            field[3] = "city";
+            field[4] = "state";
+            field[5] = "country";
+            field[6] = "address";
+            field[7] = "postal_code";
+            field[8] = "is_default";
 
             // Creating array for data
             String[] data = new String[9];
-            data[0] = String.valueOf(id);
-            data[1] = String.valueOf(Variables.id);
-            data[2] = Variables.token;
-            data[3] = name;
-            data[4] = city;
-            data[5] = state;
-            data[6] = country;
-            data[7] = address;
-            data[8] = postal_code;
+            data[0] = String.valueOf(Variables.id);
+            data[1] = Variables.token;
+            data[2] = name;
+            data[3] = city;
+            data[4] = state;
+            data[5] = country;
+            data[6] = address;
+            data[7] = postal_code;
+            data[8] = String.valueOf(is_default);
 
+            Log.e(TAG, Arrays.toString(field)+Arrays.toString(data));
             PutData putData = new PutData(Variables.BaseUrl + "saveDeliveryAddressDetails", "POST", field, data);
             if (putData.startPut()) {
+                String result = putData.getResult();
+                Log.e(TAG,result);
                 if (putData.onComplete()) {
-                    String result = putData.getResult();
+                    result = putData.getResult();
+                    Log.e(TAG,result);
                     try {
                         JSONObject response = new JSONObject(result);
 

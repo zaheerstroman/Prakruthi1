@@ -1,24 +1,34 @@
 package com.prakruthi.ui.ui.profile;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.prakruthi.R;
 import com.prakruthi.databinding.FragmentProfileBinding;
 import com.prakruthi.databinding.FragmentWishlistBinding;
 import com.prakruthi.ui.APIs.FeedBackApi;
+import com.prakruthi.ui.HomeActivity;
+import com.prakruthi.ui.Login;
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.myaddress.MyAddresses;
 import com.prakruthi.ui.ui.wishlist.WishlistFragment;
@@ -30,6 +40,8 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
 
 
     private FragmentProfileBinding binding;
+    public SharedPreferences sharedPreferences;
+    NavController navController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,8 +55,21 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater,container,false);
 
+        sharedPreferences = requireActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
         SetTextViews();
         SetClickListeners();
+
+        binding.Logout.setOnClickListener(v -> {
+            Variables.clear();
+            // Get SharedPreferences.Editor object
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("rememberMe",false);
+            // Apply changes
+            editor.apply();
+            startActivity(new Intent(requireContext(), Login.class));
+            requireActivity().finish();
+        });
+
 
 
        return binding.getRoot();
@@ -84,6 +109,11 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
         });
         binding.tvFeedback.setOnClickListener(v -> {
             FeedBackDialog();
+        });
+        binding.tvMyWishlist.setOnClickListener(v -> {
+            BottomNavigationView bottomNavigationView;
+            bottomNavigationView = (BottomNavigationView) requireActivity().findViewById(R.id.nav_view);
+            bottomNavigationView.setSelectedItemId(R.id.navigation_wishlist);
         });
     }
 

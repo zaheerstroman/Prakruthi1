@@ -6,8 +6,8 @@ public class Variables {
 
     //Login
     public static String token;
-    public static int id;
-    public static int departmentId;
+    public static Integer id;
+    public static Integer departmentId;
     public static String userCode;
     public static String name;
     public static String lastName;
@@ -56,10 +56,10 @@ public class Variables {
     public static String phoneNumber;
 
     public static void clear() {
-
+        // Login
         token = "";
-        id = 0;
-        departmentId = 0;
+        id = null;
+        departmentId = null;
         userCode = "";
         name = "";
         lastName = "";
@@ -89,16 +89,15 @@ public class Variables {
         allowEmail = "";
         allowSms = "";
         allowPush = "";
+
         status_code = "";
         loggedIn = "";
         message = "";
 
-//        RegistrationForm:---
-//        userId,userMobile,apiToken
-        userId = 0;
+        // Registration
+        userId = null;
         userMobile = "";
         apiToken = "";
-        isVerified = "";
         RegistrationOTP = "";
         phoneNumber = "";
     }

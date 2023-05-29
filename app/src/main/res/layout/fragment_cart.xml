@@ -197,6 +197,7 @@
         android:background="@drawable/custom_edit_text"
         android:backgroundTint="@color/Secondary"
         android:layout_alignParentBottom="true"
+        android:visibility="gone"
         android:layout_marginBottom="@dimen/_10sdp"
         android:text="Proceed To Checkout"
         android:layout_marginStart="@dimen/_5sdp"
