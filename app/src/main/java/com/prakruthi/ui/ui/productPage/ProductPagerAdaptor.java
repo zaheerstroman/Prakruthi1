@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.prakruthi.R;
-import com.prakruthi.ui.ui.home.banners.BannerPagerAdapter;
 
 import java.util.List;
 

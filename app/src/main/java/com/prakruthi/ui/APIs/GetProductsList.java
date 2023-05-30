@@ -1,9 +1,5 @@
 package com.prakruthi.ui.APIs;
 
-import static com.google.firebase.messaging.Constants.TAG;
-
-import android.util.Log;
-
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.home.products.HomeProductModel;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;

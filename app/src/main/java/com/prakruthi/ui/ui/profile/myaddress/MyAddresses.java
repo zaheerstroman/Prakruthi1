@@ -1,4 +1,4 @@
-package com.prakruthi.ui.ui.myaddress;
+package com.prakruthi.ui.ui.profile.myaddress;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +17,6 @@ import android.widget.Toast;
 import com.prakruthi.R;
 import com.prakruthi.ui.APIs.GetDeliveryAddressDetails;
 import com.prakruthi.ui.APIs.SaveDeliveryAddressDetails;
-import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.misc.Loading;
 import com.prakruthi.ui.ui.home.address.Address_BottomSheet_Recycler_Adaptor_Model;
 import com.saadahmedsoft.popupdialog.PopupDialog;

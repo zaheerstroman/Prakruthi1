@@ -1,21 +1,14 @@
 package com.prakruthi.ui.ui.profile;
 
-import static androidx.fragment.app.FragmentManager.TAG;
-
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,16 +18,14 @@ import android.widget.Toast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.prakruthi.R;
 import com.prakruthi.databinding.FragmentProfileBinding;
-import com.prakruthi.databinding.FragmentWishlistBinding;
 import com.prakruthi.ui.APIs.FeedBackApi;
-import com.prakruthi.ui.HomeActivity;
+import com.prakruthi.ui.APIs.MyOrders;
 import com.prakruthi.ui.Login;
 import com.prakruthi.ui.Variables;
-import com.prakruthi.ui.ui.myaddress.MyAddresses;
-import com.prakruthi.ui.ui.wishlist.WishlistFragment;
-
-import java.util.Objects;
-import java.util.Set;
+import com.prakruthi.ui.ui.profile.myaddress.MyAddresses;
+import com.prakruthi.ui.ui.profile.myorders.MyOrdersActivity;
+import com.prakruthi.ui.ui.profile.mypayments.MyPaymentsActivity;
+import com.prakruthi.ui.ui.profile.mypayments.MyPaymentsModal;
 
 public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackItemAPiHit {
 
@@ -115,8 +106,9 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
             bottomNavigationView = (BottomNavigationView) requireActivity().findViewById(R.id.nav_view);
             bottomNavigationView.setSelectedItemId(R.id.navigation_wishlist);
         });
+        binding.tvMyOrders.setOnClickListener(v -> startActivity(new Intent(requireContext(), MyOrdersActivity.class)));
+        binding.tvPayments.setOnClickListener(v -> startActivity(new Intent(requireContext(), MyPaymentsActivity.class)));
     }
-
     @Override
     public void OnProfileItemFeedback(String description) {
         try {

@@ -41,16 +41,16 @@
         android:layout_below="@id/Search"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_5sdp"
-        android:id="@+id/ClearAll"
+        android:id="@+id/SortBy"
         android:background="#C6E4FF"
         android:gravity="center_vertical"
-        android:hint="Clear All"
+        android:hint="Sort by"
         android:singleLine="true"
         android:paddingStart="@dimen/_5sdp"
         android:textColor="#61000000"
         android:textColorHint="#61000000"
         android:textSize="@dimen/_14sdp"
-        app:drawableEndCompat="@drawable/baseline_close_24"
+        app:drawableEndCompat="@drawable/baseline_sort_24"
         />
 
     <TextView
@@ -61,6 +61,7 @@
         android:layout_marginEnd="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="#C6E4FF"
+        android:id="@+id/filters"
         android:hint="Filters"
         android:textColor="#61000000"
         android:textAlignment="gravity"
@@ -73,7 +74,7 @@
     <com.cooltechworks.views.shimmer.ShimmerRecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ClearAll"
+        android:layout_below="@id/SortBy"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_15sdp"

@@ -1,43 +1,100 @@
 package com.prakruthi.ui.ui.search;
 
-import static com.google.firebase.messaging.Constants.TAG;
-
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.animation.ObjectAnimator;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.prakruthi.R;
 import com.prakruthi.ui.APIs.SearchProductApi;
-import com.prakruthi.ui.ui.productPage.ProductModel;
-
 import java.util.List;
 
 public class SearchPage extends AppCompatActivity implements SearchProductApi.OnSearchResultApiHit{
 
     EditText editText;
+
+    AppCompatButton back;
+    TextView SortBy;
     ShimmerRecyclerView searchRecyclerView;
+    String order = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_page);
-        AppCompatButton back = findViewById(R.id.search_back_btn);
-        back.setOnClickListener(v -> super.onBackPressed());
+        SetViews();
+        ClickListners();
+        SearchLogic();
+
+    }
+
+    private void SetViews()
+    {
+        back = findViewById(R.id.search_back_btn);
         searchRecyclerView = findViewById(R.id.SearchRecyclerView);
         editText = findViewById(R.id.Search);
+        SortBy = findViewById(R.id.SortBy);
+    }
+    private void ClickListners()
+    {
+        back.setOnClickListener(v -> super.onBackPressed());
+        SortBy.setOnClickListener(v -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(SearchPage.this);
+            View bottomSheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_layout, null);
+
+
+            RadioButton radioRecommended = bottomSheetView.findViewById(R.id.radioRecommended);
+            RadioButton radioAscending = bottomSheetView.findViewById(R.id.radioAscending);
+            RadioButton radioDescending = bottomSheetView.findViewById(R.id.radioDescending);
+
+            radioAscending.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    // Handle the "Sort by Ascending" radio button selection
+                    // Perform sorting operation in ascending order
+                    order = "asc";
+                    performSearch();
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+            radioDescending.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    // Handle the "Sort by Descending" radio button selection
+                    // Perform sorting operation in descending order
+                    order = "desc";
+                    performSearch();
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+            radioRecommended.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked) {
+                    // Handle the "Sort by Descending" radio button selection
+                    // Perform sorting operation in descending order
+                    order = "";
+                    performSearch();
+                    bottomSheetDialog.dismiss();
+                }
+            });
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
+    }
+    private void SearchLogic()
+    {
         editText.requestFocus();
         if (editText.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
@@ -73,7 +130,7 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
         {
             searchRecyclerView.setVisibility(View.VISIBLE);
             searchRecyclerView.showShimmerAdapter();
-            SearchProductApi searchProductApi = new SearchProductApi(this,editText.getText().toString());
+            SearchProductApi searchProductApi = new SearchProductApi(this,editText.getText().toString(),order);
             searchProductApi.HitSearchApi();
         }
     }

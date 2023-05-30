@@ -3,7 +3,6 @@ package com.prakruthi.ui.APIs;
 import static androidx.fragment.app.FragmentManager.TAG;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 

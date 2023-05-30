@@ -1,8 +1,5 @@
 package com.prakruthi.ui.ui.home.category;
 
-import static com.google.firebase.messaging.Constants.TAG;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +12,6 @@ import com.bumptech.glide.Glide;
 import com.prakruthi.R;
 import com.prakruthi.ui.APIs.GetProductsList;
 import com.prakruthi.ui.ui.home.HomeFragment;
-import com.prakruthi.ui.ui.home.address.Address_BottomSheet_Recycler_Adaptor;
 
 import java.util.List;
 

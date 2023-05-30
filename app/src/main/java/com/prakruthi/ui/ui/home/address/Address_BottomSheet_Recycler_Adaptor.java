@@ -2,42 +2,26 @@ package com.prakruthi.ui.ui.home.address;
 
 import static com.google.firebase.messaging.Constants.TAG;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.LocationManager;
 import android.os.AsyncTask;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.prakruthi.R;
-import com.prakruthi.ui.APIs.DefaultDeliveryAddressDetails;
 import com.prakruthi.ui.Variables;
-import com.prakruthi.ui.misc.Loading;
 import com.prakruthi.ui.ui.home.HomeFragment;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
-import java.util.function.Consumer;
 
 public class Address_BottomSheet_Recycler_Adaptor extends RecyclerView.Adapter<Address_BottomSheet_Recycler_Adaptor.ViewHolder> {
     private final List<Address_BottomSheet_Recycler_Adaptor_Model> mList;

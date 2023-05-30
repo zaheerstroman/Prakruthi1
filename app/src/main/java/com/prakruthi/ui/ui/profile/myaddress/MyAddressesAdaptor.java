@@ -1,4 +1,4 @@
-package com.prakruthi.ui.ui.myaddress;
+package com.prakruthi.ui.ui.profile.myaddress;
 
 import android.view.LayoutInflater;
 import android.view.View;

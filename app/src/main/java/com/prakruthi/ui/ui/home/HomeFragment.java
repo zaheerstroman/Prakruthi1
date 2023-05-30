@@ -2,7 +2,6 @@ package com.prakruthi.ui.ui.home;
 
 import static com.google.firebase.messaging.Constants.TAG;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -11,11 +10,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,7 +34,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.prakruthi.R;
 import com.prakruthi.databinding.FragmentHomeBinding;
@@ -46,18 +42,15 @@ import com.prakruthi.ui.APIs.GetHomeDetails;
 import com.prakruthi.ui.APIs.GetProductsList;
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.misc.Loading;
+import com.prakruthi.ui.ui.home.banners.BannerPagerAdapter;
+import com.prakruthi.ui.ui.home.products.HomeProductAdaptor;
 import com.prakruthi.ui.ui.home.address.Address_BottomSheet_Recycler_Adaptor;
 import com.prakruthi.ui.ui.home.address.Address_BottomSheet_Recycler_Adaptor_Model;
-import com.prakruthi.ui.ui.home.banners.BannerPagerAdapter;
 import com.prakruthi.ui.ui.home.banners.HomeBannerModel;
 import com.prakruthi.ui.ui.home.category.HomeCategoryModal;
 import com.prakruthi.ui.ui.home.category.HomeCategoryRecyclerAdaptor;
-import com.prakruthi.ui.ui.home.products.HomeProductAdaptor;
 import com.prakruthi.ui.ui.home.products.HomeProductModel;
 import com.prakruthi.ui.ui.search.SearchPage;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;

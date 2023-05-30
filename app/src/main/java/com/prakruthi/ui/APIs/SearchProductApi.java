@@ -1,5 +1,9 @@
 package com.prakruthi.ui.APIs;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+
+import android.util.Log;
+
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.productPage.ProductModel;
 import com.prakruthi.ui.ui.search.SearchModle;
@@ -10,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -18,10 +23,12 @@ public class SearchProductApi {
 
     OnSearchResultApiHit mListner;
     String ProductName;
-    public SearchProductApi(OnSearchResultApiHit listner , String ProductName)
+    String order = "";
+    public SearchProductApi(OnSearchResultApiHit listner , String ProductName , String order)
     {
         mListner = listner;
         this.ProductName = ProductName;
+        this.order = order;
     }
 
     public void HitSearchApi()
@@ -35,16 +42,25 @@ public class SearchProductApi {
 
         @Override
         public void run() {
+            JSONObject filters = new JSONObject();
+            try {
+                filters.put("type","");
+                filters.put("color","");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             //Creating array for parameters
-            String[] field = new String[3];
+            String[] field = new String[4];
             field[0] = "user_id";
             field[1] = "token";
             field[2] = "product_name";
+            field[3] = "order";
             //Creating array for data
-            String[] data = new String[3];
+            String[] data = new String[4];
             data[0] = String.valueOf(Variables.id);
             data[1] = Variables.token;
             data[2] = ProductName;
+            data[3] = order;
             PutData putData = new PutData(Variables.BaseUrl+"getSearchProductsList", "POST", field, data);
             if (putData.startPut()) {
                 if (putData.onComplete()) {

@@ -16,8 +16,6 @@ import com.prakruthi.ui.ui.productPage.ProductPage;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class HomeProductAdaptor extends RecyclerView.Adapter<HomeProductAdaptor.ViewHolder> {
 
     private final List<HomeProductModel> homeProductModelList;
