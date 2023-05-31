@@ -122,7 +122,10 @@ public class CartFragment extends Fragment implements GetCartDetails.OnDataFetch
 
     @Override
     public void OnAddtoCartDataFetched(String Message) {
-        requireActivity().runOnUiThread(Loading::hide);
+        requireActivity().runOnUiThread( () -> {
+            Loading.hide();
+            getCartDetails();
+        } );
     }
 
     @Override

@@ -18,6 +18,24 @@ public class SearchModle {
     private String color;
     private String size;
     private String type;
+    private String rating;
+    private String count_rating;
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getCount_rating() {
+        return count_rating;
+    }
+
+    public void setCount_rating(String count_rating) {
+        this.count_rating = count_rating;
+    }
 
     // Getter and Setter for id
     public int getId() {

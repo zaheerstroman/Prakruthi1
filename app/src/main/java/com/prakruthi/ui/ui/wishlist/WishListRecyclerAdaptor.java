@@ -56,7 +56,7 @@ public class WishListRecyclerAdaptor extends RecyclerView.Adapter<WishListRecycl
         holder.wishlist_product_added_date.setSelected(true);
         holder.wishlist_product_add_to_cart.setOnClickListener(v -> {
             Loading.show(holder.itemView.getContext());
-            AddToCart addToCart = new AddToCart(wishListModal.getProduct_id(), "1" , "" , "" , false , listner);
+            AddToCart addToCart = new AddToCart(wishListModal.getProduct_id(), "1" , ""  , false , listner);
             addToCart.fetchData();
         });
         holder.wishlist_product_delete.setOnClickListener(v -> {

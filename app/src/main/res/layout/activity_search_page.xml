@@ -50,7 +50,7 @@
         android:textColor="#61000000"
         android:textColorHint="#61000000"
         android:textSize="@dimen/_14sdp"
-        app:drawableEndCompat="@drawable/baseline_sort_24"
+        app:drawableEndCompat="@drawable/baseline_unfold_more_24"
         />
 
     <TextView

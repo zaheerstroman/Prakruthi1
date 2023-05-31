@@ -76,12 +76,12 @@ public class CartRecyclerAdaptor extends RecyclerView.Adapter<CartRecyclerAdapto
 
             holder.minus.setOnClickListener(v -> {
                 Loading.show(holder.itemView.getContext());
-                AddToCart addToCart = new AddToCart(String.valueOf(cartData.getProductId()),String.valueOf(cartData.getQuantity()),String.valueOf(cartData.getQuantity()-1),String.valueOf(cartData.getId()) ,true,listner);
+                AddToCart addToCart = new AddToCart(String.valueOf(cartData.getProductId()),String.valueOf(1),String.valueOf(cartData.getId()) ,true,listner);
                 addToCart.fetchData();
             });
             holder.plus.setOnClickListener(v -> {
                 Loading.show(holder.itemView.getContext());
-                AddToCart addToCart = new AddToCart(String.valueOf(cartData.getProductId()),String.valueOf(cartData.getQuantity()) , String.valueOf(cartData.getQuantity()+1) , String.valueOf(cartData.getId()) , true , listner);
+                AddToCart addToCart = new AddToCart(String.valueOf(cartData.getProductId()),String.valueOf(1) ,"" , false , listner);
                 addToCart.fetchData();
             });
             if (cartData.getQuantity() <= 1)

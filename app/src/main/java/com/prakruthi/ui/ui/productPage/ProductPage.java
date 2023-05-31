@@ -82,7 +82,7 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
                 return;
             }
             Loading.show(this);
-            AddToCart addToCart = new AddToCart(productId,String.valueOf(Qty.getSelectedIndex()+1),String.valueOf(Qty.getSelectedIndex()+1),"" ,false,this);
+            AddToCart addToCart = new AddToCart(productId,String.valueOf(Qty.getSelectedIndex()+1),String.valueOf(Qty.getSelectedIndex()+1) ,false,this);
             addToCart.fetchData();
         });
     }

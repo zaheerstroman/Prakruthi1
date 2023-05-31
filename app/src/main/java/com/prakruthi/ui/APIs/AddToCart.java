@@ -15,18 +15,14 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class AddToCart {
-
-    String Productid , quantity ,quantityafter , id;
+    String Productid , quantity  , id;
     boolean edit = false;
-
     OnDataFetchedListner mListner;
-
-    public AddToCart(String productid , String quantity , String quantityafter , String id , boolean edit , OnDataFetchedListner listner)
+    public AddToCart(String productid , String quantity , String id , boolean edit , OnDataFetchedListner listner)
     {
         this.Productid = productid;
         this.edit = edit;
         this.quantity = quantity;
-        this.quantityafter = quantityafter;
         this.id = id;
         mListner = listner;
     }
@@ -94,22 +90,23 @@ public class AddToCart {
         @Override
         public void run() {
             //Creating array for parameters
-            String[] field = new String[5];
+            String[] field = new String[6];
             field[0] = "user_id";
             field[1] = "token";
             field[2] = "product_id";
             field[3] = "quantity";
             field[4] = "id";
+            field[5] = "remove";
             //Creating array for data
-            String[] data = new String[5];
+            String[] data = new String[6];
             data[0] = String.valueOf(Variables.id);
             data[1] = Variables.token;
             data[2] = Productid;
-            data[3] = quantityafter;
+            data[3] = quantity;
             data[4] = id;
+            data[5] = "yes";
 
             PutData putData = new PutData(Variables.BaseUrl+"addToCart", "POST", field, data);
-
             if (putData.startPut()) {
                 if (putData.onComplete()) {
                     String result = putData.getResult();

@@ -111,7 +111,8 @@ public class SearchProductApi {
                     searchModle.setColor(productDetails.getString("color"));
                     searchModle.setSize(productDetails.getString("size"));
                     searchModle.setType(productDetails.getString("type"));
-
+                    searchModle.setRating(productDetails.getString("rating"));
+                    searchModle.setCount_rating(productDetails.getString("count_rating"));
                     searchResults.add(searchModle);
                 }
 
