@@ -6,11 +6,14 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -22,12 +25,15 @@ import com.prakruthi.R;
 import com.prakruthi.ui.APIs.SearchProductApi;
 import java.util.List;
 
+import co.ceryle.radiorealbutton.RadioRealButton;
+import co.ceryle.radiorealbutton.RadioRealButtonGroup;
+
 public class SearchPage extends AppCompatActivity implements SearchProductApi.OnSearchResultApiHit{
 
     EditText editText;
 
     AppCompatButton back;
-    TextView SortBy;
+    TextView SortBy , filters;
     ShimmerRecyclerView searchRecyclerView;
     String order = "";
     @Override
@@ -46,7 +52,9 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
         searchRecyclerView = findViewById(R.id.SearchRecyclerView);
         editText = findViewById(R.id.Search);
         SortBy = findViewById(R.id.SortBy);
+        filters = findViewById(R.id.filters);
     }
+    @SuppressLint("UseCompatLoadingForDrawables")
     private void ClickListners()
     {
         back.setOnClickListener(v -> super.onBackPressed());
@@ -88,6 +96,32 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
                     bottomSheetDialog.dismiss();
                 }
             });
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+        });
+        filters.setOnClickListener(v -> {
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(SearchPage.this);
+            View bottomSheetView = getLayoutInflater().inflate(R.layout.filters_bottom_sheet, null);
+
+            RadioRealButtonGroup group = bottomSheetView.findViewById(R.id.group);
+
+            RadioRealButton radioRealButton = bottomSheetView.findViewById(R.id.button5);
+            RadioRealButton radioRealButton2 = bottomSheetView.findViewById(R.id.button5);
+            RadioRealButton radioRealButton3 = bottomSheetView.findViewById(R.id.button5);
+            ViewGroup parent = (ViewGroup) radioRealButton.getParent();
+            if (parent != null) {
+                parent.removeView(radioRealButton);
+            }
+
+            radioRealButton.setId(View.generateViewId());
+            radioRealButton.setVisibility(View.VISIBLE);
+            group.addView(radioRealButton);
+            group.addView(radioRealButton2);
+            group.addView(radioRealButton3);
+
+            // onClickButton listener detects any click performed on buttons by touch
+            group.setOnClickedButtonListener((button, position) -> Toast.makeText(SearchPage.this, "Clicked! Position: " + button.getText(), Toast.LENGTH_SHORT).show());
 
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
