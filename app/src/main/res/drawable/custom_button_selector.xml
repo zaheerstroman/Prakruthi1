@@ -3,5 +3,5 @@
     <!-- Selected state -->
     <item android:drawable="@drawable/custom_edit_text" android:state_checked="true" />
     <!-- Unselected state -->
-    <item android:drawable="@drawable/custom_edit_text" />
+    <item android:drawable="@drawable/custom_radio_button_layout" />
 </selector>

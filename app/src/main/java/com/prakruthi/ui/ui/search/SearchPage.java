@@ -49,6 +49,11 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
     TextView SortBy, filters;
     ShimmerRecyclerView searchRecyclerView;
     String order = "";
+    String type = "";
+    String color = "";
+
+    RadioGroup typegroup;
+    RadioGroup colorgroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +121,15 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
         filters.setOnClickListener(v -> {
             GetFilterApi getFilterApi = new GetFilterApi(this);
             getFilterApi.HitApi();
+            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(SearchPage.this);
+            View bottomSheetView = getLayoutInflater().inflate(R.layout.filters_bottom_sheet, null);
+
+           typegroup = bottomSheetView.findViewById(R.id.type_group);
+           colorgroup = bottomSheetView.findViewById(R.id.color_group);
+
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
+
         });
     }
 
@@ -153,7 +167,7 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
         } else {
             searchRecyclerView.setVisibility(View.VISIBLE);
             searchRecyclerView.showShimmerAdapter();
-            SearchProductApi searchProductApi = new SearchProductApi(this, editText.getText().toString(), order);
+            SearchProductApi searchProductApi = new SearchProductApi(this, editText.getText().toString(), order , type , color);
             searchProductApi.HitSearchApi();
         }
     }
@@ -213,6 +227,67 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
                 radioButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     if (isChecked) {
                         buttonView.setBackgroundTintList(ColorStateList.valueOf(selectedTint));
+                        this.type = String.valueOf(radioButton.getText());
+
+                        performSearch();
+
+                    } else {
+                        buttonView.setBackgroundTintList(null);
+                    }
+                });
+
+                // Add the RadioButton to the RadioGroup
+                group.addView(radioButton);
+
+
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+    }
+    public void ShowFiltrClr(JSONObject result, RadioGroup group) {
+        try
+        {
+            JSONArray types = result.getJSONArray("product_color_details");
+            for (int i = 0; i < types.length(); i++) {
+                JSONObject type = types.getJSONObject(i);
+                RadioButton radioButton = new RadioButton(this);
+                radioButton.setId(View.generateViewId());
+                radioButton.setText(type.getString("color"));
+                radioButton.setButtonDrawable(null);
+
+                // Create LayoutParams with desired width and height
+                int backgroundWidth = 200; // Example value, adjust as needed
+                int backgroundHeight = 80; // Example value, adjust as needed
+                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(backgroundWidth, backgroundHeight);
+
+                // Set margins
+                int leftMargin = 16; // Example value, adjust as needed
+                int topMargin = 8; // Example value, adjust as needed
+                int rightMargin = 16; // Example value, adjust as needed
+                int bottomMargin = 8; // Example value, adjust as needed
+
+                // Create MarginLayoutParams and set margins
+                ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(layoutParams);
+                marginLayoutParams.setMargins(leftMargin, topMargin, rightMargin, bottomMargin);
+
+                radioButton.setLayoutParams(marginLayoutParams);
+
+                // Set the selector drawable as the background
+                radioButton.setBackgroundResource(R.drawable.custom_button_selector);
+                radioButton.setTextSize(20);
+
+                radioButton.setGravity(Gravity.CENTER_HORIZONTAL);
+                // Customize background tint for selected state
+                int selectedTint = ContextCompat.getColor(this, R.color.Secondary_less);
+                radioButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    if (isChecked) {
+                        buttonView.setBackgroundTintList(ColorStateList.valueOf(selectedTint));
+                        this.color = String.valueOf(radioButton.getText());
+                        performSearch();
                     } else {
                         buttonView.setBackgroundTintList(null);
                     }
@@ -234,16 +309,8 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
     @Override
     public void OnFilterApiSuccess(JSONObject result) {
         runOnUiThread(() -> {
-            BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(SearchPage.this);
-            View bottomSheetView = getLayoutInflater().inflate(R.layout.filters_bottom_sheet, null);
-
-            RadioGroup group = bottomSheetView.findViewById(R.id.group);
-
-
-            bottomSheetDialog.setContentView(bottomSheetView);
-            bottomSheetDialog.show();
-
-            ShowFiltrType(result, group, bottomSheetView);
+            ShowFiltrType(result, typegroup);
+            ShowFiltrClr(result,colorgroup);
         });
     }
 

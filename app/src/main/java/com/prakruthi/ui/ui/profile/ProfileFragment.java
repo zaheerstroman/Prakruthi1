@@ -32,7 +32,6 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
 
     private FragmentProfileBinding binding;
     public SharedPreferences sharedPreferences;
-    NavController navController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,11 +60,8 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
             requireActivity().finish();
         });
 
-
-
        return binding.getRoot();
     }
-
 
     public void FeedBackDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());

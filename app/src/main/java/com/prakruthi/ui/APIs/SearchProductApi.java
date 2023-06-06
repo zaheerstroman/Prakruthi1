@@ -24,11 +24,15 @@ public class SearchProductApi {
     OnSearchResultApiHit mListner;
     String ProductName;
     String order = "";
-    public SearchProductApi(OnSearchResultApiHit listner , String ProductName , String order)
+    String type = "";
+    String color = "";
+    public SearchProductApi(OnSearchResultApiHit listner , String ProductName , String order, String type , String color)
     {
         mListner = listner;
         this.ProductName = ProductName;
         this.order = order;
+        this.type = type;
+        this.color = color;
     }
 
     public void HitSearchApi()
@@ -44,23 +48,26 @@ public class SearchProductApi {
         public void run() {
             JSONObject filters = new JSONObject();
             try {
-                filters.put("type","");
-                filters.put("color","");
+                filters.put("type",type);
+                filters.put("color",color);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             //Creating array for parameters
-            String[] field = new String[4];
+            String[] field = new String[5];
             field[0] = "user_id";
             field[1] = "token";
             field[2] = "product_name";
             field[3] = "order";
+            field[4] = "filter";
             //Creating array for data
-            String[] data = new String[4];
+            String[] data = new String[5];
             data[0] = String.valueOf(Variables.id);
             data[1] = Variables.token;
             data[2] = ProductName;
             data[3] = order;
+            data[4] = filters.toString();
+
             PutData putData = new PutData(Variables.BaseUrl+"getSearchProductsList", "POST", field, data);
             if (putData.startPut()) {
                 if (putData.onComplete()) {
