@@ -230,13 +230,14 @@
             android:gravity="center"
             android:text="View All"
             android:textColor="@color/Green"
+            android:visibility="gone"
             android:textSize="@dimen/_20sdp" />
 
         <com.cooltechworks.views.shimmer.ShimmerRecyclerView
             android:id="@+id/ProfileHomeProductsRecycler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_view_all"
+            android:layout_below="@+id/tv_recent_Products"
             android:layout_marginTop="@dimen/_5sdp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:shimmer_demo_child_count="10"

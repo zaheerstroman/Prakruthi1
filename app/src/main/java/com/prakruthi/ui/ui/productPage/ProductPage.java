@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.prakruthi.R;
+import com.prakruthi.ui.APIs.AddRecentViewProductsAPI;
 import com.prakruthi.ui.APIs.AddToCart;
 import com.prakruthi.ui.APIs.GetProductDetails;
 import com.prakruthi.ui.APIs.SaveWishList;
@@ -91,6 +92,8 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
     {
         GetProductDetails getProductDetails = new GetProductDetails(this , productId);
         getProductDetails.fetchData();
+        AddRecentViewProductsAPI addRecentViewProductsAPI = new AddRecentViewProductsAPI(productId);
+        addRecentViewProductsAPI.HitRecentApi();
     }
     @Override
     public void OnDataFetched(ProductModel productModel) {

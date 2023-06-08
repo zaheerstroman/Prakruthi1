@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.prakruthi.R;
 import com.prakruthi.databinding.FragmentProfileBinding;
 import com.prakruthi.ui.APIs.FeedBackApi;
+import com.prakruthi.ui.APIs.GetRecentViewProductsAPI;
 import com.prakruthi.ui.APIs.MyOrders;
 import com.prakruthi.ui.Login;
 import com.prakruthi.ui.Variables;
@@ -26,8 +28,12 @@ import com.prakruthi.ui.ui.profile.myaddress.MyAddresses;
 import com.prakruthi.ui.ui.profile.myorders.MyOrdersActivity;
 import com.prakruthi.ui.ui.profile.mypayments.MyPaymentsActivity;
 import com.prakruthi.ui.ui.profile.mypayments.MyPaymentsModal;
+import com.prakruthi.ui.ui.profile.recentProducts.RecentProductAdaptor;
+import com.prakruthi.ui.ui.profile.recentProducts.RecentProductModel;
 
-public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackItemAPiHit {
+import java.util.ArrayList;
+
+public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackItemAPiHit , GetRecentViewProductsAPI.OnGetRecentViewProductsAPIHit {
 
 
     private FragmentProfileBinding binding;
@@ -88,6 +94,9 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
     {
         binding.txtId.setText("ID : #");
         binding.txtId.append(String.valueOf(Variables.id));
+        binding.ProfileHomeProductsRecycler.showShimmerAdapter();
+        GetRecentViewProductsAPI getRecentViewProductsAPI = new GetRecentViewProductsAPI(this);
+        getRecentViewProductsAPI.HitRecentApi();
     }
     public void SetClickListeners()
     {
@@ -129,5 +138,25 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
         {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void OnGetRecentViewProductsAPIGivesResult(ArrayList<RecentProductModel> recentProductModels) {
+        requireActivity().runOnUiThread( () -> {
+            binding.ProfileHomeProductsRecycler.setLayoutManager(new GridLayoutManager(requireContext(),2));
+            binding.ProfileHomeProductsRecycler.setAdapter(new RecentProductAdaptor(recentProductModels));
+            binding.ProfileHomeProductsRecycler.hideShimmerAdapter();
+        } );
+    }
+
+    @Override
+    public void OnGetRecentViewProductsAPIGivesError(String error) {
+        requireActivity().runOnUiThread( () -> {
+            Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show();
+            binding.ProfileHomeProductsRecycler.hideShimmerAdapter();
+            binding.tvRecentProducts.setVisibility(View.GONE);
+            binding.tvViewAll.setVisibility(View.GONE);
+        } );
+
     }
 }
