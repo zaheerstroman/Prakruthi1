@@ -2,19 +2,30 @@ package com.prakruthi.ui.ui.productPage;
 
 import static com.google.firebase.messaging.Constants.TAG;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.graphics.Paint;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.prakruthi.R;
 import com.prakruthi.ui.APIs.AddRecentViewProductsAPI;
 import com.prakruthi.ui.APIs.AddToCart;
@@ -27,17 +38,23 @@ import com.saadahmedsoft.popupdialog.Styles;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 import com.skydoves.powerspinner.PowerSpinnerView;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
+import com.willy.ratingbar.BaseRatingBar;
+import com.willy.ratingbar.ScaleRatingBar;
 
 public class ProductPage extends AppCompatActivity implements GetProductDetails.OnProductDataFetched , AddToCart.OnDataFetchedListner, SaveWishList.OnSaveWishListDataFetchedListener {
 
     String productId;
-    TextView ProductName,ProductDescription,CurrentPrice,MRPPrice,ProductDeleveryAddress,Avalable;
+    TextView ProductName,ProductDescription,CurrentPrice,MRPPrice,ProductDeleveryAddress,Avalable,Ratingcount;
     PowerSpinnerView Qty;
     AppCompatButton AddtoCart,BuyNow;
     DotsIndicator dotsIndicator;
 
     AppCompatButton Wishlist;
     ViewPager2 ProductImagePager;
+
+    ScaleRatingBar ratingBar;
+    ShimmerRecyclerView ReviewsrecyclerView;
+
 
     boolean in_wishlist;
     @Override
@@ -58,6 +75,8 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
         AddtoCart = findViewById(R.id.AddtoCart);
         BuyNow = findViewById(R.id.BuyNow);
         Wishlist = findViewById(R.id.Product_Save_Wishlist);
+        ratingBar = findViewById(R.id.simpleRatingBar);
+        Ratingcount = findViewById(R.id.RatingCount);
         GetApiData();
 
         Wishlist.setOnClickListener(v->{
@@ -109,6 +128,62 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
             in_wishlist = productModel.isIn_wishlist();
             if (in_wishlist)
                 Wishlist.setBackgroundDrawable(ContextCompat.getDrawable(this,R.drawable.like_filled));
+            ratingBar.setRating(Float.parseFloat(productModel.getRating()));
+            Ratingcount.setText(productModel.getCount_rating());
+            ratingBar.setScrollable(false);
+            ratingBar.setOnRatingChangeListener((ratingBar, rating, fromUser) -> {
+                {
+                    // Inflate the custom layout
+                    View bottomSheetView = getLayoutInflater().inflate(R.layout.product_reviews_bottom_popup, null);
+
+                    // Find the RecyclerView in the layout
+                    ReviewsrecyclerView = bottomSheetView.findViewById(R.id.recyclerView);
+
+                    // Set up your RecyclerView (e.g., set adapter, layout manager, etc.)
+                    ReviewsrecyclerView.showShimmerAdapter();
+                    Log.e(TAG, "OnDataFetched: " );
+                    // Create the bottom sheet dialog
+                    BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(ProductPage.this);
+                    bottomSheetDialog.setContentView(bottomSheetView);
+                    bottomSheetDialog.show();
+                    Handler handler = new Handler(Looper.getMainLooper());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        handler.postDelayed( () -> {
+
+                            ReviewsrecyclerView.setLayoutManager(new LinearLayoutManager(ProductPage.this));
+                            ReviewsrecyclerView.setAdapter(new RecyclerView.Adapter() {
+                                @NonNull
+                                @Override
+                                public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_reviews_bottom_popup_recycler, parent, false);
+                                    return new ReviewViewHolder(view);
+                                }
+
+                                @Override
+                                public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+
+                                }
+
+                                @Override
+                                public int getItemCount() {
+                                    return 20;
+                                }
+
+                                // ViewHolder class for the item view
+                                class ReviewViewHolder extends RecyclerView.ViewHolder {
+
+                                    ReviewViewHolder(View itemView) {
+                                        super(itemView);
+                                    }
+                                }
+                            });
+                            ReviewsrecyclerView.hideShimmerAdapter();
+                        }, 2000);
+                    }
+                }
+
+            });
+
         });
 
     }

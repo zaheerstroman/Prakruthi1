@@ -62,6 +62,8 @@ android {
 dependencies {
 
 
+    implementation 'com.github.ome450901:SimpleRatingBar:1.5.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.github.patgdut:RadioRealButton:v2.1.2'
     implementation 'com.saadahmedev.popup-dialog:popup-dialog:1.0.2'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
@@ -73,7 +75,7 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
     implementation "com.github.skydoves:powerspinner:1.2.6"
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.25'
-    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
     implementation 'com.github.VishnuSivadasVS:Advanced-HttpURLConnection:1.2'
     implementation 'com.google.firebase:firebase-messaging-directboot:23.1.2'
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
