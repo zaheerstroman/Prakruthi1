@@ -1,8 +1,7 @@
-package com.prakruthi.ui.ui.profile.myorders;
+package com.prakruthi.ui.ui.profile.order_qty;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -10,45 +9,61 @@ import android.os.Bundle;
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.prakruthi.R;
 import com.prakruthi.ui.APIs.MyOrders;
+import com.prakruthi.ui.ui.profile.myorders.MyOrdersAdaptor;
+import com.prakruthi.ui.ui.profile.myorders.MyOrdersModal;
 import com.saadahmedsoft.popupdialog.PopupDialog;
 import com.saadahmedsoft.popupdialog.Styles;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
 
 import java.util.ArrayList;
 
-public class MyOrdersActivity extends AppCompatActivity implements MyOrders.OnProfileMyOrdersApiHitFetchedListener {
+public class OrderQtyActivity extends AppCompatActivity implements OrdersQty.OnProfileOrderQtyApiHitFetchedListener{
 
     ShimmerRecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_orders);
+        setContentView(R.layout.activity_order_qty);
 
         SetViews();
         CallApi();
+
     }
 
     public void CallApi()
     {
-        MyOrders myOrders = new MyOrders(this);
-        myOrders.HitAPi();
+        OrdersQty ordersQty = new OrdersQty(this);
+        ordersQty.HitAPi();
         recyclerView.showShimmerAdapter();
     }
+
     public void SetViews()
     {
-        recyclerView = findViewById(R.id.my_orders_recyclerview_List);
+        recyclerView = findViewById(R.id.my_orders_qty_recyclerview_List);
     }
+
+
+//    @Override
+//    public void OnProfileItemMyOrdersQty(ArrayList<OrdersQtyModal> ordersQtyModal) {
+//        runOnUiThread( () -> {
+//            recyclerView.hideShimmerAdapter();
+//            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//            recyclerView.setAdapter(new OrdersQtyAdaptor(ordersQtyModal));
+//        } );
+//    }
+
     @Override
-    public void OnProfileItemMyOrders(ArrayList<MyOrdersModal> myOrdersModals) {
+    public void OnProfileItemOrdersQty(ArrayList<OrdersQtyModal> ordersQtyModal) {
         runOnUiThread( () -> {
             recyclerView.hideShimmerAdapter();
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(new MyOrdersAdaptor(myOrdersModals));
+            recyclerView.setAdapter(new OrdersQtyAdaptor(ordersQtyModal));
         } );
     }
 
     @Override
-    public void OnProfileItemMyOrdersAPiGivesError(String error) {
+    public void OnProfileItemOrdersQtyAPiGivesError(String error) {
         runOnUiThread( () -> {
             recyclerView.hideShimmerAdapter();
             PopupDialog.getInstance(this)
@@ -66,4 +81,5 @@ public class MyOrdersActivity extends AppCompatActivity implements MyOrders.OnPr
                     });
         } );
     }
+
 }
