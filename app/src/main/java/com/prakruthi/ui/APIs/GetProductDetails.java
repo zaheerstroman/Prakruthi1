@@ -96,6 +96,8 @@ public class GetProductDetails {
                 product.setSize(productDetails.getString("size"));
                 product.setType(productDetails.getString("type"));
                 product.setIn_wishlist(productDetails.getBoolean("in_wishlist"));
+                product.setRating(productDetails.getString("rating"));
+                product.setCount_rating(productDetails.getString("count_rating"));
 
                 // Use the product and status code as needed
                 mListener.OnDataFetched(product);

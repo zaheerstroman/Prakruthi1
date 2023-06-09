@@ -29,6 +29,41 @@
         android:layout_below="@+id/productPage_back_btn"
         />
 
+    <com.willy.ratingbar.ScaleRatingBar
+        android:id="@+id/simpleRatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ProductImagePager"
+        android:layout_toStartOf="@id/RatingCount"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:srb_numStars="5"
+        app:srb_minimumStars="0"
+        app:srb_starWidth="@dimen/_15sdp"
+        app:srb_starHeight="@dimen/_15sdp"
+        app:srb_starPadding="@dimen/_3sdp"
+        app:srb_stepSize="0.01"
+        app:srb_isIndicator="false"
+        android:clickable="true"
+        app:srb_clickable="true"
+        app:srb_drawableEmpty="@drawable/outline_star_outline_24"
+        app:srb_drawableFilled="@drawable/star_vector">
+    </com.willy.ratingbar.ScaleRatingBar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ProductImagePager"
+        android:text="4000"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textSize="@dimen/_10sdp"
+        android:textStyle="bold"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/RatingCount"
+        />
+
+
+
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_25sdp"
