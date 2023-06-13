@@ -1,8 +1,7 @@
-package com.prakruthi.ui.ui.profile.order_qty;
+package com.prakruthi.ui.APIs;
 
-import com.prakruthi.ui.APIs.MyOrders;
 import com.prakruthi.ui.Variables;
-import com.prakruthi.ui.ui.profile.myorders.MyOrdersModal;
+import com.prakruthi.ui.ui.profile.order_qty.OrdersQtyModal;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONArray;

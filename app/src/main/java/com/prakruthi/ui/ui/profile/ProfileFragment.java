@@ -28,6 +28,7 @@ import com.prakruthi.ui.ui.profile.myaddress.MyAddresses;
 import com.prakruthi.ui.ui.profile.myorders.MyOrdersActivity;
 import com.prakruthi.ui.ui.profile.mypayments.MyPaymentsActivity;
 import com.prakruthi.ui.ui.profile.mypayments.MyPaymentsModal;
+import com.prakruthi.ui.ui.profile.order_qty.OrderQtyActivity;
 import com.prakruthi.ui.ui.profile.recentProducts.RecentProductAdaptor;
 import com.prakruthi.ui.ui.profile.recentProducts.RecentProductModel;
 
@@ -106,6 +107,13 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
         binding.tvFeedback.setOnClickListener(v -> {
             FeedBackDialog();
         });
+        if (Variables.departmentId != 2)
+        {
+            binding.tvMyWishlist.setText("quantity");
+            binding.tvMyWishlist.setOnClickListener(v -> {
+                startActivity(new Intent(requireContext(), OrderQtyActivity.class));
+            });
+        }
         binding.tvMyWishlist.setOnClickListener(v -> {
             BottomNavigationView bottomNavigationView;
             bottomNavigationView = (BottomNavigationView) requireActivity().findViewById(R.id.nav_view);

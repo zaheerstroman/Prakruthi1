@@ -8,9 +8,7 @@ import android.os.Bundle;
 
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.prakruthi.R;
-import com.prakruthi.ui.APIs.MyOrders;
-import com.prakruthi.ui.ui.profile.myorders.MyOrdersAdaptor;
-import com.prakruthi.ui.ui.profile.myorders.MyOrdersModal;
+import com.prakruthi.ui.APIs.OrdersQty;
 import com.saadahmedsoft.popupdialog.PopupDialog;
 import com.saadahmedsoft.popupdialog.Styles;
 import com.saadahmedsoft.popupdialog.listener.OnDialogButtonClickListener;
@@ -43,15 +41,6 @@ public class OrderQtyActivity extends AppCompatActivity implements OrdersQty.OnP
         recyclerView = findViewById(R.id.my_orders_qty_recyclerview_List);
     }
 
-
-//    @Override
-//    public void OnProfileItemMyOrdersQty(ArrayList<OrdersQtyModal> ordersQtyModal) {
-//        runOnUiThread( () -> {
-//            recyclerView.hideShimmerAdapter();
-//            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//            recyclerView.setAdapter(new OrdersQtyAdaptor(ordersQtyModal));
-//        } );
-//    }
 
     @Override
     public void OnProfileItemOrdersQty(ArrayList<OrdersQtyModal> ordersQtyModal) {
