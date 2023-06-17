@@ -29,10 +29,10 @@
         android:layout_below="@+id/productPage_back_btn"
         />
 
-    <com.willy.ratingbar.ScaleRatingBar
+    <com.willy.ratingbar.RotationRatingBar
         android:id="@+id/simpleRatingBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_15sdp"
         android:layout_below="@+id/ProductImagePager"
         android:layout_toStartOf="@id/RatingCount"
         android:layout_marginTop="@dimen/_5sdp"
@@ -47,7 +47,7 @@
         app:srb_clickable="true"
         app:srb_drawableEmpty="@drawable/outline_star_outline_24"
         app:srb_drawableFilled="@drawable/star_vector">
-    </com.willy.ratingbar.ScaleRatingBar>
+    </com.willy.ratingbar.RotationRatingBar>
 
     <TextView
         android:layout_width="wrap_content"
@@ -176,6 +176,7 @@
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="@dimen/_14sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         app:spinner_arrow_show="true"
         app:spinner_arrow_tint="@color/black"
         app:spinner_divider_color="@color/black"
@@ -203,7 +204,6 @@
         android:id="@+id/AddtoCart"
         />
 
-
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
@@ -213,7 +213,7 @@
         android:layout_marginEnd="@dimen/_15sdp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/_30sdp"
-        android:text="But Now"
+        android:text="Buy Now"
         android:fontFamily="@font/coda"
         android:id="@+id/BuyNow"
         />

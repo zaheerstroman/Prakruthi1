@@ -1,5 +1,9 @@
 package com.prakruthi.ui.APIs;
 
+import static androidx.fragment.app.FragmentManager.TAG;
+
+import android.util.Log;
+
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.profile.order_qty.OrdersQtyModal;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
@@ -38,30 +42,24 @@ public class OrdersQty {
             String[] data = new String[2];
             data[0] = String.valueOf(Variables.id);
             data[1] = Variables.token;
-//            PutData putData = new PutData(Variables.BaseUrl + "getOrderData", "POST", field, data);
             PutData putData = new PutData(Variables.BaseUrl + "getPurchaseData", "POST", field, data);
-
-
-
             if (putData.startPut()) {
                 if (putData.onComplete()) {
                     String result = putData.getResult();
                     try {
                         JSONObject jsonObject = new JSONObject(result);
-                        JSONArray jsonArray = jsonObject.getJSONArray("result");
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
                         ArrayList<OrdersQtyModal> ordersQtyModal = new ArrayList<>();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject ordersQtyModalData = jsonArray.getJSONObject(i);
                             String id = ordersQtyModalData.getString("id");
                             String product_id = ordersQtyModalData.getString("product_id");
                             String user_id = ordersQtyModalData.getString("user_id");
-                            String quantity = ordersQtyModalData.getString("quantity");
+                            String quantity = ordersQtyModalData.getString("quntity");
                             String used_quntity = ordersQtyModalData.getString("used_quntity");
                             String name = ordersQtyModalData.getString("name");
                             String attachment = ordersQtyModalData.getString("attachment");
                             String remaining_quntity = ordersQtyModalData.getString("remaining_quntity");
-
-
                             ordersQtyModal.add(new OrdersQtyModal(id,product_id,user_id,quantity,used_quntity,name,attachment,remaining_quntity));
                         }
                         handleResponse(ordersQtyModal);

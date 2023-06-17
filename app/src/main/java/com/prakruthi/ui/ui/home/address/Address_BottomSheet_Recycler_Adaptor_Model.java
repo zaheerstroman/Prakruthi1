@@ -5,6 +5,10 @@ public class Address_BottomSheet_Recycler_Adaptor_Model {
     private String address;
     private int Defualt;
 
+    public Address_BottomSheet_Recycler_Adaptor_Model() {
+
+    }
+
     public int getId() {
         return id;
     }

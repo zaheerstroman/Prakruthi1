@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.prakruthi.R;
+import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.productPage.ProductPagerAdaptor;
 
 import java.util.List;
@@ -43,6 +44,14 @@ public class SearchAdaptor extends RecyclerView.Adapter<SearchAdaptor.ViewHolder
         holder.Search_Product_name.setText(searchModles.get(position).getName());
         holder.Search_Product_Price.setText(searchModles.get(position).getCustomerPrice());
         holder.Search_Product_Price_real.setText(searchModles.get(position).getActualPrice());
+        if (Variables.departmentId.equals(2))
+        {
+            holder.Search_Product_Price.setText(searchModles.get(position).getCustomerPrice());
+        } else if (Variables.departmentId.equals(3)) {
+            holder.Search_Product_Price.setText(searchModles.get(position).getDealerPrice());
+        } else if (Variables.departmentId.equals(4)) {
+            holder.Search_Product_Price.setText(searchModles.get(position).getMartPrice());
+        }
         holder.Search_Product_Description.setText(searchModles.get(position).getDescription());
         int ratingStars = Integer.parseInt(searchModles.get(position).getRating());
         Resources res = holder.itemView.getContext().getResources();

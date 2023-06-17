@@ -3,11 +3,14 @@ package com.prakruthi.ui.ui.home.address;
 import static com.google.firebase.messaging.Constants.TAG;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.prakruthi.R;
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.home.HomeFragment;
+import com.prakruthi.ui.ui.profile.myaddress.MyAddresses;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 import org.json.JSONException;
@@ -26,6 +30,7 @@ import java.util.List;
 public class Address_BottomSheet_Recycler_Adaptor extends RecyclerView.Adapter<Address_BottomSheet_Recycler_Adaptor.ViewHolder> {
     private final List<Address_BottomSheet_Recycler_Adaptor_Model> mList;
     private final Context context;
+    private Button addAddressButton;
 
     public Address_BottomSheet_Recycler_Adaptor(List<Address_BottomSheet_Recycler_Adaptor_Model> list,Context context) {
         mList = list;
@@ -36,6 +41,31 @@ public class Address_BottomSheet_Recycler_Adaptor extends RecyclerView.Adapter<A
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.choose_location_bottom_dialog_recycler, parent, false);
+        // Check if the mList is empty
+        if (mList.isEmpty()) {
+            Log.e(TAG, "asdzxfbjhnkml;" );
+            // Create the button
+            addAddressButton = new Button(parent.getContext());
+
+            // Set button dimensions
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            addAddressButton.setLayoutParams(params);
+
+            // Set button background as transparent
+            addAddressButton.setBackgroundColor(Color.TRANSPARENT);
+
+            // Set button text
+            addAddressButton.setText("Add Address");
+
+            // Set button click listener
+            addAddressButton.setOnClickListener(v -> {
+                // Add your desired action here
+                parent.getContext().startActivity(new Intent(parent.getContext(), MyAddresses.class));
+            });
+
+            // Add the button to the parent view
+            parent.addView(addAddressButton);
+        }
         return new ViewHolder(view);
     }
 
@@ -70,6 +100,11 @@ public class Address_BottomSheet_Recycler_Adaptor extends RecyclerView.Adapter<A
             });
 
         });
+
+        // Check if the mList is empty
+        if (mList.isEmpty() && addAddressButton != null) {
+            addAddressButton.setVisibility(View.VISIBLE);
+        }
 
     }
 

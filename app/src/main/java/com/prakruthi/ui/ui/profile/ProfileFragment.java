@@ -93,8 +93,8 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
     }
     public void SetTextViews()
     {
-        binding.txtId.setText("ID : #");
-        binding.txtId.append(String.valueOf(Variables.id));
+        binding.txtId.setText("");
+        binding.txtId.append(String.valueOf(Variables.name));
         binding.ProfileHomeProductsRecycler.showShimmerAdapter();
         GetRecentViewProductsAPI getRecentViewProductsAPI = new GetRecentViewProductsAPI(this);
         getRecentViewProductsAPI.HitRecentApi();
@@ -114,11 +114,14 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
                 startActivity(new Intent(requireContext(), OrderQtyActivity.class));
             });
         }
-        binding.tvMyWishlist.setOnClickListener(v -> {
-            BottomNavigationView bottomNavigationView;
-            bottomNavigationView = (BottomNavigationView) requireActivity().findViewById(R.id.nav_view);
-            bottomNavigationView.setSelectedItemId(R.id.navigation_wishlist);
-        });
+        else
+        {
+            binding.tvMyWishlist.setOnClickListener(v -> {
+                BottomNavigationView bottomNavigationView;
+                bottomNavigationView = (BottomNavigationView) requireActivity().findViewById(R.id.nav_view);
+                bottomNavigationView.setSelectedItemId(R.id.navigation_wishlist);
+            });
+        }
         binding.tvMyOrders.setOnClickListener(v -> startActivity(new Intent(requireContext(), MyOrdersActivity.class)));
         binding.tvPayments.setOnClickListener(v -> startActivity(new Intent(requireContext(), MyPaymentsActivity.class)));
     }

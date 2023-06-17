@@ -93,9 +93,6 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
     }
 
     public void SetScreenViews() {
-
-
-
         binding.Search.setOnClickListener(v -> {
             startActivity(new Intent(requireContext(),SearchPage.class));
         });
@@ -211,14 +208,12 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
                         dialog.dismiss();
                 });
             }
-
         });
 
         dialog.setContentView(dialogView);
         // Show the dialog
         dialog.show();
     }
-
     public void GetDeliveryAddressDetails()
     {
         GetDeliveryAddressDetails getDeliveryAddressDetails = new GetDeliveryAddressDetails(this);
@@ -232,7 +227,6 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
             addressRecyclerView.setAdapter(new Address_BottomSheet_Recycler_Adaptor(address_bottomSheet_recycler_adaptor_models,requireContext()));
         }
     }
-
     public void getHomeDetails()
     {
         binding.HomeCategoryRecyclerview.showShimmerAdapter();
@@ -269,7 +263,6 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
             // Initialize the ViewPager2 with the BannerPagerAdapter
             viewPager.setAdapter(new BannerPagerAdapter(homeBannerModels, getContext()));
         });
-
     }
 
 
@@ -283,7 +276,6 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
             BannerFetched = true;
             runnable.run();
         });
-
     }
     @Override
     public void onDataFetchError(String error) {
