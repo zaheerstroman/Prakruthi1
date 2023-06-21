@@ -79,7 +79,7 @@
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_15sdp"
-        tools:listitem="@layout/search_recycler_layout_loading"
+        tools:listitem="@layout/search_recycler_layout"
         app:shimmer_demo_layout="@layout/search_recycler_layout_loading"
         android:visibility="gone"
         android:id="@+id/SearchRecyclerView"/>

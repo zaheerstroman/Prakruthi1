@@ -75,7 +75,13 @@ public class GetProductsList {
                 String name = productlist.getString("name");
                 String attachment = productlist.getString("attachment");
                 String description = productlist.getString("description");
-                homeProductModels.add(new HomeProductModel(id, name, description, attachment));
+                String actual_price = productlist.getString("actual_price");
+                String customer_price = productlist.getString("customer_price");
+                String delar_price = productlist.getString("delar_price");
+                String mart_price = productlist.getString("mart_price");
+                String rating = productlist.getString("rating");
+                String count_rating = productlist.getString("count_rating");
+                homeProductModels.add(new HomeProductModel(id, name, attachment , rating , count_rating , actual_price , customer_price , delar_price , mart_price , description));
             }
             mListner.OnCategoryProductsFetched(homeProductModels);
         }

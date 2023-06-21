@@ -46,7 +46,7 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
     EditText editText;
 
     AppCompatButton back;
-    TextView SortBy, filters;
+    TextView SortBy, filters , ResetFilters;
     ShimmerRecyclerView searchRecyclerView;
     String order = "";
     String type = "";
@@ -54,6 +54,7 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
 
     RadioGroup typegroup;
     RadioGroup colorgroup;
+    SearchAdaptor searchAdaptor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,8 +125,9 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(SearchPage.this);
             View bottomSheetView = getLayoutInflater().inflate(R.layout.filters_bottom_sheet, null);
 
-           typegroup = bottomSheetView.findViewById(R.id.type_group);
-           colorgroup = bottomSheetView.findViewById(R.id.color_group);
+            ResetFilters = bottomSheetView.findViewById(R.id.ResetFilter);
+            typegroup = bottomSheetView.findViewById(R.id.type_group);
+            colorgroup = bottomSheetView.findViewById(R.id.color_group);
 
             bottomSheetDialog.setContentView(bottomSheetView);
             bottomSheetDialog.show();
@@ -177,15 +179,20 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
         runOnUiThread(() -> {
             searchRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             searchRecyclerView.hideShimmerAdapter();
-            searchRecyclerView.setAdapter(new SearchAdaptor(product));
+            searchAdaptor = new SearchAdaptor(product);
+            searchRecyclerView.setAdapter(searchAdaptor);
         });
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void OnSearchResultApiGivesError(String error) {
         runOnUiThread(() -> {
             Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
             searchRecyclerView.hideShimmerAdapter();
+            searchAdaptor.searchModles.clear();
+            searchRecyclerView.getActualAdapter().notifyDataSetChanged();
+            searchRecyclerView.scrollToPosition(0);
         });
     }
 
@@ -311,6 +318,14 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
         runOnUiThread(() -> {
             ShowFiltrType(result, typegroup);
             ShowFiltrClr(result,colorgroup);
+            ResetFilters.setOnClickListener(v -> {
+                order = "";
+                type = "";
+                color = "";
+                typegroup.clearCheck();
+                colorgroup.clearCheck();
+                performSearch();
+            });
         });
     }
 

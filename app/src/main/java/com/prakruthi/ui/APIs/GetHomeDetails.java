@@ -1,5 +1,7 @@
 package com.prakruthi.ui.APIs;
 
+import android.util.Log;
+
 import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.home.banners.HomeBannerModel;
 import com.prakruthi.ui.ui.home.category.HomeCategoryModal;
@@ -53,6 +55,7 @@ public class GetHomeDetails {
         private void handleResponse(String result) {
             if (result != null) {
                 try {
+                    Log.wtf("TAG", result );
                     JSONObject jsonResponse = new JSONObject(result);
                     JSONArray bannerList = jsonResponse.getJSONObject("data").getJSONArray("banner_list");
                     JSONArray categoryList = jsonResponse.getJSONObject("data").getJSONArray("category_list");
@@ -86,7 +89,13 @@ public class GetHomeDetails {
                         String name = productlist.getString("name");
                         String attachment = productlist.getString("attachment");
                         String description = productlist.getString("description");
-                        homeProductModels.add(new HomeProductModel(id, name, description, attachment));
+                        String actual_price = productlist.getString("actual_price");
+                        String customer_price = productlist.getString("customer_price");
+                        String delar_price = productlist.getString("delar_price");
+                        String mart_price = productlist.getString("mart_price");
+                        String rating = productlist.getString("rating");
+                        String count_rating = productlist.getString("count_rating");
+                        homeProductModels.add(new HomeProductModel(id, name, attachment , rating , count_rating , actual_price , customer_price , delar_price , mart_price , description));
                     }
 
                     // Call listener with all three lists

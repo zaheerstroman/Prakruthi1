@@ -1,6 +1,7 @@
 package com.prakruthi.ui.ui.home.products;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.prakruthi.R;
+import com.prakruthi.ui.Variables;
 import com.prakruthi.ui.ui.productPage.ProductPage;
+import com.willy.ratingbar.RotationRatingBar;
 
 import java.util.List;
 
@@ -43,6 +46,18 @@ public class HomeProductAdaptor extends RecyclerView.Adapter<HomeProductAdaptor.
             holder.itemView.getContext().startActivity(new Intent(holder.itemView.getContext(),ProductPage.class)
                     .putExtra("productId",String.valueOf(homeProductModel.getId())));
         });
+        holder.HomeRatingBar.setRating(Float.parseFloat(homeProductModel.getRating()));
+        holder.HomeRatingCount.setText(homeProductModel.getCount_rating());
+        if (Variables.departmentId.equals(2))
+        {
+            holder.Home_Product_Price.setText(homeProductModel.getCustomerPrice());
+        } else if (Variables.departmentId.equals(3)) {
+            holder.Home_Product_Price.setText(homeProductModel.getDealerPrice());
+        } else if (Variables.departmentId.equals(4)) {
+            holder.Home_Product_Price.setText(homeProductModel.getMartPrice());
+        }
+        holder.Home_Product_Price_real.setText(homeProductModel.getActualPrice());
+        holder.Home_Product_Price_real.setPaintFlags(holder.Home_Product_Price_real.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
     @Override
@@ -52,12 +67,18 @@ public class HomeProductAdaptor extends RecyclerView.Adapter<HomeProductAdaptor.
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView productImageView;
-        public TextView productTextView;
+        public TextView productTextView , HomeRatingCount , Home_Product_Price , Home_Product_Price_real;
+        public RotationRatingBar HomeRatingBar;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             productImageView = itemView.findViewById(R.id.homepage_product_recycle_view_imageview);
             productTextView = itemView.findViewById(R.id.homepage_product_recycle_view_name_text);
+            HomeRatingBar = itemView.findViewById(R.id.HomeRatingBar);
+            HomeRatingCount = itemView.findViewById(R.id.HomeRatingCount);
+            Home_Product_Price = itemView.findViewById(R.id.Home_Product_Price);
+            Home_Product_Price_real = itemView.findViewById(R.id.Home_Product_Price_real);
         }
     }
 }

@@ -50,7 +50,7 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
     AppCompatButton AddtoCart,BuyNow;
     DotsIndicator dotsIndicator;
 
-    AppCompatButton Wishlist;
+    AppCompatButton Wishlist , productPage_back_btn;
     ViewPager2 ProductImagePager;
 
     RotationRatingBar ratingBar;
@@ -64,6 +64,7 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
         setContentView(R.layout.activity_product_page);
         // Retrieve the product ID from the intent
         productId = getIntent().getStringExtra("productId");
+        productPage_back_btn = findViewById(R.id.productPage_back_btn);
         ProductImagePager = findViewById(R.id.ProductImagePager);
         dotsIndicator = findViewById(R.id.dots_indicator);
         ProductName = findViewById(R.id.ProductName);
@@ -80,6 +81,7 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
         Ratingcount = findViewById(R.id.RatingCount);
         GetApiData();
 
+        productPage_back_btn.setOnClickListener(v -> super.onBackPressed());
         Wishlist.setOnClickListener(v->{
             if (in_wishlist)
             {
@@ -124,25 +126,22 @@ public class ProductPage extends AppCompatActivity implements GetProductDetails.
             ProductDescription.setText(productModel.getDescription());
             if (Variables.departmentId.equals(2))
             {
-                CurrentPrice.setText(productModel.getCustomerPrice());
+                CurrentPrice.append(productModel.getCustomerPrice());
             } else if (Variables.departmentId.equals(3)) {
-                CurrentPrice.setText(productModel.getDealerPrice());
+                CurrentPrice.append(productModel.getDealerPrice());
             } else if (Variables.departmentId.equals(4)) {
-                CurrentPrice.setText(productModel.getMartPrice());
+                CurrentPrice.append(productModel.getMartPrice());
             }
-
-            MRPPrice.setText(productModel.getActualPrice());
+            MRPPrice.append(productModel.getActualPrice());
             MRPPrice.setPaintFlags(MRPPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             ProductDeleveryAddress.setText(Variables.address);
             in_wishlist = productModel.isIn_wishlist();
             if (in_wishlist)
                 Wishlist.setBackgroundDrawable(ContextCompat.getDrawable(this,R.drawable.like_filled));
-            ratingBar.setNumStars(Integer.parseInt(productModel.getRating()));
-            ratingBar.setMinimumStars(Float.parseFloat(productModel.getRating()));
             ratingBar.setRating(Float.parseFloat(productModel.getRating()));
             Ratingcount.setText(productModel.getCount_rating());
-            ratingBar.setScrollable(false);
-            ratingBar.setOnRatingChangeListener((ratingBar, rating, fromUser) -> {
+            ratingBar.setClickable(true);
+            ratingBar.setOnClickListener(v -> {
                 {
                     // Inflate the custom layout
                     View bottomSheetView = getLayoutInflater().inflate(R.layout.product_reviews_bottom_popup, null);

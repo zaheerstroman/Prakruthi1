@@ -1,15 +1,25 @@
 package com.prakruthi.ui;
 
+import static android.content.ContentValues.TAG;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
+import android.os.PersistableBundle;
+import android.util.Log;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.prakruthi.R;
 
+import java.sql.Time;
 import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -18,16 +28,17 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new TimerTask() {
             @Override
             public void run() {
-                // Code to be executed after delay
-//                startActivity(new Intent(SplashScreen.this,Otp_Verification_Animation.class));
+                Log.wtf(TAG, "run: " );
                 startActivity(new Intent(SplashScreen.this, Login.class));
-
+                finish();
             }
-        }, 2000); // 1000ms = 1 second delay
+        },1000);
 
     }
+
 }

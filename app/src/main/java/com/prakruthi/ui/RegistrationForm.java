@@ -219,6 +219,7 @@ public class RegistrationForm extends AppCompatActivity {
                             JSONObject department = departments.getJSONObject(i);
                             departmentNames.add(department.getString("name"));
                         }
+                        type.setItems(departmentNames);
 
                         JSONArray states = jsonObj.getJSONArray("state");
                         ArrayList<String> stateNames = new ArrayList<>();

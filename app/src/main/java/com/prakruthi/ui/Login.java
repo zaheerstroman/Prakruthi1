@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class Login extends AppCompatActivity {
     TextView register,forget_password;
     EditText username,password;
     AppCompatButton login;
+    RelativeLayout LoginLayout;
 
     CheckBox RememberMe;
 
@@ -48,14 +50,18 @@ public class Login extends AppCompatActivity {
         password = findViewById(R.id.edittext_login_password);
         RememberMe = findViewById(R.id.RememberMe);
         login = findViewById(R.id.login_btn);
+        LoginLayout = findViewById(R.id.LoginLayout);
 
 
         sharedPreferences = getSharedPreferences("Login", Context.MODE_PRIVATE);
 
         if (isRemembered())
         {
+            Log.wtf(TAG, "onCreate: " );
             String username = sharedPreferences.getString("username","");
             String password = sharedPreferences.getString("password","");
+            LoginLayout.setVisibility(View.GONE);
+            Loading.show(this);
             Api(username,password);
             return;
         }
@@ -88,7 +94,6 @@ public class Login extends AppCompatActivity {
     {
         Loading.show(Login.this);
         login.setVisibility(View.INVISIBLE);
-
         // Execute the AsyncTask
         new AsyncTask<Void, Void, String>() {
             @Override
@@ -139,10 +144,12 @@ public class Login extends AppCompatActivity {
 
                     } catch (JSONException e) {
                         e.printStackTrace();
+                        login.setVisibility(View.VISIBLE);
                         Toast.makeText(Login.this, "Network Error", Toast.LENGTH_SHORT).show();
                     }
                 }
                 else {
+                    login.setVisibility(View.VISIBLE);
                     Toast.makeText(Login.this, "Network Error", Toast.LENGTH_SHORT).show();
                 }
                 login.setVisibility(View.VISIBLE);
@@ -223,7 +230,6 @@ public class Login extends AppCompatActivity {
             Variables.allowSms = allowSms;
             Variables.allowPush = allowPush;
 
-            Log.e(TAG, Variables.id+Variables.token );
             login.setVisibility(View.VISIBLE);
             Loading.hide();
             if (RememberMe.isChecked())
@@ -235,6 +241,7 @@ public class Login extends AppCompatActivity {
             Log.e(TAG, e.toString() );
             Toast.makeText(this, "System Error", Toast.LENGTH_SHORT).show();
             login.setVisibility(View.VISIBLE);
+            LoginLayout.setVisibility(View.VISIBLE);
         }
 
     }
@@ -250,7 +257,6 @@ public class Login extends AppCompatActivity {
         editor.putString("username", username.getText().toString());
         editor.putString("password", password.getText().toString());
         editor.putBoolean("rememberMe",true);
-
         // Apply changes
         editor.apply();
     }

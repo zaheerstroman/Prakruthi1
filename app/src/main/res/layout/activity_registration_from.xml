@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/_165sdp"
+        android:layout_marginTop="@dimen/_145sdp"
         android:layout_alignParentTop="true"
         android:background="@drawable/custom_shape_registrationform">
 
@@ -126,7 +126,6 @@
             android:textSize="@dimen/_14sdp"
             app:spinner_arrow_tint="@color/black"
             app:spinner_divider_color="@color/black"
-            app:spinner_item_array="@array/dropdown_State"
             app:spinner_item_height="@dimen/_46sdp"
             app:spinner_popup_max_height="120dp" />
 
@@ -148,7 +147,6 @@
             app:spinner_arrow_show="true"
             app:spinner_arrow_tint="@color/black"
             app:spinner_divider_color="@color/black"
-            app:spinner_item_array="@array/dropdown_District"
             app:spinner_item_height="@dimen/_46sdp"
             app:spinner_popup_max_height="@dimen/_120sdp" />
 
@@ -186,7 +184,6 @@
             app:spinner_arrow_show="true"
             app:spinner_arrow_tint="@color/black"
             app:spinner_divider_color="@color/black"
-            app:spinner_item_array="@array/Type"
             app:spinner_item_height="46dp"
             app:spinner_popup_max_height="@dimen/_120sdp" />
 
