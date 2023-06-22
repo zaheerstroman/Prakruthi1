@@ -29,15 +29,13 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new TimerTask() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.wtf(TAG, "run: " );
                 startActivity(new Intent(SplashScreen.this, Login.class));
                 finish();
             }
-        },1000);
+        }, 1000);
 
     }
 
