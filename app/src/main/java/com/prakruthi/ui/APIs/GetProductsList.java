@@ -87,7 +87,12 @@ public class GetProductsList {
         }
         catch (JSONException e) {
             e.printStackTrace();
-            handleError("Failed to parse data");
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                handleError(jsonObject.getString("message"));
+            } catch (JSONException ex) {
+                ex.printStackTrace();
+            }
         }
 
 

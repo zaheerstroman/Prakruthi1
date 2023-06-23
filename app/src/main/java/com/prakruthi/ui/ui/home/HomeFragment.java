@@ -82,10 +82,9 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
                              ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        SetScreenViews();
         GetDeliveryAddressDetails();
-        View root = binding.getRoot();
-        return root;
+        SetScreenViews();
+        return binding.getRoot();
     }
 
     public void SetScreenViews() {
@@ -102,12 +101,6 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
                 chooseLocationDialog();
             }
         });
-        if (Variables.address.equals("null")) {
-            binding.DeleverHomeLocation.setText("Choose Location");
-        }
-        else {
-            binding.DeleverHomeLocation.setText(Variables.address);
-        }
         getHomeDetails();
     }
 
@@ -221,6 +214,11 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
         {
             addressRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
             addressRecyclerView.setAdapter(new Address_BottomSheet_Recycler_Adaptor(address_bottomSheet_recycler_adaptor_models,requireContext()));
+        }if (Variables.address.isEmpty() || Variables.address.matches("") || Variables.address.equals("null") || Variables.address.equals(null)) {
+            binding.DeleverHomeLocation.setText("Choose Location");
+        }
+        else {
+            binding.DeleverHomeLocation.setText(Variables.address);
         }
     }
     public void getHomeDetails()
@@ -305,6 +303,8 @@ public class HomeFragment extends Fragment implements GetDeliveryAddressDetails.
     public void OnGetProductsListApiGivesError(String error) { requireActivity().runOnUiThread(()->{
         Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show();
         binding.HomeProductsRecycler.hideShimmerAdapter();
+        HomeProductAdaptor.homeProductModelList.clear();
+        binding.HomeProductsRecycler.getActualAdapter().notifyDataSetChanged();
     });
     }
 }

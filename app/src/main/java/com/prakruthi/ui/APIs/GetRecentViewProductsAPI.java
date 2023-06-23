@@ -74,7 +74,15 @@ public class GetRecentViewProductsAPI {
                         mListner.OnGetRecentViewProductsAPIGivesResult(recentProductModels);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        mListner.OnGetRecentViewProductsAPIGivesError("Internal Error");
+                        try {
+                            JSONObject jsonObject = new JSONObject(result);
+                            mListner.OnGetRecentViewProductsAPIGivesError(jsonObject.getString("message"));
+                        }
+                        catch (Exception e1)
+                        {
+                            e1.printStackTrace();
+                            mListner.OnGetRecentViewProductsAPIGivesError("Internal Error");
+                        }
                     }
 
                 }

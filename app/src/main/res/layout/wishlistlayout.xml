@@ -46,18 +46,6 @@
         />
 
 
-    <TextView
-        android:id="@+id/wishlist_product_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_23sdp"
-        android:layout_toEndOf="@+id/wishlist_product_price"
-        android:gravity="center"
-        android:text="in Stock"
-        android:textColor="@color/Primary"
-        android:textSize="@dimen/_16sdp"
-        android:layout_centerVertical="true"
-        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/wishlist_product_add_to_cart"

@@ -35,8 +35,6 @@ public class GetDeliveryAddressDetails extends AsyncTask<Void, Void, ArrayList<A
         // Create PutData object to make API call
         PutData putData = new PutData(URL, "POST", FIELD, DATA);
 
-        Log.e(TAG, Arrays.toString(FIELD)+Arrays.toString(DATA) );
-        Log.e(ContentValues.TAG, Variables.id+Variables.token );
         // Start API call
         if (putData.startPut()) {
             if (putData.onComplete()) {
@@ -55,7 +53,7 @@ public class GetDeliveryAddressDetails extends AsyncTask<Void, Void, ArrayList<A
                         int id = obj.getInt("id");
                         if (Defualt == 1)
                         {
-                            Variables.address = obj.getString("full_address");
+                            Variables.address = address;
                         }
                         addressList.add(new Address_BottomSheet_Recycler_Adaptor_Model(name, address,Defualt,id));
                     }

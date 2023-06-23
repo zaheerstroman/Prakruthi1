@@ -21,7 +21,7 @@ import java.util.List;
 
 public class HomeProductAdaptor extends RecyclerView.Adapter<HomeProductAdaptor.ViewHolder> {
 
-    private final List<HomeProductModel> homeProductModelList;
+    public static List<HomeProductModel> homeProductModelList;
 
     public HomeProductAdaptor(List<HomeProductModel> homeProductModelList) {
         this.homeProductModelList = homeProductModelList;

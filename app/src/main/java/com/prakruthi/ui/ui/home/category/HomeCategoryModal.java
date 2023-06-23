@@ -4,12 +4,22 @@ public class HomeCategoryModal {
 
     private int id;
     private String name;
+    private boolean isSelected;
     private String attachment;
 
     public HomeCategoryModal(int id, String name, String attachment) {
         this.id = id;
         this.name = name;
         this.attachment = attachment;
+    }
+
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 
     public int getId() {

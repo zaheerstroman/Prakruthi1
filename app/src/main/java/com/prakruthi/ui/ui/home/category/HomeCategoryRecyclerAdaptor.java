@@ -1,11 +1,19 @@
 package com.prakruthi.ui.ui.home.category;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -34,6 +42,7 @@ public class HomeCategoryRecyclerAdaptor extends RecyclerView.Adapter<HomeCatego
         return new ViewHolder(view);
     }
 
+    private int selectedItemPosition = -1; // Initially no item is selected
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HomeCategoryModal homeCategoryModal = homeCategoryModalList.get(position);
         holder.productTextView.setText(homeCategoryModal.getName());
@@ -47,15 +56,39 @@ public class HomeCategoryRecyclerAdaptor extends RecyclerView.Adapter<HomeCatego
         } else {
             holder.productImageView.setElevation(0f); // Remove elevation for odd positions.
         }
-        holder.itemView.setOnClickListener(v->{
+
+        // Check if the current position is the selected item
+        boolean isSelected = position == selectedItemPosition;
+
+        // Set the background drawable based on the selection
+        Drawable backgroundDrawable = isSelected ? createRoundedRectangleDrawable(holder.itemView.getContext(), R.color.Primary,80) : null;
+        holder.productImageView.setBackground(backgroundDrawable);
+
+        holder.itemView.setOnClickListener(v -> {
+            // Update the selected item position
+            selectedItemPosition = holder.getAdapterPosition();
+
+            // Notify the adapter that the data has changed to refresh the views
+            notifyDataSetChanged();
+
+            // Rest of your code...
             HomeFragment.HomeShimmerProductRecyclerView.showShimmerAdapter();
             String categoryid = String.valueOf(homeCategoryModalList.get(position).getId());
-            GetProductsList getProductsList = new GetProductsList(listner,categoryid);
+            GetProductsList getProductsList = new GetProductsList(listner, categoryid);
             getProductsList.HitGetProductListAPi();
         });
     }
 
 
+
+    // Helper method to create a rounded rectangle drawable
+    private Drawable createRoundedRectangleDrawable(Context context, @ColorRes int colorRes, float cornerRadius) {
+        int color = ContextCompat.getColor(context, colorRes);
+        float[] radii = {cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius, cornerRadius};
+        ShapeDrawable shapeDrawable = new ShapeDrawable(new RoundRectShape(radii, null, null));
+        shapeDrawable.getPaint().setColor(color);
+        return shapeDrawable;
+    }
     @Override
     public int getItemCount() {
         return homeCategoryModalList.size();

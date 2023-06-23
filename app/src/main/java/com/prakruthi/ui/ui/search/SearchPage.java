@@ -26,6 +26,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.cooltechworks.views.shimmer.ShimmerRecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -202,14 +203,17 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
             JSONArray types = result.getJSONArray("product_type_details");
             for (int i = 0; i < types.length(); i++) {
                 JSONObject type = types.getJSONObject(i);
-                RadioButton radioButton = new RadioButton(this);
-                radioButton.setId(View.generateViewId());
-                radioButton.setText(type.getString("type"));
-                radioButton.setButtonDrawable(null);
+                ToggleButton toggleButton = new ToggleButton(this);
+                toggleButton.setId(View.generateViewId());
+                toggleButton.setTextOn(type.getString("type")); // Set text for checked state
+                toggleButton.setTextOff(type.getString("type")); // Set text for unchecked state
+                toggleButton.setChecked(false); // Set the initial state to unchecked
+
+                toggleButton.setButtonDrawable(null);
 
                 // Create LayoutParams with desired width and height
                 int backgroundWidth = 200; // Example value, adjust as needed
-                int backgroundHeight = 80; // Example value, adjust as needed
+                int backgroundHeight = 100; // Example value, adjust as needed
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(backgroundWidth, backgroundHeight);
 
                 // Set margins
@@ -222,30 +226,30 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
                 ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(layoutParams);
                 marginLayoutParams.setMargins(leftMargin, topMargin, rightMargin, bottomMargin);
 
-                radioButton.setLayoutParams(marginLayoutParams);
+                toggleButton.setLayoutParams(marginLayoutParams);
 
                 // Set the selector drawable as the background
-                radioButton.setBackgroundResource(R.drawable.custom_button_selector);
-                radioButton.setTextSize(20);
+                toggleButton.setBackgroundResource(R.drawable.custom_button_selector);
+                toggleButton.setTextSize(20);
 
-                radioButton.setGravity(Gravity.CENTER_HORIZONTAL);
+                toggleButton.setGravity(Gravity.CENTER_HORIZONTAL);
+
                 // Customize background tint for selected state
                 int selectedTint = ContextCompat.getColor(this, R.color.Secondary_less);
-                radioButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                toggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     if (isChecked) {
                         buttonView.setBackgroundTintList(ColorStateList.valueOf(selectedTint));
-                        this.type = String.valueOf(radioButton.getText());
-
+                        this.type = String.valueOf(toggleButton.getText());
                         performSearch();
-
                     } else {
+                        this.type = "";
+                        performSearch();
                         buttonView.setBackgroundTintList(null);
                     }
                 });
 
-                // Add the RadioButton to the RadioGroup
-                group.addView(radioButton);
-
+                // Add the ToggleButton to the RadioGroup
+                group.addView(toggleButton, marginLayoutParams);
 
             }
         }
@@ -261,14 +265,17 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
             JSONArray types = result.getJSONArray("product_color_details");
             for (int i = 0; i < types.length(); i++) {
                 JSONObject type = types.getJSONObject(i);
-                RadioButton radioButton = new RadioButton(this);
-                radioButton.setId(View.generateViewId());
-                radioButton.setText(type.getString("color"));
-                radioButton.setButtonDrawable(null);
+                ToggleButton toggleButton = new ToggleButton(this);
+                toggleButton.setId(View.generateViewId());
+                toggleButton.setTextOn(type.getString("color")); // Set text for checked state
+                toggleButton.setTextOff(type.getString("color")); // Set text for unchecked state
+                toggleButton.setChecked(false); // Set the initial state to unchecked
+
+                toggleButton.setButtonDrawable(null);
 
                 // Create LayoutParams with desired width and height
                 int backgroundWidth = 200; // Example value, adjust as needed
-                int backgroundHeight = 80; // Example value, adjust as needed
+                int backgroundHeight = 100; // Example value, adjust as needed
                 ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(backgroundWidth, backgroundHeight);
 
                 // Set margins
@@ -281,30 +288,32 @@ public class SearchPage extends AppCompatActivity implements SearchProductApi.On
                 ViewGroup.MarginLayoutParams marginLayoutParams = new ViewGroup.MarginLayoutParams(layoutParams);
                 marginLayoutParams.setMargins(leftMargin, topMargin, rightMargin, bottomMargin);
 
-                radioButton.setLayoutParams(marginLayoutParams);
+                toggleButton.setLayoutParams(marginLayoutParams);
 
                 // Set the selector drawable as the background
-                radioButton.setBackgroundResource(R.drawable.custom_button_selector);
-                radioButton.setTextSize(20);
+                toggleButton.setBackgroundResource(R.drawable.custom_button_selector);
+                toggleButton.setTextSize(20);
 
-                radioButton.setGravity(Gravity.CENTER_HORIZONTAL);
+                toggleButton.setGravity(Gravity.CENTER_HORIZONTAL);
+
                 // Customize background tint for selected state
                 int selectedTint = ContextCompat.getColor(this, R.color.Secondary_less);
-                radioButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                toggleButton.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     if (isChecked) {
                         buttonView.setBackgroundTintList(ColorStateList.valueOf(selectedTint));
-                        this.color = String.valueOf(radioButton.getText());
+                        this.color = String.valueOf(toggleButton.getText());
                         performSearch();
                     } else {
+                        this.color = "";
+                        performSearch();
                         buttonView.setBackgroundTintList(null);
                     }
                 });
 
-                // Add the RadioButton to the RadioGroup
-                group.addView(radioButton);
-
-
+                // Add the ToggleButton to the RadioGroup
+                group.addView(toggleButton, marginLayoutParams);
             }
+
         }
         catch (Exception e)
         {

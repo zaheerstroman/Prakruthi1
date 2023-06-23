@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -79,17 +80,27 @@ public class ProfileFragment extends Fragment implements FeedBackApi.OnFeedbackI
         builder.setView(editText);
 
         // Add the submit button
-        builder.setPositiveButton("Submit", (dialog, which) -> {
-            // Handle the submit button click
-            String feedback = editText.getText().toString();
-            // Do something with the feedback
-            FeedBackApi feedBackApi = new FeedBackApi(this,feedback);
-            feedBackApi.FeedbackHitApi();
-        });
+        builder.setPositiveButton("Submit", null); // Set the click listener to null for now
 
         // Create and show the dialog
         AlertDialog dialog = builder.create();
         dialog.show();
+
+        // Get the button from the dialog's view
+        Button submitButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        submitButton.setOnClickListener(view -> {
+            // Handle the submit button click
+            String feedback = editText.getText().toString();
+
+            if (feedback.isEmpty()) {
+                editText.setError("Feedback cannot be empty");
+            } else {
+                // Do something with the feedback
+                FeedBackApi feedBackApi = new FeedBackApi(this, feedback);
+                feedBackApi.FeedbackHitApi();
+                dialog.dismiss(); // Dismiss the dialog after handling the click
+            }
+        });
     }
     public void SetTextViews()
     {

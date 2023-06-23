@@ -11,13 +11,13 @@
         android:id="@+id/navigation_wishlist"
         android:icon="@drawable/outline_favorite_24"
         android:iconTint="@color/Primary_less"
-        android:title="@string/title_dashboard" />
+        android:title="Wishlist" />
 
     <item
         android:id="@+id/navigation_cart"
         android:icon="@drawable/cart_icon"
         android:iconTint="@color/Primary_less"
-        android:title="@string/title_notifications" />
+        android:title="Cart" />
 
     <item
         android:id="@+id/navigation_profile"

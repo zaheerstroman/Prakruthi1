@@ -63,14 +63,13 @@
         <activity
             android:name=".ui.SplashScreen"
             android:exported="true"
-            android:noHistory="true"
-            android:launchMode="singleTask">
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- firebase -->
+        </activity>
+        <!-- firebase -->
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

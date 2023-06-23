@@ -57,7 +57,6 @@ public class Login extends AppCompatActivity {
 
         if (isRemembered())
         {
-            Log.wtf(TAG, "onCreate: " );
             String username = sharedPreferences.getString("username","");
             String password = sharedPreferences.getString("password","");
             LoginLayout.setVisibility(View.GONE);
@@ -90,7 +89,8 @@ public class Login extends AppCompatActivity {
         });
 
     }
-    public void Api(String usernameString,String passwordString)
+    @SuppressLint("StaticFieldLeak")
+    public void Api(String usernameString, String passwordString)
     {
         Loading.show(Login.this);
         login.setVisibility(View.INVISIBLE);
@@ -116,12 +116,9 @@ public class Login extends AppCompatActivity {
                 }
                 return null;
             }
-
-            @SuppressLint("StaticFieldLeak")
             @Override
             protected void onPostExecute(String result) {
                 if (result != null) {
-                    Log.e(TAG, result );
                     try {
                         JSONObject json = new JSONObject(result);
                         boolean statusCode = json.getBoolean("status_code");
@@ -239,7 +236,7 @@ public class Login extends AppCompatActivity {
         }
         catch (JSONException e) {
             Log.e(TAG, e.toString() );
-            Toast.makeText(this, "System Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Internal Error", Toast.LENGTH_SHORT).show();
             login.setVisibility(View.VISIBLE);
             LoginLayout.setVisibility(View.VISIBLE);
         }

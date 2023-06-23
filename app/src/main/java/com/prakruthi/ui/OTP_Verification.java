@@ -53,8 +53,7 @@ public class OTP_Verification extends AppCompatActivity {
         txt_re_send.setOnClickListener(v -> {
             resendOtp();
         });
-
-                startTimer(60000, 1000);
+        startTimer(60000, 1000);
     }
     public void startTimer(final long finish, long tick) {
         txt_re_send.setEnabled(false);
@@ -115,6 +114,7 @@ public class OTP_Verification extends AppCompatActivity {
                                 // handle the case where status code is false
                                 String message = jsonObject.getString("message");
                                 Toast.makeText(OTP_Verification.this, message , Toast.LENGTH_SHORT).show();
+                                btn_otp_submit.setVisibility(View.VISIBLE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -87,7 +87,6 @@ public class WishListRecyclerAdaptor extends RecyclerView.Adapter<WishListRecycl
             wishlist_product_image = itemView.findViewById(R.id.wishlist_product_image);
             wishlist_product_name = itemView.findViewById(R.id.wishlist_product_name);
             wishlist_product_price = itemView.findViewById(R.id.wishlist_product_price);
-            wishlist_product_status = itemView.findViewById(R.id.wishlist_product_status);
             wishlist_product_add_to_cart = itemView.findViewById(R.id.wishlist_product_add_to_cart);
             wishlist_product_added_date = itemView.findViewById(R.id.wishlist_product_added_date);
             wishlist_product_delete = itemView.findViewById(R.id.wishlist_product_delete);
